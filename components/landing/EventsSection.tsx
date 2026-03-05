@@ -8,7 +8,6 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
-import type { Event } from "@/lib/supabase/types";
 
 const SAMPLE_EVENTS = [
   {
@@ -37,17 +36,11 @@ const SAMPLE_EVENTS = [
   },
 ];
 
-interface EventsSectionProps {
-  events?: Event[] | null;
-}
-
-export default function EventsSection({ events }: EventsSectionProps) {
+export default function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const displayEvents = events && events.length > 0 ? events : SAMPLE_EVENTS;
-
-  const eventsSchema = displayEvents.map((event) => ({
+  const eventsSchema = SAMPLE_EVENTS.map((event) => ({
     "@context": "https://schema.org",
     "@type": "Event",
     name: event.title,
@@ -61,7 +54,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
       name: "Superteam Malaysia",
       url: "https://superteammy.com",
     },
-    eventAttendanceMode: (event.location_name ?? "").toLowerCase().includes("online")
+    eventAttendanceMode: event.location_name.toLowerCase().includes("online")
       ? "https://schema.org/OnlineEventAttendanceMode"
       : "https://schema.org/OfflineEventAttendanceMode",
   }));
@@ -135,7 +128,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-alt to-transparent z-10 pointer-events-none" />
 
         <div className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 pb-4">
-          {displayEvents.map((event, i) => (
+          {SAMPLE_EVENTS.map((event, i) => (
             <motion.div
               key={event.id}
               initial={{ opacity: 0, x: 60 }}
@@ -184,23 +177,18 @@ export default function EventsSection({ events }: EventsSectionProps) {
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                {event.location_name ?? "TBA"}
+                {event.location_name}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Mobile CTA + Powered by Luma */}
-      <div className="mt-8 px-6 flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-4">
-        <span className="text-xs text-text-muted flex items-center gap-1">
-          Powered by <a href="https://lu.ma" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Luma</a>
-        </span>
-        <div className="sm:hidden">
-          <Button href={SOCIAL_LINKS.luma} variant="ghost">
-            View All Events
-          </Button>
-        </div>
+      {/* Mobile CTA */}
+      <div className="text-center mt-8 sm:hidden px-6">
+        <Button href={SOCIAL_LINKS.luma} variant="ghost">
+          View All Events
+        </Button>
       </div>
     </SectionWrapper>
   );
