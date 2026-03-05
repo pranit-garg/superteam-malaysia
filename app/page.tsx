@@ -12,6 +12,7 @@ import WallOfLove from "@/components/landing/WallOfLove";
 import FAQSection from "@/components/landing/FAQSection";
 import JoinCTA from "@/components/landing/JoinCTA";
 import { FAQ_ITEMS } from "@/data/faq";
+import { fetchUpcomingEvents } from "@/lib/supabase/queries/events";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -26,7 +27,9 @@ const faqSchema = {
   })),
 };
 
-export default function Home() {
+export default async function Home() {
+  const events = await fetchUpcomingEvents();
+
   return (
     <>
       <script
@@ -40,7 +43,7 @@ export default function Home() {
         <HeroSection />
         <MissionSection />
         <StatsSection />
-        <EventsSection />
+        <EventsSection events={events} />
         <MemberSpotlight />
         <PartnersSection />
         <WallOfLove />
