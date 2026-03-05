@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { fadeUp, DURATION, TROPICAL_EASE } from "@/lib/animations";
+import { fadeUp, DURATION } from "@/lib/animations";
 import { PARTNERS } from "@/data/partners";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 

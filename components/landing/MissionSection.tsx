@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { fadeLeft, fadeUp, TROPICAL_EASE, DURATION } from "@/lib/animations";
+import { fadeUp, TROPICAL_EASE, DURATION } from "@/lib/animations";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 const PILLARS = [

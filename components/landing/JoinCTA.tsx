@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { fadeUp, scaleXReveal, DURATION, TROPICAL_EASE } from "@/lib/animations";
+import { fadeUp, scaleXReveal } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
 
@@ -15,6 +15,16 @@ export default function JoinCTA() {
     <section className="relative py-32 md:py-40 px-6 overflow-hidden bg-bg">
       {/* Background image */}
       <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/cta-bg.webp"
+          className="absolute inset-0 w-full h-full object-cover opacity-45"
+        >
+          <source src="/videos/cta-bg.mp4" type="video/mp4" />
+        </video>
         <Image
           src="/images/cta-bg.webp"
           alt=""

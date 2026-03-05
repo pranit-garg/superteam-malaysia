@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { fadeLeft, fadeRight, fadeUp, staggerContainer, TROPICAL_EASE, DURATION } from "@/lib/animations";
+import { fadeLeft, fadeRight, staggerContainer, TROPICAL_EASE } from "@/lib/animations";
 import { SAMPLE_MEMBERS } from "@/data/members";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";

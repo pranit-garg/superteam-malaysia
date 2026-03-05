@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { maskReveal, fadeUp, TROPICAL_EASE } from "@/lib/animations";
+import { maskReveal, fadeUp } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
 import Button from "@/components/ui/Button";
@@ -27,13 +27,23 @@ export default function HeroSection() {
         className="absolute inset-0 z-0"
         style={{ y: bgY }}
       >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/hero-bg.webp"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
         <Image
           src="/images/hero-bg.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover [video~='*']:hidden"
           placeholder="blur"
           blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoKAAYABUB8JaACdADhOhgUAADeIv3QOtEJ0dRgcbnuJEvMr99b7d1RPPVsAAAA"
         />
