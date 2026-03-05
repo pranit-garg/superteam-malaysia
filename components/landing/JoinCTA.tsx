@@ -3,10 +3,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { fadeUp } from "@/lib/animations";
+import { fadeUp, scaleXReveal, DURATION, TROPICAL_EASE } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
-import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
 
 export default function JoinCTA() {
   const ref = useRef(null);
@@ -14,7 +13,7 @@ export default function JoinCTA() {
 
   return (
     <section className="relative py-32 md:py-40 px-6 overflow-hidden bg-bg">
-      {/* Background image + glow */}
+      {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src="/images/cta-bg.webp"
@@ -26,14 +25,18 @@ export default function JoinCTA() {
           blurDataURL="data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAYABUB8JZgCdADc+wTGAAD+TH2I7awcpyktADwheDZDywZ9s9k4uGPM/1oNAAA="
         />
         <div className="absolute inset-0 bg-bg/40" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-primary/8 blur-[150px]" />
       </div>
 
-      <BotanicalOverlay variant="canopy" className="opacity-20" />
-      <BotanicalOverlay variant="vine-left" className="opacity-15" />
-      <BotanicalOverlay variant="vine-right" className="opacity-15" />
-
       <div ref={ref} className="relative z-10 max-w-3xl mx-auto text-center">
+        {/* Animated horizontal rule */}
+        <motion.div
+          className="w-24 h-px bg-primary mx-auto mb-8"
+          variants={scaleXReveal}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          style={{ originX: 0.5 }}
+        />
+
         <motion.p
           variants={fadeUp}
           initial="hidden"
@@ -48,7 +51,7 @@ export default function JoinCTA() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           custom={0.1}
-          className="font-[family-name:var(--font-display)] text-4xl md:text-6xl font-black mb-6"
+          className="font-[family-name:var(--font-display)] text-5xl md:text-7xl font-black mb-6"
         >
           Your next chapter
           <br />

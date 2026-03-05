@@ -3,14 +3,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { fadeUp, DURATION, TROPICAL_EASE } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import GlowCard from "@/components/ui/GlowCard";
 import Button from "@/components/ui/Button";
 
-// Sample events (replaced by Supabase data in production)
 const SAMPLE_EVENTS = [
   {
     id: "1",
@@ -42,21 +40,21 @@ export default function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const eventsSchema = SAMPLE_EVENTS.map(event => ({
+  const eventsSchema = SAMPLE_EVENTS.map((event) => ({
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": event.title,
-    "startDate": event.start_at,
-    "location": {
+    name: event.title,
+    startDate: event.start_at,
+    location: {
       "@type": "Place",
-      "name": event.location_name,
+      name: event.location_name,
     },
-    "organizer": {
+    organizer: {
       "@type": "Organization",
-      "name": "Superteam Malaysia",
-      "url": "https://superteammy.com",
+      name: "Superteam Malaysia",
+      url: "https://superteammy.com",
     },
-    "eventAttendanceMode": event.location_name.toLowerCase().includes("online")
+    eventAttendanceMode: event.location_name.toLowerCase().includes("online")
       ? "https://schema.org/OnlineEventAttendanceMode"
       : "https://schema.org/OfflineEventAttendanceMode",
   }));
@@ -65,6 +63,7 @@ export default function EventsSection() {
     <SectionWrapper
       id="events"
       alt
+      fullBleed
       bgSlot={
         <>
           <Image
@@ -72,11 +71,11 @@ export default function EventsSection() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-45"
+            className="object-cover opacity-25"
             placeholder="blur"
             blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoKAAYABUB8JYgCw7DdSZdXsAAA/ob/ZJnVg52yxsPbBQa393WRk3VtiE3gtAAA"
           />
-          <div className="absolute inset-0 bg-bg-alt/40 z-[1]" />
+          <div className="absolute inset-0 bg-bg-alt/60 z-[1]" />
         </>
       }
     >
@@ -87,36 +86,61 @@ export default function EventsSection() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <div className="text-center mb-16">
-        <motion.p
+
+      {/* Header row: left-aligned heading + button right */}
+      <div className="max-w-7xl mx-auto mb-10 flex items-end justify-between px-6" ref={ref}>
+        <div>
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
+          >
+            Events
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            custom={0.1}
+            className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
+          >
+            Learn, Build, <span className="text-primary">Connect</span>
+          </motion.h2>
+        </div>
+        <motion.div
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
+          custom={0.2}
+          className="hidden sm:block"
         >
-          Events
-        </motion.p>
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.1}
-          className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
-        >
-          Learn, Build, <span className="text-primary">Connect</span>
-        </motion.h2>
+          <Button href={SOCIAL_LINKS.luma} variant="ghost">
+            View All
+          </Button>
+        </motion.div>
       </div>
 
-      <motion.div
-        ref={ref}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"
-      >
-        {SAMPLE_EVENTS.map((event, i) => (
-          <motion.div key={event.id} variants={fadeUp} custom={i * 0.05}>
-            <GlowCard className="h-full flex flex-col">
+      {/* Horizontal scroll cards */}
+      <div className="relative">
+        {/* Fade masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-bg-alt to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-alt to-transparent z-10 pointer-events-none" />
+
+        <div className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 pb-4">
+          {SAMPLE_EVENTS.map((event, i) => (
+            <motion.div
+              key={event.id}
+              initial={{ opacity: 0, x: 60 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                duration: DURATION.medium,
+                ease: TROPICAL_EASE,
+                delay: 0.3 + i * 0.12,
+              }}
+              whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+              className="flex-shrink-0 w-[320px] md:w-[350px] snap-start bg-card border border-card-border border-t-2 border-t-primary rounded-sm p-6 flex flex-col cursor-pointer"
+            >
               {/* Date badge */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20">
@@ -155,12 +179,13 @@ export default function EventsSection() {
                 </svg>
                 {event.location_name}
               </div>
-            </GlowCard>
-          </motion.div>
-        ))}
-      </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
-      <div className="text-center">
+      {/* Mobile CTA */}
+      <div className="text-center mt-8 sm:hidden px-6">
         <Button href={SOCIAL_LINKS.luma} variant="ghost">
           View All Events
         </Button>

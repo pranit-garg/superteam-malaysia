@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { fadeUp, staggerContainer, TROPICAL_EASE } from "@/lib/animations";
+import { fadeLeft, fadeRight, fadeUp, staggerContainer, TROPICAL_EASE, DURATION } from "@/lib/animations";
 import { SAMPLE_MEMBERS } from "@/data/members";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
@@ -35,7 +35,6 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
           className="absolute inset-0 bg-card border border-card-border rounded-2xl p-6 flex flex-col items-center justify-center text-center"
           style={{ backfaceVisibility: "hidden" }}
         >
-          {/* Avatar */}
           <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-4 overflow-hidden">
             {member.photo_url ? (
               <Image
@@ -54,14 +53,9 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
           <h3 className="font-[family-name:var(--font-display)] font-bold text-lg">
             {member.name}
           </h3>
-          <p className="text-text-muted text-sm">
-            {member.title}
-          </p>
-          <p className="text-text-muted/60 text-xs mt-1">
-            {member.company}
-          </p>
+          <p className="text-text-muted text-sm">{member.title}</p>
+          <p className="text-text-muted/60 text-xs mt-1">{member.company}</p>
 
-          {/* Badges */}
           <div className="flex flex-wrap gap-1.5 mt-4 justify-center">
             {member.badges?.slice(0, 2).map((badge) => (
               <span
@@ -128,53 +122,46 @@ export default function MemberSpotlight() {
 
   return (
     <SectionWrapper id="members">
-      <div className="text-center mb-16">
-        <motion.p
-          variants={fadeUp}
+      <div ref={ref} className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        {/* Left 40%: Sticky info */}
+        <motion.div
+          className="lg:w-[40%] lg:sticky lg:top-32 lg:self-start"
+          variants={fadeLeft}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
         >
-          Our Builders
-        </motion.p>
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.1}
-          className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
-        >
-          Meet the <span className="text-primary">Community</span>
-        </motion.h2>
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.2}
-          className="text-text-muted mt-4 max-w-lg mx-auto"
-        >
-          Tap a card to see what they're working on.
-        </motion.p>
-      </div>
+          <p className="text-primary text-sm font-medium tracking-wider uppercase mb-3">
+            Our Builders
+          </p>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-4">
+            Meet the <span className="text-primary">Community</span>
+          </h2>
+          <p className="text-text-muted mb-8 leading-relaxed">
+            Tap a card to see what they&apos;re working on. Developers, designers,
+            creators, and operators building on Solana across Malaysia.
+          </p>
+          <Link href="/members">
+            <Button variant="ghost">View Full Directory</Button>
+          </Link>
+        </motion.div>
 
-      <motion.div
-        ref={ref}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10"
-      >
-        {featured.map((member, i) => (
-          <motion.div key={member.id} variants={fadeUp} custom={i * 0.05}>
-            <MemberCard member={member} />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <div className="text-center">
-        <Link href="/members">
-          <Button variant="ghost">View Full Directory</Button>
-        </Link>
+        {/* Right 60%: Card grid */}
+        <motion.div
+          className="lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-5"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {featured.map((member, i) => (
+            <motion.div
+              key={member.id}
+              variants={fadeRight}
+              custom={i * 0.08}
+            >
+              <MemberCard member={member} />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </SectionWrapper>
   );

@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { DURATION, TROPICAL_EASE } from "@/lib/animations";
 import { TESTIMONIALS } from "@/data/testimonials";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
@@ -12,48 +12,56 @@ export default function WallOfLove() {
 
   return (
     <SectionWrapper>
-      <div className="text-center mb-16">
+      {/* Right-aligned heading */}
+      <div className="text-right mb-16" ref={ref}>
         <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          initial={{ opacity: 0, x: 40 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: DURATION.medium, ease: TROPICAL_EASE }}
           className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
         >
           Community
         </motion.p>
         <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.1}
+          initial={{ opacity: 0, x: 40 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: DURATION.medium, ease: TROPICAL_EASE, delay: 0.1 }}
           className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
         >
           Wall of <span className="text-gold">Love</span>
         </motion.h2>
       </div>
 
-      <motion.div
-        ref={ref}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-2 gap-5"
-      >
+      {/* CSS Masonry columns */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
         {TESTIMONIALS.map((t, i) => (
           <motion.div
             key={i}
-            variants={fadeUp}
-            custom={i * 0.05}
-            className="bg-card border border-card-border rounded-2xl p-6 hover:border-gold/20 transition-colors duration-500"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+              duration: DURATION.medium,
+              ease: TROPICAL_EASE,
+              delay: 0.2 + i * 0.12,
+            }}
+            className="break-inside-avoid bg-card border border-card-border rounded-2xl p-6 border-l-2 border-l-gold/40 hover:border-gold/20 transition-colors duration-500"
           >
-            <svg
+            {/* Quote mark */}
+            <motion.svg
               className="w-8 h-8 text-gold/30 mb-4"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : {}}
+              transition={{
+                duration: DURATION.fast,
+                ease: TROPICAL_EASE,
+                delay: 0.4 + i * 0.12,
+              }}
             >
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-            </svg>
+            </motion.svg>
             <p className="text-text text-sm leading-relaxed mb-4">
               &ldquo;{t.content}&rdquo;
             </p>
@@ -70,7 +78,7 @@ export default function WallOfLove() {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

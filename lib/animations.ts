@@ -50,6 +50,34 @@ export const fadeUp = {
   }),
 };
 
+// Fade in from left
+export const fadeLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: DURATION.medium,
+      ease: TROPICAL_EASE,
+      delay,
+    },
+  }),
+};
+
+// Fade in from right
+export const fadeRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: DURATION.medium,
+      ease: TROPICAL_EASE,
+      delay,
+    },
+  }),
+};
+
 // Fade in (no movement)
 export const fadeIn = {
   hidden: { opacity: 0 },

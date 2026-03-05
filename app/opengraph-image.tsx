@@ -21,34 +21,6 @@ export default async function Image() {
           overflow: "hidden",
         }}
       >
-        {/* Background gradient orbs */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-20%",
-            right: "-10%",
-            width: "600px",
-            height: "600px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(20,241,149,0.15) 0%, transparent 70%)",
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-20%",
-            left: "-10%",
-            width: "500px",
-            height: "500px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(153,69,255,0.12) 0%, transparent 70%)",
-            display: "flex",
-          }}
-        />
-
         {/* Botanical line accent */}
         <div
           style={{
@@ -57,7 +29,7 @@ export default async function Image() {
             left: "40px",
             width: "120px",
             height: "3px",
-            background: "#14F195",
+            background: "#0ECB81",
             display: "flex",
           }}
         />
@@ -68,7 +40,7 @@ export default async function Image() {
             left: "40px",
             width: "3px",
             height: "80px",
-            background: "#14F195",
+            background: "#0ECB81",
             display: "flex",
           }}
         />
@@ -81,7 +53,7 @@ export default async function Image() {
             right: "40px",
             width: "120px",
             height: "3px",
-            background: "#9945FF",
+            background: "#0ECB81",
             display: "flex",
           }}
         />
@@ -92,7 +64,7 @@ export default async function Image() {
             right: "40px",
             width: "3px",
             height: "80px",
-            background: "#9945FF",
+            background: "#0ECB81",
             display: "flex",
           }}
         />
@@ -112,8 +84,8 @@ export default async function Image() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "rgba(20,241,149,0.1)",
-              border: "1px solid rgba(20,241,149,0.3)",
+              background: "rgba(14,203,129,0.1)",
+              border: "1px solid rgba(14,203,129,0.3)",
               borderRadius: "9999px",
               padding: "8px 20px",
             }}
@@ -123,13 +95,13 @@ export default async function Image() {
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                background: "#14F195",
+                background: "#0ECB81",
                 display: "flex",
               }}
             />
             <span
               style={{
-                color: "#14F195",
+                color: "#0ECB81",
                 fontSize: "18px",
                 fontWeight: 600,
                 letterSpacing: "0.05em",
@@ -153,7 +125,7 @@ export default async function Image() {
             }}
           >
             <span>Superteam</span>
-            <span style={{ color: "#14F195" }}>Malaysia</span>
+            <span style={{ color: "#0ECB81" }}>Malaysia</span>
           </div>
 
           {/* Subtitle */}
@@ -169,7 +141,7 @@ export default async function Image() {
           </span>
         </div>
 
-        {/* Gold accent bar */}
+        {/* Accent bar */}
         <div
           style={{
             position: "absolute",
@@ -177,8 +149,7 @@ export default async function Image() {
             left: "0",
             width: "100%",
             height: "4px",
-            background:
-              "linear-gradient(90deg, #14F195, #9945FF, #d4a246)",
+            background: "#0ECB81",
             display: "flex",
           }}
         />

@@ -2,11 +2,12 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { fadeUp } from "@/lib/animations";
+import { fadeLeft, fadeRight } from "@/lib/animations";
 import { FAQ_ITEMS } from "@/data/faq";
+import { SOCIAL_LINKS } from "@/lib/constants";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Accordion from "@/components/ui/Accordion";
-import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
+import Button from "@/components/ui/Button";
 
 export default function FAQSection() {
   const ref = useRef(null);
@@ -14,35 +15,36 @@ export default function FAQSection() {
 
   return (
     <SectionWrapper id="faq" alt>
-      <BotanicalOverlay variant="vine-right" className="opacity-20" />
-
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-16">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
-          >
-            FAQ
-          </motion.p>
-          <motion.h2
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.1}
-            className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
-          >
-            Got <span className="text-primary">Questions?</span>
-          </motion.h2>
-        </div>
-
+      <div ref={ref} className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        {/* Left 40%: Sticky heading */}
         <motion.div
-          ref={ref}
-          variants={fadeUp}
+          className="lg:w-[40%] lg:sticky lg:top-32 lg:self-start"
+          variants={fadeLeft}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          custom={0.2}
+        >
+          <p className="text-primary text-sm font-medium tracking-wider uppercase mb-3">
+            FAQ
+          </p>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-4">
+            Got <span className="text-primary">Questions?</span>
+          </h2>
+          <p className="text-text-muted mb-8 leading-relaxed">
+            Everything you need to know about Superteam Malaysia.
+            Can&apos;t find what you&apos;re looking for? Reach out directly.
+          </p>
+          <Button href={SOCIAL_LINKS.telegram} variant="ghost">
+            Ask on Telegram
+          </Button>
+        </motion.div>
+
+        {/* Right 60%: Accordion */}
+        <motion.div
+          className="lg:w-[60%]"
+          variants={fadeRight}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          custom={0.15}
         >
           <Accordion items={FAQ_ITEMS} />
         </motion.div>

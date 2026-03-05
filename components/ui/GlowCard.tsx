@@ -16,7 +16,7 @@ export default function GlowCard({
   glowColor = "primary",
 }: GlowCardProps) {
   const glowColors = {
-    primary: "hover:shadow-[0_0_40px_rgba(20,241,149,0.12)]",
+    primary: "hover:shadow-[0_0_40px_rgba(14,203,129,0.12)]",
     secondary: "hover:shadow-[0_0_40px_rgba(153,69,255,0.12)]",
     gold: "hover:shadow-[0_0_40px_rgba(212,162,70,0.12)]",
   };

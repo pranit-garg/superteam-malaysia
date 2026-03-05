@@ -10,6 +10,7 @@ interface SectionWrapperProps {
   id?: string;
   className?: string;
   alt?: boolean;
+  fullBleed?: boolean;
   bgSlot?: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export default function SectionWrapper({
   id,
   className,
   alt = false,
+  fullBleed = false,
   bgSlot,
 }: SectionWrapperProps) {
   const ref = useRef(null);
@@ -37,7 +39,11 @@ export default function SectionWrapper({
       )}
     >
       {bgSlot}
-      <div className="mx-auto max-w-7xl relative">{children}</div>
+      {fullBleed ? (
+        <div className="relative">{children}</div>
+      ) : (
+        <div className="mx-auto max-w-7xl relative">{children}</div>
+      )}
     </motion.section>
   );
 }

@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { maskReveal, fadeUp, STAGGER, TROPICAL_EASE } from "@/lib/animations";
+import { maskReveal, fadeUp, TROPICAL_EASE } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
 import Button from "@/components/ui/Button";
@@ -38,7 +38,6 @@ export default function HeroSection() {
           blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoKAAYABUB8JaACdADhOhgUAADeIv3QOtEJ0dRgcbnuJEvMr99b7d1RPPVsAAAA"
         />
         <div className="absolute inset-0 bg-bg/45" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]" />
       </motion.div>
 
       {/* Botanical overlays */}

@@ -1,9 +1,9 @@
 export const COLORS = {
   background: "#0a0a0f",
   backgroundAlt: "#0f1a14",
-  primary: "#14F195", // Solana Green
-  secondary: "#9945FF", // Solana Purple
-  tertiary: "#d4a246", // Malaysian Gold
+  primary: "#0ECB81",
+  secondary: "#9945FF",
+  tertiary: "#d4a246",
   textPrimary: "#ffffff",
   textMuted: "#a1a1aa",
   cardSurface: "rgba(255,255,255,0.05)",
