@@ -182,3 +182,34 @@ export const flipCard = {
   front: { rotateY: 0 },
   back: { rotateY: 180 },
 };
+
+// Pathway card hover (deeper lift + spring)
+export const pathwayCardHover = {
+  rest: { y: 0 },
+  hover: {
+    y: -12,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
+
+// Node pulse (for vine junction dots)
+export const nodePulse = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: (delay: number = 0) => ({
+    scale: 1,
+    opacity: 1,
+    transition: {
+      scale: {
+        type: "spring" as const,
+        stiffness: 200,
+        damping: 15,
+        delay,
+      },
+      opacity: { duration: 0.3, delay },
+    },
+  }),
+};

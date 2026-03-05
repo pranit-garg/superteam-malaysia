@@ -2,95 +2,168 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { DURATION, TROPICAL_EASE } from "@/lib/animations";
-import { TESTIMONIALS } from "@/data/testimonials";
+import { fadeUp } from "@/lib/animations";
+import { TESTIMONIALS, ROW_1_INDICES, ROW_2_INDICES } from "@/data/testimonials";
+import type { Testimonial } from "@/data/testimonials";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import TweetEmbed from "@/components/ui/TweetEmbed";
+import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
 
-export default function WallOfLove() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+/* ─── Size-based widths ─── */
+const SIZE_WIDTHS: Record<Testimonial["size"], string> = {
+  compact: "w-[280px] md:w-[300px]",
+  standard: "w-[320px] md:w-[360px]",
+  featured: "w-[380px] md:w-[440px]",
+};
+
+/* ─── Background ─── */
+function WallBackground() {
+  return (
+    <>
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full"
+        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.04) 0%, transparent 70%)" }}
+      />
+      <div
+        className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full"
+        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.03) 0%, transparent 70%)" }}
+      />
+    </>
+  );
+}
+
+/* ─── Testimonial Card ─── */
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  const isTweet = testimonial.is_tweet;
+  const isFeatured = testimonial.size === "featured";
 
   return (
-    <SectionWrapper>
-      {/* Right-aligned heading */}
-      <div className="text-right mb-16" ref={ref}>
+    <div className={`${SIZE_WIDTHS[testimonial.size]} flex-shrink-0 group/card`}>
+      {/* Gradient border wrapper */}
+      <div className="bg-gradient-to-br from-primary/20 via-card-border to-primary/10 rounded-2xl p-px group-hover/card:from-primary/40 group-hover/card:via-primary/20 group-hover/card:to-primary/20 transition-all duration-500">
+        <div className="bg-bg/90 backdrop-blur-sm rounded-2xl p-6 h-full group-hover/card:-translate-y-1.5 transition-transform duration-500 ease-out relative overflow-hidden">
+          {/* Featured decorative quote */}
+          {isFeatured && (
+            <svg
+              className="absolute top-4 right-4 w-16 h-16 text-primary/[0.07]"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          )}
+
+          {/* Tweet badge */}
+          {isTweet && (
+            <div className="flex items-center gap-2 mb-3">
+              <svg className="w-4 h-4 text-text-muted/50" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+              <span className="text-xs text-primary/60 font-medium">@SuperteamMY</span>
+            </div>
+          )}
+
+          {/* Quote content */}
+          <p className={`text-text leading-relaxed mb-4 ${isFeatured ? "text-base" : "text-sm"}`}>
+            {isTweet ? (
+              testimonial.content
+            ) : (
+              <>
+                <span className="text-primary/40">&ldquo;</span>
+                {testimonial.content}
+                <span className="text-primary/40">&rdquo;</span>
+              </>
+            )}
+          </p>
+
+          {/* Author row */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shadow-[0_0_8px_rgba(10,177,114,0.15)]">
+              <span className="text-primary text-xs font-bold">
+                {testimonial.author_name.charAt(0)}
+              </span>
+            </div>
+            <div>
+              <p className="text-sm font-medium">{testimonial.author_name}</p>
+              <p className="text-xs text-text-muted">{testimonial.author_title}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Marquee Row ─── */
+function MarqueeRow({
+  indices,
+  direction = "left",
+  duration = "30s",
+}: {
+  indices: number[];
+  direction?: "left" | "right";
+  duration?: string;
+}) {
+  const items = indices.map((i) => TESTIMONIALS[i]);
+  const repeated = [...items, ...items, ...items, ...items];
+
+  return (
+    <div className="group relative overflow-hidden">
+      {/* Fade masks */}
+      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
+
+      <div
+        className="flex gap-5 w-max group-hover:[animation-play-state:paused]"
+        style={{
+          animation: `${direction === "left" ? "marquee" : "marquee-reverse"} ${duration} linear infinite`,
+        }}
+      >
+        {repeated.map((t, i) => (
+          <TestimonialCard key={`${direction}-${i}`} testimonial={t} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main Section ─── */
+export default function WallOfLove() {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+
+  return (
+    <SectionWrapper fullBleed bgSlot={<WallBackground />}>
+      {/* Botanical canopy overlay */}
+      <BotanicalOverlay variant="canopy" className="opacity-30" />
+
+      {/* Header */}
+      <div ref={headerRef} className="max-w-7xl mx-auto px-6 text-center mb-12">
         <motion.p
-          initial={{ opacity: 0, x: 40 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: DURATION.medium, ease: TROPICAL_EASE }}
+          variants={fadeUp}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+          custom={0}
           className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
         >
           Community
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, x: 40 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: DURATION.medium, ease: TROPICAL_EASE, delay: 0.1 }}
+          variants={fadeUp}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+          custom={0.1}
           className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
         >
-          Wall of <span className="text-gold">Love</span>
+          Voices from the{" "}
+          <span className="text-primary">Community</span>
         </motion.h2>
       </div>
 
-      {/* CSS Masonry columns */}
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
-        {TESTIMONIALS.map((t, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: DURATION.medium,
-              ease: TROPICAL_EASE,
-              delay: 0.2 + i * 0.12,
-            }}
-            className="break-inside-avoid"
-          >
-            {t.is_tweet && t.tweet_id ? (
-              <TweetEmbed
-                tweetId={t.tweet_id}
-                fallback={{
-                  author_name: t.author_name,
-                  author_title: t.author_title,
-                  content: t.content,
-                }}
-              />
-            ) : (
-              <div className="bg-card border border-card-border rounded-2xl p-6 border-l-2 border-l-gold/40 hover:border-gold/20 transition-colors duration-500">
-                <motion.svg
-                  className="w-8 h-8 text-gold/30 mb-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{
-                    duration: DURATION.fast,
-                    ease: TROPICAL_EASE,
-                    delay: 0.4 + i * 0.12,
-                  }}
-                >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </motion.svg>
-                <p className="text-text text-sm leading-relaxed mb-4">
-                  &ldquo;{t.content}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center">
-                    <span className="text-gold text-xs font-bold">
-                      {t.author_name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{t.author_name}</p>
-                    <p className="text-xs text-text-muted">{t.author_title}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </motion.div>
-        ))}
+      {/* Dual-row marquee */}
+      <div className="space-y-5">
+        <MarqueeRow indices={ROW_1_INDICES} direction="left" duration="30s" />
+        <MarqueeRow indices={ROW_2_INDICES} direction="right" duration="38s" />
       </div>
     </SectionWrapper>
   );
