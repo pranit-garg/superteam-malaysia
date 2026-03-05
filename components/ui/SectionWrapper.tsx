@@ -33,16 +33,20 @@ export default function SectionWrapper({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       className={cn(
-        "relative py-24 md:py-32 px-6 overflow-hidden",
+        "relative py-24 md:py-32 px-6",
         alt ? "bg-bg-alt" : "bg-bg",
         className
       )}
     >
-      {bgSlot}
+      {bgSlot && (
+        <div className="absolute inset-0 overflow-hidden">
+          {bgSlot}
+        </div>
+      )}
       {fullBleed ? (
-        <div className="relative">{children}</div>
+        <div className="relative z-[1]">{children}</div>
       ) : (
-        <div className="mx-auto max-w-7xl relative">{children}</div>
+        <div className="mx-auto max-w-7xl relative z-[1]">{children}</div>
       )}
     </motion.section>
   );

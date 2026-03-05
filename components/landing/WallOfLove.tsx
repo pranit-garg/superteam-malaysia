@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { DURATION, TROPICAL_EASE } from "@/lib/animations";
 import { TESTIMONIALS } from "@/data/testimonials";
 import SectionWrapper from "@/components/ui/SectionWrapper";
+import TweetEmbed from "@/components/ui/TweetEmbed";
 
 export default function WallOfLove() {
   const ref = useRef(null);
@@ -44,38 +45,50 @@ export default function WallOfLove() {
               ease: TROPICAL_EASE,
               delay: 0.2 + i * 0.12,
             }}
-            className="break-inside-avoid bg-card border border-card-border rounded-2xl p-6 border-l-2 border-l-gold/40 hover:border-gold/20 transition-colors duration-500"
+            className="break-inside-avoid"
           >
-            {/* Quote mark */}
-            <motion.svg
-              className="w-8 h-8 text-gold/30 mb-4"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={isInView ? { scale: 1, opacity: 1 } : {}}
-              transition={{
-                duration: DURATION.fast,
-                ease: TROPICAL_EASE,
-                delay: 0.4 + i * 0.12,
-              }}
-            >
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-            </motion.svg>
-            <p className="text-text text-sm leading-relaxed mb-4">
-              &ldquo;{t.content}&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center">
-                <span className="text-gold text-xs font-bold">
-                  {t.author_name.charAt(0)}
-                </span>
+            {t.is_tweet && t.tweet_id ? (
+              <TweetEmbed
+                tweetId={t.tweet_id}
+                fallback={{
+                  author_name: t.author_name,
+                  author_title: t.author_title,
+                  content: t.content,
+                }}
+              />
+            ) : (
+              <div className="bg-card border border-card-border rounded-2xl p-6 border-l-2 border-l-gold/40 hover:border-gold/20 transition-colors duration-500">
+                <motion.svg
+                  className="w-8 h-8 text-gold/30 mb-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{
+                    duration: DURATION.fast,
+                    ease: TROPICAL_EASE,
+                    delay: 0.4 + i * 0.12,
+                  }}
+                >
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </motion.svg>
+                <p className="text-text text-sm leading-relaxed mb-4">
+                  &ldquo;{t.content}&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <span className="text-gold text-xs font-bold">
+                      {t.author_name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">{t.author_name}</p>
+                    <p className="text-xs text-text-muted">{t.author_title}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-medium">{t.author_name}</p>
-                <p className="text-xs text-text-muted">{t.author_title}</p>
-              </div>
-            </div>
+            )}
           </motion.div>
         ))}
       </div>

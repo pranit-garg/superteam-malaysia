@@ -2,10 +2,10 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
 import { fadeUp, scaleXReveal } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
+import SeamlessVideo from "@/components/ui/SeamlessVideo";
 
 export default function JoinCTA() {
   const ref = useRef(null);
@@ -15,26 +15,13 @@ export default function JoinCTA() {
     <section className="relative py-32 md:py-40 px-6 overflow-hidden bg-bg">
       {/* Background image */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <SeamlessVideo
+          src="/videos/cta-bg.mp4"
+          webmSrc="/videos/cta-bg.webm"
           poster="/images/cta-bg.webp"
-          className="absolute inset-0 w-full h-full object-cover opacity-45"
-        >
-          <source src="/videos/cta-bg.mp4" type="video/mp4" />
-        </video>
-        <Image
-          src="/images/cta-bg.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-45"
-          placeholder="blur"
-          blurDataURL="data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAYABUB8JZgCdADc+wTGAAD+TH2I7awcpyktADwheDZDywZ9s9k4uGPM/1oNAAA="
+          className="absolute inset-0 w-full h-full"
+          overlay="bg-bg/40"
         />
-        <div className="absolute inset-0 bg-bg/40" />
       </div>
 
       <div ref={ref} className="relative z-10 max-w-3xl mx-auto text-center">

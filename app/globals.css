@@ -33,15 +33,15 @@
 /* ── Theme Tokens ── */
 @theme inline {
   --color-bg: #0d1a12;
-  --color-bg-alt: #122018;
-  --color-primary: #0ECB81;
+  --color-bg-alt: #162a1e;
+  --color-primary: #0AB172;
   --color-secondary: #9945FF;
   --color-gold: #d4a246;
   --color-text: #ffffff;
-  --color-text-muted: #a1a1aa;
+  --color-text-muted: #c8c8d0;
   --color-card: rgba(255, 255, 255, 0.08);
-  --color-card-border: rgba(14, 203, 129, 0.14);
-  --color-primary-glow: rgba(14, 203, 129, 0.28);
+  --color-card-border: rgba(14, 203, 129, 0.22);
+  --color-primary-glow: rgba(10, 177, 114, 0.28);
   --color-secondary-glow: rgba(153, 69, 255, 0.15);
 
   --font-display: "Satoshi", system-ui, sans-serif;
@@ -65,7 +65,7 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background-color: rgba(14, 203, 129, 0.3);
+  background-color: rgba(10, 177, 114, 0.3);
   color: #ffffff;
 }
 
@@ -114,8 +114,8 @@ body {
 
 /* ── Glow Effects ── */
 .glow-primary {
-  box-shadow: 0 0 30px rgba(14, 203, 129, 0.15),
-    0 0 60px rgba(14, 203, 129, 0.05);
+  box-shadow: 0 0 30px rgba(10, 177, 114, 0.15),
+    0 0 60px rgba(10, 177, 114, 0.05);
 }
 
 .glow-secondary {
