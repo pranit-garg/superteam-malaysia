@@ -1,11 +1,30 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { type ButtonHTMLAttributes } from "react";
+import { motion } from "framer-motion";
+import { TROPICAL_EASE, DURATION } from "@/lib/animations";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   href?: string;
 }
+
+const hoverEffects = {
+  primary: {
+    scale: 1.03,
+    boxShadow: "0 0 25px rgba(10,177,114,0.35), 0 0 50px rgba(10,177,114,0.15)",
+  },
+  secondary: {
+    scale: 1.03,
+    boxShadow: "0 0 25px rgba(153,69,255,0.35), 0 0 50px rgba(153,69,255,0.15)",
+  },
+  ghost: {
+    scale: 1.03,
+    boxShadow: "0 0 20px rgba(10,177,114,0.15)",
+  },
+};
 
 export default function Button({
   children,
@@ -16,14 +35,12 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-medium rounded-full transition-all duration-300 whitespace-nowrap hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
+    "relative overflow-hidden inline-flex items-center justify-center gap-2 font-medium rounded-full transition-colors duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
 
   const variants = {
     primary: "bg-primary text-bg hover:bg-primary/90 glow-primary",
-    secondary:
-      "bg-secondary text-white hover:bg-secondary/90 glow-secondary",
-    ghost:
-      "bg-transparent border border-card-border text-text hover:border-primary hover:text-primary",
+    secondary: "bg-secondary text-white hover:bg-secondary/90 glow-secondary",
+    ghost: "bg-transparent border border-card-border text-text hover:border-primary hover:text-primary",
   };
 
   const sizes = {
@@ -34,22 +51,31 @@ export default function Button({
 
   const classes = cn(base, variants[variant], sizes[size], className);
 
+  const motionProps = {
+    whileHover: {
+      ...hoverEffects[variant],
+      transition: { duration: DURATION.fast, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] },
+    },
+    whileTap: { scale: 0.98 },
+  } as const;
+
   if (href) {
     return (
-      <a
+      <motion.a
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         className={classes}
+        {...motionProps}
       >
-        {children}
-      </a>
+        <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+      </motion.a>
     );
   }
 
   return (
-    <button className={classes} {...props}>
-      {children}
-    </button>
+    <motion.button className={classes} {...motionProps} {...(props as any)}>
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+    </motion.button>
   );
 }

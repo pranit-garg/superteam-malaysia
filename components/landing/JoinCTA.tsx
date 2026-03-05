@@ -61,7 +61,7 @@ export default function JoinCTA() {
           custom={0.2}
           className="text-text-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed"
         >
-          500+ builders, designers, and creators in Malaysia&apos;s most
+          Builders, designers, and creators in Malaysia&apos;s most
           active Solana community. No applications, no gatekeeping. Just show up and ship.
         </motion.p>
 

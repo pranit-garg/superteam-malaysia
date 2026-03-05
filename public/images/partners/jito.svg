@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <circle cx="50" cy="50" r="45" fill="#1A1B23"/>
+  <path d="M30 65V40c0-3.3 2.7-6 6-6h28c3.3 0 6 2.7 6 6v25c0 3.3-2.7 6-6 6H36c-3.3 0-6-2.7-6-6z" fill="url(#jito_grad)"/>
+  <path d="M42 48l8 8 8-8" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <defs>
+    <linearGradient id="jito_grad" x1="30" y1="34" x2="70" y2="71" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5DCCAD"/>
+      <stop offset="1" stop-color="#2A9D8F"/>
+    </linearGradient>
+  </defs>
+</svg>

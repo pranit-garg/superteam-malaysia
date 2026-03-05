@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="24" fill="url(#me_grad)"/>
+  <path d="M91.2 52.8L69.6 31.2c-5.28-5.28-13.92-5.28-19.2 0L28.8 52.8c-5.28 5.28-5.28 13.92 0 19.2L50.4 93.6c5.28 5.28 13.92 5.28 19.2 0L91.2 72c5.28-5.28 5.28-13.92 0-19.2z" fill="white"/>
+  <path d="M60 48l12 12-12 12-12-12 12-12z" fill="url(#me_grad2)"/>
+  <defs>
+    <linearGradient id="me_grad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E42575"/>
+      <stop offset="1" stop-color="#A020F0"/>
+    </linearGradient>
+    <linearGradient id="me_grad2" x1="48" y1="48" x2="72" y2="72" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E42575"/>
+      <stop offset="1" stop-color="#A020F0"/>
+    </linearGradient>
+  </defs>
+</svg>

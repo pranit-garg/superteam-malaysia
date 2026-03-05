@@ -14,7 +14,6 @@ export default function HeroSection() {
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
@@ -22,11 +21,8 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image layer */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y: bgY }}
-      >
+      {/* Background video layer - static, no parallax */}
+      <div className="absolute inset-0 z-0">
         <SeamlessVideo
           src="/videos/hero-bg.mp4"
           poster="/images/hero-bg.webp"
@@ -34,7 +30,7 @@ export default function HeroSection() {
           eager
           overlay="bg-gradient-to-b from-bg/70 via-bg/35 to-bg/60"
         />
-      </motion.div>
+      </div>
 
       {/* Botanical overlays */}
       <BotanicalOverlay variant="vine-left" />
@@ -82,8 +78,7 @@ export default function HeroSection() {
           custom={0.3}
           className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]"
         >
-          Builders, creators, and founders growing Solana in Southeast Asia.
-          500+ members, real projects shipped, no gatekeeping.
+          The home for Solana builders in Malaysia. Ship projects, earn bounties, grow together.
         </motion.p>
 
         {/* CTAs */}
@@ -106,20 +101,21 @@ export default function HeroSection() {
           </Button>
         </motion.div>
 
-        {/* Scroll indicator */}
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-5 h-8 rounded-full border border-text-muted/30 flex items-start justify-center p-1.5"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border border-text-muted/30 flex items-start justify-center p-1.5"
-          >
-            <div className="w-1 h-2 rounded-full bg-primary" />
-          </motion.div>
+          <div className="w-1 h-2 rounded-full bg-primary" />
         </motion.div>
       </motion.div>
     </section>

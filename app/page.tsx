@@ -4,7 +4,8 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import HeroSection from "@/components/landing/HeroSection";
 import MissionSection from "@/components/landing/MissionSection";
-import StatsSection from "@/components/landing/StatsSection";
+
+import PathwaySection from "@/components/landing/PathwaySection";
 import EventsSection from "@/components/landing/EventsSection";
 import MemberSpotlight from "@/components/landing/MemberSpotlight";
 import PartnersSection from "@/components/landing/PartnersSection";
@@ -42,7 +43,7 @@ export default async function Home() {
       <main id="main-content">
         <HeroSection />
         <MissionSection />
-        <StatsSection />
+        <PathwaySection />
         <EventsSection events={events} />
         <MemberSpotlight />
         <PartnersSection />

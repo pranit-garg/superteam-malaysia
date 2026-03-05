@@ -41,9 +41,8 @@ export default function SectionWrapper({
       {/* Section transition edges for alt sections */}
       {alt && (
         <>
-          <div className="absolute top-0 left-0 right-0 h-px bg-section-divider" />
-          <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-bg to-transparent z-[1]" />
-          <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-bg to-transparent z-[1]" />
+          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-bg via-bg/50 to-transparent z-[1]" />
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-bg via-bg/50 to-transparent z-[1]" />
         </>
       )}
       {bgSlot && (

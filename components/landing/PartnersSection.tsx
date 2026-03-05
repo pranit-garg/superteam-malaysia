@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp, DURATION } from "@/lib/animations";
 import { PARTNERS } from "@/data/partners";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -10,12 +11,10 @@ export default function PartnersSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Split partners into two rows for dual marquee
   const mid = Math.ceil(PARTNERS.length / 2);
   const row1 = PARTNERS.slice(0, mid);
   const row2 = PARTNERS.slice(mid);
 
-  // Duplicate for seamless loop
   const row1Double = [...row1, ...row1, ...row1, ...row1];
   const row2Double = [...row2, ...row2, ...row2, ...row2];
 
@@ -41,7 +40,6 @@ export default function PartnersSection() {
         </motion.h2>
       </div>
 
-      {/* Marquee rows */}
       <motion.div
         className="space-y-4 overflow-hidden"
         initial={{ opacity: 0 }}
@@ -55,14 +53,24 @@ export default function PartnersSection() {
             style={{ animation: "marquee 30s linear infinite" }}
           >
             {row1Double.map((partner, i) => (
-              <div
+              <a
                 key={`r1-${i}`}
-                className="rounded-full px-6 py-3 border border-card-border bg-card/50 whitespace-nowrap hover:border-primary/30 transition-colors duration-300"
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-full px-5 py-2.5 border border-card-border bg-card/50 whitespace-nowrap hover:border-primary/30 transition-all duration-300 group/card"
               >
-                <span className="font-[family-name:var(--font-display)] font-bold text-text-muted text-sm">
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={28}
+                  height={28}
+                  className="w-7 h-7 rounded-sm object-contain grayscale group-hover/card:grayscale-0 transition-all duration-300"
+                />
+                <span className="font-[family-name:var(--font-display)] font-bold text-text-muted text-sm group-hover/card:text-text transition-colors duration-300">
                   {partner.name}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -74,14 +82,24 @@ export default function PartnersSection() {
             style={{ animation: "marquee-reverse 35s linear infinite" }}
           >
             {row2Double.map((partner, i) => (
-              <div
+              <a
                 key={`r2-${i}`}
-                className="rounded-full px-6 py-3 border border-card-border bg-card/50 whitespace-nowrap hover:border-primary/30 transition-colors duration-300"
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-full px-5 py-2.5 border border-card-border bg-card/50 whitespace-nowrap hover:border-primary/30 transition-all duration-300 group/card"
               >
-                <span className="font-[family-name:var(--font-display)] font-bold text-text-muted text-sm">
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={28}
+                  height={28}
+                  className="w-7 h-7 rounded-sm object-contain grayscale group-hover/card:grayscale-0 transition-all duration-300"
+                />
+                <span className="font-[family-name:var(--font-display)] font-bold text-text-muted text-sm group-hover/card:text-text transition-colors duration-300">
                   {partner.name}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         </div>

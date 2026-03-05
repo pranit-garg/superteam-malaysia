@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { TROPICAL_EASE } from "@/lib/animations";
+import Button from "@/components/ui/Button";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -64,14 +65,9 @@ export default function Header() {
 
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-4">
-            <a
-              href={SOCIAL_LINKS.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-bg font-medium text-sm rounded-full hover:bg-primary/90 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:outline-none"
-            >
-              Join Community
-            </a>
+            <span className="hidden md:inline-flex">
+              <Button href={SOCIAL_LINKS.telegram}>Join Community</Button>
+            </span>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
@@ -126,14 +122,7 @@ export default function Header() {
               >
                 Directory
               </Link>
-              <a
-                href={SOCIAL_LINKS.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 px-8 py-3 bg-primary text-bg font-medium rounded-full focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:outline-none"
-              >
-                Join Community
-              </a>
+              <Button href={SOCIAL_LINKS.telegram} size="lg">Join Community</Button>
             </nav>
           </motion.div>
         )}

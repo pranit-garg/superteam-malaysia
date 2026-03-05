@@ -14,15 +14,17 @@ export const SOCIAL_LINKS = {
   twitter: "https://x.com/SuperteamMY",
   telegram: "https://t.me/SuperteamMY",
   discord: "#",
-  luma: "https://lu.ma/superteammy",
+  luma: "https://lu.ma/mysuperteam",
   superteamGlobal: "https://superteam.fun",
+  superteamEarn: "https://superteam.fun/earn",
+  solanaDev: "https://solana.com/developers",
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Mission", href: "#mission" },
+  { label: "About", href: "#mission" },
+  { label: "Get Started", href: "#get-started" },
   { label: "Events", href: "#events" },
-  { label: "Members", href: "#members" },
-  { label: "Partners", href: "#partners" },
+  { label: "Community", href: "#members" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 

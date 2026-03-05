@@ -95,7 +95,7 @@ export default function RootLayout({
               "sameAs": [
                 "https://x.com/SuperteamMY",
                 "https://t.me/SuperteamMY",
-                "https://lu.ma/superteammy"
+                "https://lu.ma/mysuperteam"
               ]
             }),
           }}

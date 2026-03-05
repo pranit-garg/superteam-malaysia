@@ -6,10 +6,12 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  const [members, events, partners, announcements] = await Promise.all([
+  const [members, events, partners, testimonials, siteStats, announcements] = await Promise.all([
     supabase.from("members").select("id", { count: "exact", head: true }),
     supabase.from("events").select("id", { count: "exact", head: true }),
     supabase.from("partners").select("id", { count: "exact", head: true }),
+    supabase.from("testimonials").select("id", { count: "exact", head: true }),
+    supabase.from("stats").select("id", { count: "exact", head: true }),
     supabase.from("announcements").select("*").order("created_at", { ascending: false }).limit(5),
   ]);
 
@@ -17,12 +19,14 @@ export default async function AdminDashboard() {
     { label: "Members", count: members.count ?? 0, href: "/admin/members", color: "text-primary" },
     { label: "Events", count: events.count ?? 0, href: "/admin/events", color: "text-secondary" },
     { label: "Partners", count: partners.count ?? 0, href: "/admin/partners", color: "text-gold" },
+    { label: "Testimonials", count: testimonials.count ?? 0, href: "/admin/testimonials", color: "text-primary" },
+    { label: "Stats", count: siteStats.count ?? 0, href: "/admin/stats", color: "text-secondary" },
   ];
 
   return (
     <div className="space-y-8">
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {stats.map((stat) => (
           <Link
             key={stat.label}

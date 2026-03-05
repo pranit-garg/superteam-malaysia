@@ -78,11 +78,11 @@ export default function EventsSection({ events }: EventsSectionProps) {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-40"
+            className="object-cover opacity-20"
             placeholder="blur"
             blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoKAAYABUB8JYgCw7DdSZdXsAAA/ob/ZJnVg52yxsPbBQa393WRk3VtiE3gtAAA"
           />
-          <div className="absolute inset-0 bg-bg-alt/40 z-[1]" />
+          <div className="absolute inset-0 bg-bg-alt/70 z-[1]" />
         </>
       }
     >
@@ -112,7 +112,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
             custom={0.1}
             className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
           >
-            Learn, Build, <span className="text-primary">Connect</span>
+            What&apos;s <span className="text-primary">Happening</span>
           </motion.h2>
         </div>
         <motion.div
@@ -146,7 +146,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
                 delay: 0.3 + i * 0.12,
               }}
               whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-              className="flex-shrink-0 w-[320px] md:w-[350px] snap-start bg-card border border-card-border border-t-2 border-t-primary rounded-sm p-6 flex flex-col cursor-pointer"
+              className="flex-shrink-0 w-[320px] md:w-[350px] snap-start bg-bg/80 backdrop-blur-md border border-card-border border-t-2 border-t-primary rounded-sm p-6 flex flex-col cursor-pointer"
             >
               {/* Date badge */}
               <div className="flex items-center gap-3 mb-4">
