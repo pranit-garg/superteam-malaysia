@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_LINKS, SOCIAL_LINKS, SITE_CONFIG } from "@/lib/constants";
 
 export default function Footer() {
@@ -9,11 +10,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <span className="text-primary font-bold text-sm font-[family-name:var(--font-display)]">
-                  ST
-                </span>
-              </div>
+              <Image
+                src="/images/logo-superteam-my.png"
+                alt="Superteam Malaysia"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-lg"
+              />
               <span className="font-[family-name:var(--font-display)] font-bold text-lg">
                 Superteam <span className="text-primary">MY</span>
               </span>

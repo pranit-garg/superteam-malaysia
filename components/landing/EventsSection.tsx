@@ -72,11 +72,11 @@ export default function EventsSection() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-25"
+            className="object-cover opacity-45"
             placeholder="blur"
-            blurDataURL="data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoKAAYABUB8JQBdgCKe8Kw2gAD+5Eg8h/C+4XphqzNVi73l24AAAA=="
+            blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoKAAYABUB8JYgCw7DdSZdXsAAA/ob/ZJnVg52yxsPbBQa393WRk3VtiE3gtAAA"
           />
-          <div className="absolute inset-0 bg-bg-alt/65 z-[1]" />
+          <div className="absolute inset-0 bg-bg-alt/40 z-[1]" />
         </>
       }
     >

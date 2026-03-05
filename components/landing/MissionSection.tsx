@@ -62,11 +62,11 @@ export default function MissionSection() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-30"
+            className="object-cover opacity-50"
             placeholder="blur"
-            blurDataURL="data:image/webp;base64,UklGRigAAABXRUJQVlA4IBwAAAAwAQCdASoKAAYABUB8JZQAA3AA/u9+zLSatsAA"
+            blurDataURL="data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoKAAYABUB8JYgCdAD0qfo4AAD+JiJ9wa4wb+k+J7TcB2Tz+9tePxY0GHcAAA=="
           />
-          <div className="absolute inset-0 bg-bg-alt/60 z-[1]" />
+          <div className="absolute inset-0 bg-bg-alt/40 z-[1]" />
         </>
       }
     >

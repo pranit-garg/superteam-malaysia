@@ -35,9 +35,9 @@ export default function HeroSection() {
           sizes="100vw"
           className="object-cover"
           placeholder="blur"
-          blurDataURL="data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoKAAYABUB8JQAAXa8YRtmAAP7mh1OOuWlWlwGBk70Cx8kooKOgAA=="
+          blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoKAAYABUB8JaACdADhOhgUAADeIv3QOtEJ0dRgcbnuJEvMr99b7d1RPPVsAAAA"
         />
-        <div className="absolute inset-0 bg-bg/70" />
+        <div className="absolute inset-0 bg-bg/45" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]" />
       </motion.div>
 

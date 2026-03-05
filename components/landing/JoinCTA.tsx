@@ -21,11 +21,11 @@ export default function JoinCTA() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-25"
+          className="object-cover opacity-45"
           placeholder="blur"
-          blurDataURL="data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACQAQCdASoKAAYABUB8JYwAAsZrAFAA/tJOObA29cmCvKgNqdyclSNaI5ey5kAA"
+          blurDataURL="data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAYABUB8JZgCdADc+wTGAAD+TH2I7awcpyktADwheDZDywZ9s9k4uGPM/1oNAAA="
         />
-        <div className="absolute inset-0 bg-bg/65" />
+        <div className="absolute inset-0 bg-bg/40" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-primary/8 blur-[150px]" />
       </div>
 

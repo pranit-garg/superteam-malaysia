@@ -32,16 +32,16 @@
 
 /* ── Theme Tokens ── */
 @theme inline {
-  --color-bg: #0a0a0f;
-  --color-bg-alt: #0f1a14;
+  --color-bg: #0d1a12;
+  --color-bg-alt: #122018;
   --color-primary: #14F195;
   --color-secondary: #9945FF;
   --color-gold: #d4a246;
   --color-text: #ffffff;
   --color-text-muted: #a1a1aa;
-  --color-card: rgba(255, 255, 255, 0.05);
-  --color-card-border: rgba(255, 255, 255, 0.08);
-  --color-primary-glow: rgba(20, 241, 149, 0.15);
+  --color-card: rgba(255, 255, 255, 0.08);
+  --color-card-border: rgba(20, 241, 149, 0.12);
+  --color-primary-glow: rgba(20, 241, 149, 0.25);
   --color-secondary-glow: rgba(153, 69, 255, 0.15);
 
   --font-display: "Satoshi", system-ui, sans-serif;
@@ -106,7 +106,7 @@ body {
 
 /* ── Glassmorphism ── */
 .glass {
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(13, 26, 18, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-card-border);

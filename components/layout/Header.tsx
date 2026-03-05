@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { TROPICAL_EASE } from "@/lib/animations";
 
@@ -29,11 +30,13 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <span className="text-primary font-bold text-sm font-[family-name:var(--font-display)]">
-                ST
-              </span>
-            </div>
+            <Image
+              src="/images/logo-superteam-my.png"
+              alt="Superteam Malaysia"
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-lg"
+            />
             <span className="font-[family-name:var(--font-display)] font-bold text-lg tracking-tight">
               Superteam{" "}
               <span className="text-primary">MY</span>

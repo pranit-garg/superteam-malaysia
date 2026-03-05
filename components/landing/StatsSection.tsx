@@ -29,11 +29,11 @@ export default function StatsSection() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-20"
+          className="object-cover opacity-40"
           placeholder="blur"
-          blurDataURL="data:image/webp;base64,UklGRigAAABXRUJQVlA4IBwAAAAwAQCdASoKAAYABwB8JZwAA3AA/vBbe7nHQIAA"
+          blurDataURL="data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAAAQAgCdASoKAAYABUB8JaACdAD5h8yAueAAAPfbvLexLcvbfLz3O5Udqf4UMdjd8F7PD+EAAAA="
         />
-        <div className="absolute inset-0 bg-bg/70" />
+        <div className="absolute inset-0 bg-bg/45" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/3 blur-[200px]" />
       </motion.div>
 

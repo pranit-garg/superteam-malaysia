@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { fadeUp, staggerContainer, TROPICAL_EASE } from "@/lib/animations";
 import { SAMPLE_MEMBERS } from "@/data/members";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -34,11 +35,21 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
           className="absolute inset-0 bg-card border border-card-border rounded-2xl p-6 flex flex-col items-center justify-center text-center"
           style={{ backfaceVisibility: "hidden" }}
         >
-          {/* Avatar placeholder */}
-          <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-4">
-            <span className="text-primary font-bold text-xl font-[family-name:var(--font-display)]">
-              {member.name?.split(" ").map((n) => n[0]).join("")}
-            </span>
+          {/* Avatar */}
+          <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-4 overflow-hidden">
+            {member.photo_url ? (
+              <Image
+                src={member.photo_url}
+                alt={member.name || "Member"}
+                width={80}
+                height={80}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-primary font-bold text-xl font-[family-name:var(--font-display)]">
+                {member.name?.split(" ").map((n) => n[0]).join("")}
+              </span>
+            )}
           </div>
           <h3 className="font-[family-name:var(--font-display)] font-bold text-lg">
             {member.name}
