@@ -16,7 +16,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-medium rounded-full transition-all duration-300 whitespace-nowrap";
+    "inline-flex items-center justify-center gap-2 font-medium rounded-full transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
 
   const variants = {
     primary: "bg-primary text-bg hover:bg-primary/90 glow-primary",

@@ -34,7 +34,7 @@ export default function StatsSection() {
             animate={isInView ? "visible" : "hidden"}
             className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
           >
-            Our Impact
+            By the Numbers
           </motion.p>
           <motion.h2
             variants={fadeUp}

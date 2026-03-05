@@ -13,12 +13,12 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
 
   return (
     <div
-      className="relative h-72 cursor-pointer perspective-[1000px]"
+      className="relative h-72 cursor-pointer perspective-[1000px] rounded-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
       onClick={() => setFlipped(!flipped)}
-      onKeyDown={(e) => e.key === "Enter" && setFlipped(!flipped)}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setFlipped(!flipped)}
       tabIndex={0}
       role="button"
-      aria-label={`View ${member.name}'s profile`}
+      aria-label={`${flipped ? "Hide" : "View"} ${member.name}'s profile details`}
     >
       <motion.div
         className="absolute inset-0 transition-transform duration-500"
@@ -97,7 +97,7 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
                 className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 @{member.twitter_url.split("/").pop()}
@@ -142,7 +142,7 @@ export default function MemberSpotlight() {
           custom={0.2}
           className="text-text-muted mt-4 max-w-lg mx-auto"
         >
-          Tap a card to learn more about our featured members.
+          Tap a card to see what they're working on.
         </motion.p>
       </div>
 

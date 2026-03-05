@@ -41,19 +41,19 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-text-muted hover:text-primary transition-colors duration-300"
+                className="text-sm text-text-muted hover:text-primary transition-colors duration-300 rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
                 {link.label}
               </a>
             ))}
             <Link
               href="/members"
-              className="text-sm text-text-muted hover:text-primary transition-colors duration-300"
+              className="text-sm text-text-muted hover:text-primary transition-colors duration-300 rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
             >
               Directory
             </Link>
@@ -65,14 +65,15 @@ export default function Header() {
               href={SOCIAL_LINKS.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-bg font-medium text-sm rounded-full hover:bg-primary/90 transition-colors"
+              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-bg font-medium text-sm rounded-full hover:bg-primary/90 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:outline-none"
             >
               Join Community
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
-              aria-label="Toggle menu"
+              className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
             >
               <motion.span
                 className="w-5 h-[1.5px] bg-text block"
@@ -101,34 +102,36 @@ export default function Header() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {NAV_LINKS.map((link, i) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
+            <nav aria-label="Mobile navigation" className="flex flex-col items-center gap-8">
+              {NAV_LINKS.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-2xl font-[family-name:var(--font-display)] font-bold text-text hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05, ease: TROPICAL_EASE }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <Link
+                href="/members"
                 onClick={() => setMobileOpen(false)}
-                className="text-2xl font-[family-name:var(--font-display)] font-bold text-text hover:text-primary transition-colors"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05, ease: TROPICAL_EASE }}
+                className="text-2xl font-[family-name:var(--font-display)] font-bold text-text hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
-                {link.label}
-              </motion.a>
-            ))}
-            <Link
-              href="/members"
-              onClick={() => setMobileOpen(false)}
-              className="text-2xl font-[family-name:var(--font-display)] font-bold text-text hover:text-primary transition-colors"
-            >
-              Directory
-            </Link>
-            <a
-              href={SOCIAL_LINKS.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 px-8 py-3 bg-primary text-bg font-medium rounded-full"
-            >
-              Join Community
-            </a>
+                Directory
+              </Link>
+              <a
+                href={SOCIAL_LINKS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 px-8 py-3 bg-primary text-bg font-medium rounded-full focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:outline-none"
+              >
+                Join Community
+              </a>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

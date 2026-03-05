@@ -78,9 +78,8 @@ export default function HeroSection() {
           custom={0.3}
           className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          The home for builders, creators, and founders shaping the future of
-          Web3 in Southeast Asia. Join 500+ members turning ideas into shipped
-          products.
+          Builders, creators, and founders growing Solana in Southeast Asia.
+          500+ members, real projects shipped, no gatekeeping.
         </motion.p>
 
         {/* CTAs */}
@@ -99,7 +98,7 @@ export default function HeroSection() {
             variant="ghost"
             size="lg"
           >
-            Explore Opportunities
+            Earn on Solana
           </Button>
         </motion.div>
 

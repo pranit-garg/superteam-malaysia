@@ -24,8 +24,11 @@ export default function Accordion({ items }: AccordionProps) {
           className="border border-card-border rounded-xl overflow-hidden bg-card/50"
         >
           <button
+            id={`accordion-trigger-${i}`}
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="w-full flex items-center justify-between p-5 text-left hover:bg-card transition-colors"
+            aria-expanded={openIndex === i}
+            aria-controls={`accordion-panel-${i}`}
+            className="w-full flex items-center justify-between p-5 text-left hover:bg-card transition-colors rounded-xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
           >
             <span className="font-[family-name:var(--font-display)] font-medium text-text pr-4">
               {item.question}
@@ -34,6 +37,7 @@ export default function Accordion({ items }: AccordionProps) {
               animate={{ rotate: openIndex === i ? 45 : 0 }}
               transition={{ duration: 0.2, ease: TROPICAL_EASE }}
               className="text-primary text-xl flex-shrink-0"
+              aria-hidden="true"
             >
               +
             </motion.span>
@@ -41,6 +45,9 @@ export default function Accordion({ items }: AccordionProps) {
           <AnimatePresence>
             {openIndex === i && (
               <motion.div
+                id={`accordion-panel-${i}`}
+                role="region"
+                aria-labelledby={`accordion-trigger-${i}`}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}

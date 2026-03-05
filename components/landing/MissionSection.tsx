@@ -12,37 +12,37 @@ const PILLARS = [
     icon: "🛠",
     title: "Builder Support",
     description:
-      "Mentorship, code reviews, and technical guidance from experienced Solana developers in the region.",
+      "Mentorship, code reviews, and technical help from experienced Solana devs based in the region.",
   },
   {
     icon: "🎪",
     title: "Events & Hackathons",
     description:
-      "Regular meetups, workshops, and hackathons across KL, Penang, and JB. Learn by building together.",
+      "Meetups, workshops, and hackathons across KL, Penang, and JB. Show up and build with others.",
   },
   {
     icon: "💰",
     title: "Grants & Funding",
     description:
-      "Direct access to Solana Foundation grants, ecosystem funding, and project investment opportunities.",
+      "Solana Foundation grants, ecosystem funding, and project investment. We help you find and apply.",
   },
   {
     icon: "🎯",
     title: "Jobs & Bounties",
     description:
-      "Curated opportunities from top Solana projects. Bounties, freelance gigs, and full-time roles.",
+      "Bounties, freelance gigs, and full-time roles from Solana projects looking for talent.",
   },
   {
     icon: "📚",
     title: "Education",
     description:
-      "Workshops on Rust, Anchor, DeFi, NFTs, and more. From beginner-friendly intros to advanced deep dives.",
+      "Workshops covering Rust, Anchor, DeFi, NFTs, and more. Beginner intros to deep technical dives.",
   },
   {
     icon: "🌏",
     title: "Ecosystem Access",
     description:
-      "Connections to the global Superteam network, Solana Labs, and ecosystem partners worldwide.",
+      "Connections to the global Superteam network, Solana Foundation, and ecosystem partners worldwide.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function MissionSection() {
           custom={0.1}
           className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
         >
-          Building the Solana Ecosystem
+          Growing Solana
           <br className="hidden md:block" />
           <span className="text-primary"> in Malaysia</span>
         </motion.h2>

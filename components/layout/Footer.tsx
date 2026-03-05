@@ -24,16 +24,16 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <div>
-            <h4 className="font-[family-name:var(--font-display)] font-bold text-sm mb-4 text-text-muted uppercase tracking-wider">
+          <nav aria-label="Footer navigation">
+            <h3 className="font-[family-name:var(--font-display)] font-bold text-sm mb-4 text-text-muted uppercase tracking-wider">
               Navigate
-            </h4>
+            </h3>
             <ul className="space-y-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm text-text-muted hover:text-primary transition-colors"
+                    className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
@@ -42,26 +42,26 @@ export default function Footer() {
               <li>
                 <Link
                   href="/members"
-                  className="text-sm text-text-muted hover:text-primary transition-colors"
+                  className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
                   Member Directory
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Community */}
           <div>
-            <h4 className="font-[family-name:var(--font-display)] font-bold text-sm mb-4 text-text-muted uppercase tracking-wider">
+            <h3 className="font-[family-name:var(--font-display)] font-bold text-sm mb-4 text-text-muted uppercase tracking-wider">
               Community
-            </h4>
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href={SOCIAL_LINKS.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-text-muted hover:text-primary transition-colors"
+                  className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
                   Twitter / X
                 </a>
@@ -71,7 +71,7 @@ export default function Footer() {
                   href={SOCIAL_LINKS.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-text-muted hover:text-primary transition-colors"
+                  className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
                   Telegram
                 </a>
@@ -81,7 +81,7 @@ export default function Footer() {
                   href={SOCIAL_LINKS.luma}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-text-muted hover:text-primary transition-colors"
+                  className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
                   Events (Luma)
                 </a>
@@ -91,7 +91,7 @@ export default function Footer() {
                   href={SOCIAL_LINKS.superteamGlobal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-text-muted hover:text-primary transition-colors"
+                  className="text-sm text-text-muted hover:text-primary transition-colors rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
                   Superteam Global
                 </a>
@@ -108,7 +108,7 @@ export default function Footer() {
               href={SOCIAL_LINKS.superteamGlobal}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
+              className="text-primary hover:underline rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
             >
               Superteam
             </a>{" "}

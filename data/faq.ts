@@ -2,26 +2,26 @@ export const FAQ_ITEMS = [
   {
     question: "What is Superteam Malaysia?",
     answer:
-      "Superteam Malaysia is the local chapter of the global Superteam network. We support Solana builders, creators, and talent across Malaysia through events, mentorship, grants, and ecosystem connections.",
+      "We're the Malaysia chapter of the global Superteam network, focused on growing the Solana ecosystem locally. That means events, mentorship, grants, and plugging you into the right people.",
   },
   {
     question: "How do I join?",
     answer:
-      "Join our Telegram or Discord community to get started. There is no formal application process. Show up, contribute, and connect with fellow builders.",
+      "Hop into our Telegram or Discord. There's no application or approval process. Just show up, say hi, and start connecting with other builders.",
   },
   {
     question: "What opportunities are available?",
     answer:
-      "We connect members with bounties, grants, jobs, hackathons, and freelance projects across the Solana ecosystem. Check Superteam Earn for the latest listings.",
+      "Bounties, grants, hackathons, freelance gigs, and full-time roles across the Solana ecosystem. Check Superteam Earn for the latest listings.",
   },
   {
     question: "How can projects collaborate with us?",
     answer:
-      "Reach out via Twitter or Telegram. We partner with Solana ecosystem projects for co-hosted events, builder programs, and talent matching.",
+      "DM us on X or Telegram. We regularly partner with Solana projects on co-hosted events, builder programs, and talent matching.",
   },
   {
     question: "Do I need to be a developer to join?",
     answer:
-      "Not at all. We welcome designers, content creators, marketers, community builders, product managers, and anyone interested in Web3. Diverse skills make the ecosystem stronger.",
+      "Nope. Designers, writers, marketers, community folks, product people, and the simply curious are all welcome. The ecosystem needs more than just code.",
   },
 ];

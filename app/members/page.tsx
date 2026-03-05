@@ -31,7 +31,7 @@ export default function MembersPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-bg pt-28 pb-20 px-6">
+      <main id="main-content" className="min-h-screen bg-bg pt-28 pb-20 px-6">
         <div className="mx-auto max-w-7xl">
           {/* Header */}
           <div className="text-center mb-12">
@@ -39,7 +39,7 @@ export default function MembersPage() {
               href="/"
               className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-6"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
               Back to Home
@@ -61,6 +61,7 @@ export default function MembersPage() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={1.5}
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -73,16 +74,18 @@ export default function MembersPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by name, title, or company..."
-                className="w-full pl-12 pr-4 py-3 bg-card border border-card-border rounded-xl text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-primary/40 transition-colors"
+                aria-label="Search members by name, title, or company"
+                className="w-full pl-12 pr-4 py-3 bg-card border border-card-border rounded-xl text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary transition-colors"
               />
             </div>
           </div>
 
           {/* Skill Filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 mb-12" role="group" aria-label="Filter by skill">
             <button
               onClick={() => setSelectedSkill(null)}
-              className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 ${
+              aria-pressed={!selectedSkill}
+              className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
                 !selectedSkill
                   ? "bg-primary text-bg border-primary"
                   : "bg-card border-card-border text-text-muted hover:border-primary/30"
@@ -96,7 +99,8 @@ export default function MembersPage() {
                 onClick={() =>
                   setSelectedSkill(selectedSkill === skill ? null : skill)
                 }
-                className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 ${
+                aria-pressed={selectedSkill === skill}
+                className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
                   selectedSkill === skill
                     ? "bg-primary text-bg border-primary"
                     : "bg-card border-card-border text-text-muted hover:border-primary/30"
@@ -187,6 +191,7 @@ export default function MembersPage() {
                         className="w-4 h-4"
                         viewBox="0 0 24 24"
                         fill="currentColor"
+                        aria-hidden="true"
                       >
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
