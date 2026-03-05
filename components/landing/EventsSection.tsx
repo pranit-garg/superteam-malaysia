@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
@@ -41,8 +42,51 @@ export default function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const eventsSchema = SAMPLE_EVENTS.map(event => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.title,
+    "startDate": event.start_at,
+    "location": {
+      "@type": "Place",
+      "name": event.location_name,
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Superteam Malaysia",
+      "url": "https://superteammy.com",
+    },
+    "eventAttendanceMode": event.location_name.toLowerCase().includes("online")
+      ? "https://schema.org/OnlineEventAttendanceMode"
+      : "https://schema.org/OfflineEventAttendanceMode",
+  }));
+
   return (
-    <SectionWrapper id="events" alt>
+    <SectionWrapper
+      id="events"
+      alt
+      bgSlot={
+        <>
+          <Image
+            src="/images/events-bg.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-25"
+            placeholder="blur"
+            blurDataURL="data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoKAAYABUB8JQBdgCKe8Kw2gAD+5Eg8h/C+4XphqzNVi73l24AAAA=="
+          />
+          <div className="absolute inset-0 bg-bg-alt/65 z-[1]" />
+        </>
+      }
+    >
+      {eventsSchema.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <div className="text-center mb-16">
         <motion.p
           variants={fadeUp}

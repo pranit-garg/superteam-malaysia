@@ -37,7 +37,7 @@ export default function PartnersSection() {
         variants={staggerContainer}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-2 md:grid-cols-4 gap-5"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5"
       >
         {PARTNERS.map((partner, i) => (
           <motion.div

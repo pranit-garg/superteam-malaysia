@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import GlowCard from "@/components/ui/GlowCard";
@@ -51,7 +52,24 @@ export default function MissionSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <SectionWrapper id="mission" alt>
+    <SectionWrapper
+      id="mission"
+      alt
+      bgSlot={
+        <>
+          <Image
+            src="/images/mission-bg.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-30"
+            placeholder="blur"
+            blurDataURL="data:image/webp;base64,UklGRigAAABXRUJQVlA4IBwAAAAwAQCdASoKAAYABUB8JZQAA3AA/u9+zLSatsAA"
+          />
+          <div className="absolute inset-0 bg-bg-alt/60 z-[1]" />
+        </>
+      }
+    >
       <BotanicalOverlay variant="leaf-corner" className="top-0 right-0 opacity-30" />
 
       <div className="text-center mb-16">

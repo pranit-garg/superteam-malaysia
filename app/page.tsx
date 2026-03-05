@@ -11,10 +11,28 @@ import PartnersSection from "@/components/landing/PartnersSection";
 import WallOfLove from "@/components/landing/WallOfLove";
 import FAQSection from "@/components/landing/FAQSection";
 import JoinCTA from "@/components/landing/JoinCTA";
+import { FAQ_ITEMS } from "@/data/faq";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQ_ITEMS.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <SmoothScroll />
       <ScrollProgress />
       <Header />

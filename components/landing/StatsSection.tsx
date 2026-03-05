@@ -2,6 +2,7 @@
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { STATS } from "@/data/stats";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
@@ -21,8 +22,18 @@ export default function StatsSection() {
       ref={containerRef}
       className="relative py-24 md:py-32 overflow-hidden bg-bg"
     >
-      {/* Parallax background glow */}
+      {/* Parallax background */}
       <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
+        <Image
+          src="/images/stats-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRigAAABXRUJQVlA4IBwAAAAwAQCdASoKAAYABwB8JZwAA3AA/vBbe7nHQIAA"
+        />
+        <div className="absolute inset-0 bg-bg/70" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/3 blur-[200px]" />
       </motion.div>
 
@@ -52,7 +63,7 @@ export default function StatsSection() {
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-5 gap-8"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
         >
           {STATS.map((stat, i) => (
             <motion.div

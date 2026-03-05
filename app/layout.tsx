@@ -61,6 +61,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: "https://superteammy.com",
+  },
 };
 
 export default function RootLayout({
@@ -79,6 +82,24 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Superteam Malaysia",
+              "url": "https://superteammy.com",
+              "logo": "https://superteammy.com/opengraph-image",
+              "description": "Superteam Malaysia is the local chapter of the global Superteam network, empowering builders, creators, and talent in the Solana ecosystem.",
+              "sameAs": [
+                "https://x.com/SuperteamMY",
+                "https://t.me/SuperteamMY",
+                "https://lu.ma/superteammy"
+              ]
+            }),
+          }}
+        />
         {children}
       </body>
     </html>

@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
@@ -13,10 +14,19 @@ export default function JoinCTA() {
 
   return (
     <section className="relative py-32 md:py-40 px-6 overflow-hidden bg-bg">
-      {/* Background glow */}
+      {/* Background image + glow */}
       <div className="absolute inset-0">
+        <Image
+          src="/images/cta-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25"
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACQAQCdASoKAAYABUB8JYwAAsZrAFAA/tJOObA29cmCvKgNqdyclSNaI5ey5kAA"
+        />
+        <div className="absolute inset-0 bg-bg/65" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-primary/8 blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full bg-secondary/5 blur-[100px]" />
       </div>
 
       <BotanicalOverlay variant="canopy" className="opacity-20" />

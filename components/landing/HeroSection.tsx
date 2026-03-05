@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { maskReveal, fadeUp, STAGGER, TROPICAL_EASE } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
@@ -21,15 +22,23 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background gradient layer (replaced with image when AI images generated) */}
+      {/* Background image layer */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y: bgY }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-bg via-bg-alt to-bg" />
-        {/* Radial glow */}
+        <Image
+          src="/images/hero-bg.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoKAAYABUB8JQAAXa8YRtmAAP7mh1OOuWlWlwGBk70Cx8kooKOgAA=="
+        />
+        <div className="absolute inset-0 bg-bg/70" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[120px]" />
       </motion.div>
 
       {/* Botanical overlays */}

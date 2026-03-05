@@ -10,6 +10,7 @@ interface SectionWrapperProps {
   id?: string;
   className?: string;
   alt?: boolean;
+  bgSlot?: React.ReactNode;
 }
 
 export default function SectionWrapper({
@@ -17,6 +18,7 @@ export default function SectionWrapper({
   id,
   className,
   alt = false,
+  bgSlot,
 }: SectionWrapperProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -29,11 +31,12 @@ export default function SectionWrapper({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       className={cn(
-        "relative py-24 md:py-32 px-6",
+        "relative py-24 md:py-32 px-6 overflow-hidden",
         alt ? "bg-bg-alt" : "bg-bg",
         className
       )}
     >
+      {bgSlot}
       <div className="mx-auto max-w-7xl relative">{children}</div>
     </motion.section>
   );
