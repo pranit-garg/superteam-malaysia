@@ -14,7 +14,6 @@ const IN_ACTION_IMAGES = [
   { src: "/images/in-action/photo-6.jpg", alt: "Community builders brainstorming" },
   { src: "/images/in-action/photo-7.jpg", alt: "Superteam Malaysia event" },
   { src: "/images/in-action/photo-8.jpg", alt: "Builder showcase presentation" },
-  { src: "/images/in-action/photo-9.jpg", alt: "Superteam Malaysia networking" },
 ];
 
 export default function InActionSection() {
