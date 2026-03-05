@@ -114,7 +114,7 @@ export default function PathwaySection() {
                 className="absolute left-0 top-0 bottom-0 w-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background:
-                    "linear-gradient(to bottom, #0AB172, #9945FF 60%, transparent)",
+                    "linear-gradient(to bottom, #0AB172, rgba(10,177,114,0.3) 60%, transparent)",
                   boxShadow: "0 0 8px rgba(10,177,114,0.4)",
                 }}
               />

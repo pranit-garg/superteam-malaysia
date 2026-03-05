@@ -7,7 +7,6 @@ import { fadeUp, DURATION, TROPICAL_EASE } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Button from "@/components/ui/Button";
 import type { Event } from "@/lib/supabase/types";
 
 const SAMPLE_EVENTS = [
@@ -115,17 +114,6 @@ export default function EventsSection({ events }: EventsSectionProps) {
             What&apos;s <span className="text-primary">Happening</span>
           </motion.h2>
         </div>
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.2}
-          className="hidden sm:block"
-        >
-          <Button href={SOCIAL_LINKS.luma} variant="ghost">
-            View All
-          </Button>
-        </motion.div>
       </div>
 
       {/* Horizontal scroll cards */}
@@ -188,19 +176,39 @@ export default function EventsSection({ events }: EventsSectionProps) {
               </div>
             </motion.div>
           ))}
+            {/* View All Events card */}
+            <motion.a
+              href={SOCIAL_LINKS.luma}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, x: 60 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                duration: DURATION.medium,
+                ease: TROPICAL_EASE,
+                delay: 0.3 + displayEvents.length * 0.12,
+              }}
+              whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+              className="flex-shrink-0 w-[320px] md:w-[350px] snap-start bg-primary/5 backdrop-blur-md border border-primary/20 border-t-2 border-t-primary rounded-sm p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+              <span className="font-[family-name:var(--font-display)] font-bold text-primary text-lg">
+                View All Events
+              </span>
+              <span className="text-text-muted text-sm mt-1">on Luma</span>
+            </motion.a>
         </div>
       </div>
 
       {/* Mobile CTA + Powered by Luma */}
-      <div className="mt-8 px-6 flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-4">
+      <div className="mt-8 px-6 flex flex-col sm:flex-row items-center justify-center max-w-7xl mx-auto gap-4">
         <span className="text-xs text-text-muted flex items-center gap-1">
           Powered by <a href="https://lu.ma" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Luma</a>
         </span>
-        <div className="sm:hidden">
-          <Button href={SOCIAL_LINKS.luma} variant="ghost">
-            View All Events
-          </Button>
-        </div>
       </div>
     </SectionWrapper>
   );

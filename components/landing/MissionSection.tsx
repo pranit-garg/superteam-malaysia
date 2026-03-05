@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { fadeUp, TROPICAL_EASE, DURATION } from "@/lib/animations";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
@@ -48,6 +49,17 @@ export default function MissionSection() {
       id="mission"
       alt
     >
+      {/* Decorative Malaysian batik pattern */}
+      <div className="absolute top-0 right-0 w-[300px] h-[500px] opacity-20 z-0 pointer-events-none hidden md:block">
+        <Image
+          src="/images/mission-decoration.svg"
+          alt=""
+          fill
+          className="object-contain"
+          aria-hidden="true"
+        />
+      </div>
+
       <div ref={ref}>
         {/* Left-aligned heading */}
         <motion.p
@@ -96,13 +108,6 @@ export default function MissionSection() {
               {/* Hover background highlight */}
               <div className="absolute inset-0 -mx-4 rounded-lg bg-primary/0 group-hover:bg-primary/[0.04] transition-colors duration-300 pointer-events-none" />
 
-              {/* Left accent line that reveals on hover */}
-              <div
-                className="absolute left-0 top-2 bottom-2 w-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 origin-top scale-y-0 group-hover:scale-y-100"
-                style={{
-                  background: "linear-gradient(to bottom, #0AB172, transparent)",
-                }}
-              />
 
               {/* Number */}
               <span className="relative font-[family-name:var(--font-mono)] text-4xl md:text-5xl font-bold text-text-muted/20 group-hover:text-primary/50 leading-none shrink-0 w-16 md:w-20 transition-colors duration-300">

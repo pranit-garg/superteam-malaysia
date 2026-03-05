@@ -54,7 +54,7 @@ export default function Accordion({ items }: AccordionProps) {
             className="rounded-xl overflow-hidden"
             style={{
               background: isOpen
-                ? "linear-gradient(135deg, rgba(10,177,114,0.15), rgba(153,69,255,0.08)) padding-box, linear-gradient(135deg, #0AB172, #9945FF) border-box"
+                ? "linear-gradient(135deg, rgba(10,177,114,0.15), rgba(10,177,114,0.05)) padding-box, linear-gradient(135deg, #0AB172, rgba(10,177,114,0.3)) border-box"
                 : undefined,
               border: isOpen ? "1px solid transparent" : undefined,
             }}

@@ -41,8 +41,12 @@ export default function SectionWrapper({
       {/* Section transition edges for alt sections */}
       {alt && (
         <>
-          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-bg via-bg/50 to-transparent z-[1]" />
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-bg via-bg/50 to-transparent z-[1]" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-primary/30 z-[3]"
+               style={{ boxShadow: '0 0 20px rgba(10,177,114,0.3), 0 0 60px rgba(10,177,114,0.1)' }} />
+          <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-[600px] h-24 z-[1]"
+               style={{ background: 'radial-gradient(ellipse, rgba(10,177,114,0.12) 0%, transparent 70%)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/20 z-[3]"
+               style={{ boxShadow: '0 0 15px rgba(10,177,114,0.2)' }} />
         </>
       )}
       {bgSlot && (

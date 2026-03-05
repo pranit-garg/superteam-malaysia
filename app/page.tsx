@@ -8,6 +8,7 @@ import MissionSection from "@/components/landing/MissionSection";
 import PathwaySection from "@/components/landing/PathwaySection";
 import EventsSection from "@/components/landing/EventsSection";
 import MemberSpotlight from "@/components/landing/MemberSpotlight";
+import InActionSection from "@/components/landing/InActionSection";
 import PartnersSection from "@/components/landing/PartnersSection";
 import WallOfLove from "@/components/landing/WallOfLove";
 import FAQSection from "@/components/landing/FAQSection";
@@ -46,6 +47,7 @@ export default async function Home() {
         <PathwaySection />
         <EventsSection events={events} />
         <MemberSpotlight />
+        <InActionSection />
         <PartnersSection />
         <WallOfLove />
         <FAQSection />

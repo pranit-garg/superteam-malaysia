@@ -1,14 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- Orca DEX logo - orca whale in circular shape -->
-  <circle cx="50" cy="50" r="46" fill="#F9BC2C"/>
-  <g fill="#1A1A2E">
-    <!-- Whale body - curved swimming pose -->
-    <path d="M68 28c-8-4-18-2-24 4c-6 6-12 16-10 26c1 6 4 10 8 12c4 2 10 2 14-2c4-4 6-10 6-16l2-6c4 2 8 1 10-2c3-4 2-10-2-14l-4-2z"/>
-    <!-- Tail fin -->
-    <path d="M26 62c-2 4-6 8-10 8c0 0 4 4 8 2c3-2 5-5 6-8l-4-2z"/>
-  </g>
-  <!-- White belly patch -->
-  <path d="M46 42c-4 6-6 14-4 20c1 4 3 6 5 6c2 0 4-2 5-6c1-4 1-10-1-16l-5-4z" fill="white"/>
-  <!-- Eye spot -->
-  <ellipse cx="58" cy="36" rx="3" ry="4" fill="white" transform="rotate(-15 58 36)"/>
+  <path d="M72 30c-6-4-14-4-20 0c-8 6-14 16-12 28c1 8 6 14 12 16c6 2 12 0 16-4c4-6 6-12 6-20c2 2 4 4 4 4c4-2 6-8 2-14c-2-4-4-8-8-10z" fill="white"/>
+  <path d="M30 64c-2 4-6 10-12 10c2 4 8 4 12 0c2-2 4-6 4-10z" fill="white"/>
+  <ellipse cx="62" cy="40" rx="3" ry="3.5" fill="white" opacity="0.5"/>
 </svg>
