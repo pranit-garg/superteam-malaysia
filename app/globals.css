@@ -33,7 +33,7 @@
 /* ── Theme Tokens ── */
 @theme inline {
   --color-bg: #0d1a12;
-  --color-bg-alt: #162a1e;
+  --color-bg-alt: #1c3a28;
   --color-primary: #0AB172;
   --color-secondary: #9945FF;
   --color-gold: #d4a246;
@@ -43,6 +43,7 @@
   --color-card-border: rgba(14, 203, 129, 0.22);
   --color-primary-glow: rgba(10, 177, 114, 0.28);
   --color-secondary-glow: rgba(153, 69, 255, 0.15);
+  --color-section-divider: rgba(10, 177, 114, 0.12);
 
   --font-display: "Satoshi", system-ui, sans-serif;
   --font-body: var(--font-space-grotesk), system-ui, sans-serif;

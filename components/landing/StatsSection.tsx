@@ -18,6 +18,9 @@ export default function StatsSection() {
       ref={ref}
       className="relative py-24 md:py-32 overflow-hidden bg-bg"
     >
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Hero number */}
         <motion.div

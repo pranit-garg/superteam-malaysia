@@ -38,15 +38,23 @@ export default function SectionWrapper({
         className
       )}
     >
+      {/* Section transition edges for alt sections */}
+      {alt && (
+        <>
+          <div className="absolute top-0 left-0 right-0 h-px bg-section-divider" />
+          <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-bg to-transparent z-[1]" />
+          <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-bg to-transparent z-[1]" />
+        </>
+      )}
       {bgSlot && (
         <div className="absolute inset-0 overflow-hidden">
           {bgSlot}
         </div>
       )}
       {fullBleed ? (
-        <div className="relative z-[1]">{children}</div>
+        <div className="relative z-[2]">{children}</div>
       ) : (
-        <div className="mx-auto max-w-7xl relative z-[1]">{children}</div>
+        <div className="mx-auto max-w-7xl relative z-[2]">{children}</div>
       )}
     </motion.section>
   );

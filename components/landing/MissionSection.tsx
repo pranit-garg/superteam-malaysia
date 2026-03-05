@@ -78,7 +78,7 @@ export default function MissionSection() {
                 ease: TROPICAL_EASE,
                 delay: 0.2 + i * 0.1,
               }}
-              className="flex items-start gap-6 md:gap-8 py-6 border-b border-card-border last:border-b-0"
+              className="flex items-start gap-6 md:gap-8 py-6 border-b border-card-border/50 last:border-b-0"
             >
               {/* Number */}
               <span className="font-[family-name:var(--font-mono)] text-4xl md:text-5xl font-bold text-text-muted/20 leading-none shrink-0 w-16 md:w-20">
@@ -87,7 +87,7 @@ export default function MissionSection() {
 
               {/* Vertical divider */}
               <motion.div
-                className="w-px bg-card-border self-stretch shrink-0"
+                className="w-px bg-card-border/50 self-stretch shrink-0"
                 initial={{ scaleY: 0 }}
                 animate={isInView ? { scaleY: 1 } : {}}
                 transition={{

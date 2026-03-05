@@ -17,10 +17,9 @@ export default function JoinCTA() {
       <div className="absolute inset-0">
         <SeamlessVideo
           src="/videos/cta-bg.mp4"
-          webmSrc="/videos/cta-bg.webm"
           poster="/images/cta-bg.webp"
           className="absolute inset-0 w-full h-full"
-          overlay="bg-bg/40"
+          overlay="bg-gradient-to-b from-bg/50 via-bg/20 to-bg/60"
         />
       </div>
 

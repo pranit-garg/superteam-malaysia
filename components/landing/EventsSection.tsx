@@ -78,11 +78,11 @@ export default function EventsSection({ events }: EventsSectionProps) {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-25"
+            className="object-cover opacity-40"
             placeholder="blur"
             blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoKAAYABUB8JYgCw7DdSZdXsAAA/ob/ZJnVg52yxsPbBQa393WRk3VtiE3gtAAA"
           />
-          <div className="absolute inset-0 bg-bg-alt/60 z-[1]" />
+          <div className="absolute inset-0 bg-bg-alt/40 z-[1]" />
         </>
       }
     >

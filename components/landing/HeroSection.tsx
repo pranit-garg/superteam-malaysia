@@ -29,11 +29,10 @@ export default function HeroSection() {
       >
         <SeamlessVideo
           src="/videos/hero-bg.mp4"
-          webmSrc="/videos/hero-bg.webm"
           poster="/images/hero-bg.webp"
           className="absolute inset-0 w-full h-full"
           eager
-          overlay="bg-bg/55"
+          overlay="bg-gradient-to-b from-bg/70 via-bg/35 to-bg/60"
         />
       </motion.div>
 
