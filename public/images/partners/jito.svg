@@ -1,11 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <circle cx="50" cy="50" r="45" fill="#1A1B23"/>
-  <path d="M30 65V40c0-3.3 2.7-6 6-6h28c3.3 0 6 2.7 6 6v25c0 3.3-2.7 6-6 6H36c-3.3 0-6-2.7-6-6z" fill="url(#jito_grad)"/>
-  <path d="M42 48l8 8 8-8" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <defs>
-    <linearGradient id="jito_grad" x1="30" y1="34" x2="70" y2="71" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#5DCCAD"/>
-      <stop offset="1" stop-color="#2A9D8F"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <g fill="white">
+    <!-- Four curved arms forming pinwheel, each arm curves clockwise -->
+    <!-- Top arm curving to the right -->
+    <path d="M92 18 C88 52, 86 72, 78 80 C70 88, 50 90, 18 92 C30 60, 56 34, 92 18 Z"/>
+    <!-- Right arm curving down -->
+    <path d="M182 92 C148 88, 128 86, 120 78 C112 70, 110 50, 108 18 C140 30, 166 56, 182 92 Z"/>
+    <!-- Bottom arm curving to the left -->
+    <path d="M108 182 C112 148, 114 128, 122 120 C130 112, 150 110, 182 108 C170 140, 144 166, 108 182 Z"/>
+    <!-- Left arm curving up -->
+    <path d="M18 108 C52 112, 72 114, 80 122 C88 130, 90 150, 92 182 C60 170, 34 144, 18 108 Z"/>
+    <!-- Center dot -->
+    <circle cx="100" cy="100" r="14"/>
+  </g>
 </svg>

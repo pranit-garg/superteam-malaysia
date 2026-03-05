@@ -1,12 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <rect width="100" height="100" rx="20" fill="#111827"/>
-  <path d="M30 70V30h20c11.046 0 20 8.954 20 20s-8.954 20-20 20H30z" fill="url(#drift_grad)"/>
-  <path d="M40 60V40h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H40z" fill="#111827"/>
-  <defs>
-    <linearGradient id="drift_grad" x1="30" y1="30" x2="70" y2="70" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E85EFF"/>
-      <stop offset="0.5" stop-color="#6366F1"/>
-      <stop offset="1" stop-color="#14B8A6"/>
-    </linearGradient>
-  </defs>
+  <!-- Drift Protocol - isometric triple-line "D" logomark -->
+  <g fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round">
+    <!-- Outer D -->
+    <path d="M32 80L32 20L48 10L68 22L68 56L48 80Z"/>
+    <!-- Middle D -->
+    <path d="M32 72L32 28L44 20L60 28L60 56L44 72Z"/>
+    <!-- Inner D -->
+    <path d="M32 64L32 36L42 30L52 36L52 54L42 64Z"/>
+  </g>
 </svg>
