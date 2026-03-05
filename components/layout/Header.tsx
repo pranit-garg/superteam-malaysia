@@ -30,18 +30,15 @@ export default function Header() {
       >
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center group">
             <Image
               src="/images/logo-superteam-my.png"
               alt="Superteam Malaysia"
-              width={32}
-              height={32}
-              className="w-8 h-8 rounded-lg"
+              width={512}
+              height={57}
+              className="h-8 w-auto"
+              priority
             />
-            <span className="font-[family-name:var(--font-display)] font-bold text-lg tracking-tight">
-              Superteam{" "}
-              <span className="text-primary">MY</span>
-            </span>
           </Link>
 
           {/* Desktop Nav */}

@@ -9,17 +9,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center mb-4">
               <Image
                 src="/images/logo-superteam-my.png"
                 alt="Superteam Malaysia"
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-lg"
+                width={512}
+                height={57}
+                className="h-7 w-auto"
               />
-              <span className="font-[family-name:var(--font-display)] font-bold text-lg">
-                Superteam <span className="text-primary">MY</span>
-              </span>
             </div>
             <p className="text-text-muted text-sm max-w-sm leading-relaxed">
               {SITE_CONFIG.description}
