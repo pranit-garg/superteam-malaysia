@@ -59,8 +59,8 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     : undefined;
 
   const cardContent = (
-    <div className={`flex-1 flex flex-col bg-gradient-to-br from-primary/20 via-card-border to-primary/10 rounded-2xl p-px group-hover/card:from-primary/40 group-hover/card:via-primary/20 group-hover/card:to-primary/20 transition-all duration-500`}>
-      <div className="bg-bg/90 backdrop-blur-sm rounded-2xl p-6 flex-1 flex flex-col group-hover/card:-translate-y-1.5 transition-transform duration-500 ease-out relative overflow-hidden">
+    <div className={`grid bg-gradient-to-br from-primary/20 via-card-border to-primary/10 rounded-2xl p-px group-hover/card:from-primary/40 group-hover/card:via-primary/20 group-hover/card:to-primary/20 transition-all duration-500`}>
+      <div className="bg-bg/90 backdrop-blur-sm rounded-2xl p-6 flex flex-col group-hover/card:-translate-y-1.5 transition-transform duration-500 ease-out relative overflow-hidden">
         {/* External link icon for tweets */}
         {isTweet && <ExternalLinkIcon />}
 
@@ -132,7 +132,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         href={tweetUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${SIZE_WIDTHS[testimonial.size]} flex-shrink-0 group/card flex flex-col`}
+        className={`${SIZE_WIDTHS[testimonial.size]} flex-shrink-0 group/card grid`}
       >
         {cardContent}
       </a>
@@ -140,7 +140,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   }
 
   return (
-    <div className={`${SIZE_WIDTHS[testimonial.size]} flex-shrink-0 group/card flex flex-col`}>
+    <div className={`${SIZE_WIDTHS[testimonial.size]} flex-shrink-0 group/card grid`}>
       {cardContent}
     </div>
   );
