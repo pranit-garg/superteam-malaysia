@@ -43,9 +43,9 @@ export default async function Home() {
       <Header />
       <main id="main-content">
         <HeroSection />
+        <PartnersSection />
         <MissionSection />
         <EventsSection events={events} />
-        <PartnersSection />
         <PathwaySection />
         <MemberSpotlight />
         <InActionSection />
