@@ -1,117 +1,68 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { fadeLeft, fadeRight, staggerContainer, TROPICAL_EASE } from "@/lib/animations";
+import { fadeLeft, fadeRight, fadeUp, staggerContainer } from "@/lib/animations";
 import { SAMPLE_MEMBERS } from "@/data/members";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 
 function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
-  const [flipped, setFlipped] = useState(false);
+  const Wrapper = member.twitter_url ? "a" : "div";
+  const linkProps = member.twitter_url
+    ? { href: member.twitter_url, target: "_blank" as const, rel: "noopener noreferrer" }
+    : {};
 
   return (
-    <div
-      className="relative h-72 cursor-pointer perspective-[1000px] rounded-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-      onClick={() => setFlipped(!flipped)}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setFlipped(!flipped)}
-      tabIndex={0}
-      role="button"
-      aria-label={`${flipped ? "Hide" : "View"} ${member.name}'s profile details`}
+    <Wrapper
+      {...linkProps}
+      className="relative block h-72 rounded-2xl bg-card border border-card-border p-6 group hover:border-primary/30 hover:shadow-[0_0_30px_rgba(10,177,114,0.1)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
-      <motion.div
-        className="absolute inset-0 transition-transform duration-500"
-        style={{
-          transformStyle: "preserve-3d",
-          rotateY: flipped ? 180 : 0,
-        }}
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: TROPICAL_EASE }}
-      >
-        {/* Front */}
-        <div
-          className="absolute inset-0 bg-card border border-card-border rounded-2xl p-6 flex flex-col items-center justify-center text-center"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-4 overflow-hidden">
-            {member.photo_url ? (
-              <Image
-                src={member.photo_url}
-                alt={member.name || "Member"}
-                width={80}
-                height={80}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <span className="text-primary font-bold text-xl font-[family-name:var(--font-display)]">
-                {member.name?.split(" ").map((n) => n[0]).join("")}
-              </span>
-            )}
-          </div>
-          <h3 className="font-[family-name:var(--font-display)] font-bold text-lg">
-            {member.name}
-          </h3>
-          <p className="text-text-muted text-sm">{member.title}</p>
-          <p className="text-text-muted/60 text-xs mt-1">{member.company}</p>
-
-          <div className="flex flex-wrap gap-1.5 mt-4 justify-center">
-            {member.badges?.slice(0, 2).map((badge) => (
-              <span
-                key={badge}
-                className="px-2 py-0.5 text-[10px] rounded-full bg-gold/10 text-gold border border-gold/20 font-medium"
-              >
-                {badge}
-              </span>
-            ))}
-          </div>
+      {/* X/Twitter icon in top-right corner */}
+      {member.twitter_url && (
+        <div className="absolute top-4 right-4 text-text-muted/40 group-hover:text-primary transition-colors duration-300">
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
         </div>
+      )}
 
-        {/* Back */}
-        <div
-          className="absolute inset-0 bg-card border border-primary/20 rounded-2xl p-6 flex flex-col justify-center"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <h3 className="font-[family-name:var(--font-display)] font-bold text-lg mb-3 text-primary">
-            {member.name}
-          </h3>
-
-          <div className="space-y-3">
-            <div>
-              <p className="text-xs text-text-muted uppercase tracking-wider mb-1">
-                Skills
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {member.skills?.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {member.twitter_url && (
-              <a
-                href={member.twitter_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                @{member.twitter_url.split("/").pop()}
-              </a>
-            )}
-          </div>
+      <div className="flex flex-col items-center justify-center text-center h-full">
+        <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-4 overflow-hidden group-hover:border-primary/50 transition-colors duration-300">
+          {member.photo_url ? (
+            <Image
+              src={member.photo_url}
+              alt={member.name || "Member"}
+              width={80}
+              height={80}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-primary font-bold text-xl font-[family-name:var(--font-display)]">
+              {member.name?.split(" ").map((n) => n[0]).join("")}
+            </span>
+          )}
         </div>
-      </motion.div>
-    </div>
+        <h3 className="font-[family-name:var(--font-display)] font-bold text-lg">
+          {member.name}
+        </h3>
+        <p className="text-text-muted text-sm">{member.title}</p>
+        <p className="text-text-muted/60 text-xs mt-1">{member.company}</p>
+
+        <div className="flex flex-wrap gap-1.5 mt-4 justify-center">
+          {member.badges?.slice(0, 2).map((badge) => (
+            <span
+              key={badge}
+              className="px-2 py-0.5 text-[10px] rounded-full bg-gold/10 text-gold border border-gold/20 font-medium"
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Wrapper>
   );
 }
 
@@ -137,8 +88,8 @@ export default function MemberSpotlight() {
             Meet the <span className="text-primary">Community</span>
           </h2>
           <p className="text-text-muted mb-8 leading-relaxed">
-            Tap a card to see what they&apos;re working on. Developers, designers,
-            creators, and operators building on Solana across Malaysia.
+            Developers, designers, creators, and operators building on Solana
+            across Malaysia.
           </p>
           <Link href="/members">
             <Button variant="ghost">View Full Directory</Button>

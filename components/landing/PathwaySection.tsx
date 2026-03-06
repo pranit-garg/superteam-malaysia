@@ -1,17 +1,9 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import {
-  fadeUp,
-  fadeLeft,
-  fadeRight,
-  maskReveal,
-  scaleXReveal,
-  nodePulse,
-  TROPICAL_EASE,
-  DURATION,
-} from "@/lib/animations";
+import Image from "next/image";
+import { fadeUp, fadeLeft, maskReveal, scaleXReveal } from "@/lib/animations";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 /* ─── Data ─── */
@@ -55,263 +47,57 @@ const STEPS = [
 
 /* ─── Escalating intensity per step ─── */
 const INTENSITY = [
-  { border: "border-card-border", ghostOpacity: "text-primary/[0.03]", glowBg: 0.04, nodeR: 8, bottomLine: "via-primary/20" },
-  { border: "border-primary/15", ghostOpacity: "text-primary/[0.05]", glowBg: 0.08, nodeR: 10, bottomLine: "via-primary/35" },
-  { border: "border-primary/25", ghostOpacity: "text-primary/[0.08]", glowBg: 0.12, nodeR: 14, bottomLine: "via-primary/50" },
+  { border: "border-card-border", glowBg: 0.04, bottomLine: "via-primary/20", pulse: "2s" },
+  { border: "border-primary/15", glowBg: 0.08, bottomLine: "via-primary/35", pulse: "1.4s" },
+  { border: "border-primary/25", glowBg: 0.12, bottomLine: "via-primary/50", pulse: "0.8s" },
 ];
 
-/* ─── Pulse speeds per step ─── */
-const PULSE_DURATIONS = ["2s", "1.4s", "0.8s"];
-
-/* ─── Background Gradients (bgSlot) ─── */
-function BackgroundGradients() {
+/* ─── Cinematic KL Backdrop ─── */
+function CinematicBackdrop() {
   return (
     <>
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.03) 0%, transparent 70%)" }}
+      {/* KL skyline image */}
+      <Image
+        src="/images/pathway/kl-backdrop-v1.png"
+        alt=""
+        fill
+        className="object-cover object-[center_30%]"
+        priority
+        sizes="100vw"
       />
+      {/* Dark overlay: heavier on left (where cards are), lighter on right (towers visible) */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.06) 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.12) 0%, transparent 70%)" }}
-      />
-      <div className="absolute inset-0 dot-grid opacity-30" />
-    </>
-  );
-}
-
-/* ─── Vine Connector (scroll-driven SVG) ─── */
-function VineConnector({ cardPositions }: { cardPositions: number[] }) {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-  const pathLength = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-
-  return (
-    <div ref={containerRef} className="absolute inset-0 hidden md:block">
-      <svg
-        className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-24"
-        viewBox="0 0 96 900"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        {/* Main vine */}
-        <motion.path
-          d="M48 0 C48 80, 28 140, 48 220 C68 300, 28 380, 48 460 C68 540, 28 620, 48 700 C68 780, 48 850, 48 900"
-          className="botanical-line"
-          style={{ pathLength, strokeWidth: 2 }}
-        />
-        {/* Tendrils extending toward cards */}
-        <motion.path
-          d="M48 220 C30 215, 15 218, 5 220"
-          className="botanical-line"
-          style={{ pathLength, opacity: 0.3, strokeWidth: 1 }}
-        />
-        <motion.path
-          d="M48 460 C66 455, 81 458, 91 460"
-          className="botanical-line"
-          style={{ pathLength, opacity: 0.3, strokeWidth: 1 }}
-        />
-        <motion.path
-          d="M48 700 C30 695, 15 698, 5 700"
-          className="botanical-line"
-          style={{ pathLength, opacity: 0.3, strokeWidth: 1 }}
-        />
-        {/* Node circles at card junctions */}
-        {[220, 460, 700].map((cy, i) => (
-          <motion.circle
-            key={cy}
-            cx={48}
-            cy={cy}
-            r={INTENSITY[i].nodeR}
-            fill="rgba(10,177,114,0.2)"
-            stroke="rgba(10,177,114,0.5)"
-            strokeWidth={1.5}
-            variants={nodePulse}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            custom={0.2 + i * 0.3}
-          />
-        ))}
-      </svg>
-    </div>
-  );
-}
-
-/* ─── Mobile Vine ─── */
-function MobileVine() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-  const pathLength = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-
-  return (
-    <div ref={containerRef} className="absolute left-4 top-0 bottom-0 md:hidden">
-      <svg className="h-full w-8" viewBox="0 0 32 900" preserveAspectRatio="none" fill="none">
-        <motion.path
-          d="M16 0 C16 100, 8 180, 16 280 C24 380, 8 480, 16 580 C24 680, 16 800, 16 900"
-          className="botanical-line"
-          style={{ pathLength, strokeWidth: 2 }}
-        />
-        {[220, 460, 700].map((cy, i) => (
-          <motion.circle
-            key={cy}
-            cx={16}
-            cy={cy}
-            r={INTENSITY[i].nodeR * 0.75}
-            fill="rgba(10,177,114,0.2)"
-            stroke="rgba(10,177,114,0.5)"
-            strokeWidth={1.5}
-            variants={nodePulse}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            custom={0.2 + i * 0.3}
-          />
-        ))}
-      </svg>
-    </div>
-  );
-}
-
-/* ─── Step Visual (animated SVG compositions) ─── */
-const STEP_VISUALS = [
-  {
-    // LEARN: open book
-    icon: "M200 260 L200 160 L140 140 L140 240 Z M200 260 L200 160 L260 140 L260 240 Z",
-    rings: [{ r: 140, dash: "8 12", dur: "20s", dir: "normal" }],
-    particles: 4,
-    glowOpacity: 0.06,
-  },
-  {
-    // EARN: diamond/gem
-    icon: "M200 120 L260 200 L200 280 L140 200 Z M160 200 L200 140 L240 200 M160 200 L200 260 L240 200",
-    rings: [
-      { r: 140, dash: "6 10", dur: "15s", dir: "normal" },
-      { r: 110, dash: "4 14", dur: "12s", dir: "reverse" },
-    ],
-    particles: 5,
-    glowOpacity: 0.1,
-  },
-  {
-    // BUILD: 3 interlocking hexagons
-    icon: [
-      "M200 130 L230 147 L230 183 L200 200 L170 183 L170 147 Z",
-      "M170 200 L200 217 L200 253 L170 270 L140 253 L140 217 Z",
-      "M230 200 L260 217 L260 253 L230 270 L200 253 L200 217 Z",
-    ].join(" "),
-    rings: [
-      { r: 140, dash: "5 8", dur: "12s", dir: "normal" },
-      { r: 115, dash: "3 10", dur: "8s", dir: "reverse" },
-      { r: 165, dash: "7 12", dur: "18s", dir: "normal" },
-    ],
-    particles: 6,
-    glowOpacity: 0.15,
-  },
-];
-
-function StepVisual({ index, isInView }: { index: number; isInView: boolean }) {
-  const config = STEP_VISUALS[index];
-  const color = "#0AB172";
-
-  return (
-    <motion.div
-      className="relative w-full aspect-square max-w-[400px] mx-auto"
-      variants={index % 2 === 0 ? fadeRight : fadeLeft}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      custom={0.2}
-    >
-      {/* Layer 1: Ambient glow */}
-      <div
-        className="absolute inset-0 rounded-full"
+        className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle at center, rgba(10,177,114,${config.glowOpacity}) 0%, transparent 70%)`,
+          background: `linear-gradient(to right,
+            rgba(10,20,16,0.92) 0%,
+            rgba(10,20,16,0.88) 35%,
+            rgba(10,20,16,0.7) 55%,
+            rgba(10,20,16,0.5) 75%,
+            rgba(10,20,16,0.6) 100%
+          )`,
         }}
       />
-
-      <svg viewBox="0 0 400 400" className="relative w-full h-full">
-        {/* Inline keyframes */}
-        <defs>
-          <style>{`
-            @keyframes spin { to { transform: rotate(360deg); } }
-            @keyframes orbit-${index} {
-              0% { transform: rotate(0deg) translateX(var(--orbit-r)) rotate(0deg); opacity: 0.6; }
-              50% { opacity: 1; }
-              100% { transform: rotate(360deg) translateX(var(--orbit-r)) rotate(-360deg); opacity: 0.6; }
-            }
-            ${index === 2 ? `@keyframes pulse-glow { 0%, 100% { opacity: ${config.glowOpacity}; } 50% { opacity: ${config.glowOpacity * 1.8}; } }` : ""}
-          `}</style>
-        </defs>
-
-        {/* Layer 2: Rotating rings */}
-        {config.rings.map((ring, ri) => (
-          <circle
-            key={ri}
-            cx={200}
-            cy={200}
-            r={ring.r}
-            fill="none"
-            stroke={color}
-            strokeOpacity={0.12 + ri * 0.04}
-            strokeWidth={1}
-            strokeDasharray={ring.dash}
-            style={{
-              transformOrigin: "200px 200px",
-              animation: `spin ${ring.dur} linear infinite ${ring.dir}`,
-            }}
-          />
-        ))}
-
-        {/* Layer 3: Orbital particles */}
-        {Array.from({ length: config.particles }).map((_, pi) => {
-          const angle = (pi / config.particles) * 360;
-          const orbitR = 120 + (pi % 2) * 30;
-          const dur = 10 + pi * 2;
-          return (
-            <circle
-              key={pi}
-              cx={200}
-              cy={200}
-              r={2}
-              fill={color}
-              fillOpacity={0.4 + (pi % 3) * 0.15}
-              style={{
-                ["--orbit-r" as string]: `${orbitR}px`,
-                transformOrigin: "200px 200px",
-                animation: `orbit-${index} ${dur}s linear infinite`,
-                animationDelay: `${(pi / config.particles) * -dur}s`,
-              }}
-            />
-          );
-        })}
-
-        {/* Layer 4: Icon with stroke reveal */}
-        <motion.path
-          d={config.icon}
-          fill="none"
-          stroke={color}
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={
-            isInView
-              ? { pathLength: 1, opacity: 0.7, transition: { duration: 1.8, ease: "easeInOut", delay: 0.3 } }
-              : { pathLength: 0, opacity: 0 }
-          }
-        />
-      </svg>
-    </motion.div>
+      {/* Top/bottom fade to blend with adjacent sections */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to bottom,
+            rgba(10,20,16,1) 0%,
+            transparent 12%,
+            transparent 88%,
+            rgba(10,20,16,1) 100%
+          )`,
+        }}
+      />
+      {/* Mobile: stronger center overlay since cards go full-width */}
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{
+          background: "rgba(10,20,16,0.75)",
+        }}
+      />
+    </>
   );
 }
 
@@ -326,146 +112,114 @@ function PathwayCard({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const intensity = INTENSITY[index];
-  const isLeft = index % 2 === 0; // 0,2 = left, 1 = right (desktop)
-  const cardVariant = isLeft ? fadeLeft : fadeRight;
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`relative flex items-center gap-6 md:gap-12 ${
-        isLeft ? "md:flex-row" : "md:flex-row-reverse"
-      }`}
+      className={`relative bg-bg-deep/80 backdrop-blur-xl border ${intensity.border} rounded-2xl p-7 md:p-8 group cursor-default overflow-hidden`}
+      variants={fadeLeft}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      custom={index * 0.12}
+      whileHover={{
+        y: -8,
+        borderColor: "rgba(10,177,114,0.3)",
+        transition: { type: "spring", stiffness: 300, damping: 20 },
+      }}
+      style={{
+        boxShadow: `0 0 ${40 + index * 20}px rgba(10,177,114,${intensity.glowBg * 0.5})`,
+      }}
     >
-      {/* Horizontal connector from vine to card (desktop) */}
-      <motion.div
-        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-px w-12 origin-${isLeft ? "right" : "left"} ${
-          isLeft ? "left-[calc(50%-48px)]" : "right-[calc(50%-48px)]"
-        }`}
-        style={{
-          background: `linear-gradient(${isLeft ? "to left" : "to right"}, rgba(10,177,114,0.4), transparent)`,
-        }}
-        variants={scaleXReveal}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        custom={0}
-      />
-
-      {/* Animated SVG visual (desktop only) */}
-      <div className="hidden md:block md:w-1/2">
-        <StepVisual index={index} isInView={isInView} />
-      </div>
-
-      {/* Card */}
-      <motion.div
-        className={`relative md:w-1/2 ml-12 md:ml-0 bg-card/80 backdrop-blur-md border ${intensity.border} rounded-2xl p-8 group cursor-default overflow-hidden`}
-        variants={cardVariant}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        custom={0.1}
-        whileHover={{
-          y: -12,
-          borderColor: "rgba(10,177,114,0.3)",
-          transition: { type: "spring", stiffness: 300, damping: 20 },
-        }}
-        style={{
-          boxShadow: `0 0 ${40 + index * 20}px rgba(10,177,114,${intensity.glowBg * 0.5})`,
-        }}
+      {/* Ghost number */}
+      <span
+        className={`absolute -top-4 -left-2 font-[family-name:var(--font-display)] text-[7rem] font-black text-primary/[${0.03 + index * 0.02}] leading-none select-none pointer-events-none group-hover:text-primary/[0.08] transition-colors duration-500`}
       >
-        {/* Ghost number */}
-        <motion.span
-          className={`absolute -top-4 -left-2 font-[family-name:var(--font-display)] text-[8rem] font-black ${intensity.ghostOpacity} leading-none select-none pointer-events-none group-hover:text-primary/[0.08] transition-colors duration-500`}
+        {step.number}
+      </span>
+
+      {/* Step label pill */}
+      <motion.div
+        className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4"
+        variants={fadeUp}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        custom={0.15 + index * 0.12}
+      >
+        <span
+          className="w-2 h-2 rounded-full bg-primary"
+          style={{ animation: `node-ping ${intensity.pulse} ease-out infinite` }}
+        />
+        <span className="text-primary text-xs font-semibold tracking-widest">
+          {step.label}
+        </span>
+      </motion.div>
+
+      {/* Title */}
+      <div className="overflow-hidden mb-3">
+        <motion.h3
+          className="font-[family-name:var(--font-display)] font-bold text-xl md:text-2xl"
           variants={maskReveal}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          custom={0.2}
+          custom={0.2 + index * 0.12}
         >
-          {step.number}
-        </motion.span>
+          {step.title}
+        </motion.h3>
+      </div>
 
-        {/* Step label pill */}
-        <motion.div
-          className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4"
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.3}
-        >
-          <span
-            className="w-2 h-2 rounded-full bg-primary"
-            style={{ animation: `node-ping ${PULSE_DURATIONS[index]} ease-out infinite` }}
-          />
-          <span className="text-primary text-xs font-semibold tracking-widest">
-            {step.label}
-          </span>
-        </motion.div>
+      {/* Description */}
+      <motion.p
+        className="text-text-muted text-sm leading-relaxed mb-5"
+        variants={fadeUp}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        custom={0.3 + index * 0.12}
+      >
+        {step.description}
+      </motion.p>
 
-        {/* Title */}
-        <div className="overflow-hidden mb-3">
-          <motion.h3
-            className="font-[family-name:var(--font-display)] font-bold text-2xl"
-            variants={maskReveal}
+      {/* Links */}
+      <ul className="space-y-2">
+        {step.links.map((link, li) => (
+          <motion.li
+            key={link.label}
+            variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={0.35}
+            custom={0.4 + index * 0.12 + li * 0.06}
           >
-            {step.title}
-          </motion.h3>
-        </div>
-
-        {/* Description */}
-        <motion.p
-          className="text-text-muted text-sm leading-relaxed mb-6"
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.5}
-        >
-          {step.description}
-        </motion.p>
-
-        {/* Links as list items */}
-        <ul className="space-y-2">
-          {step.links.map((link, li) => (
-            <motion.li
-              key={link.label}
-              variants={fadeUp}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              custom={0.6 + li * 0.08}
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/link inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors duration-300"
             >
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/link inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors duration-300"
+              <span className="inline-block w-6 h-px bg-text-muted/30 group-hover/link:w-10 group-hover/link:bg-primary transition-all duration-300" />
+              {link.label}
+              <svg
+                className="w-3 h-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
-                <span className="inline-block w-6 h-px bg-text-muted/30 group-hover/link:w-10 group-hover/link:bg-primary transition-all duration-300" />
-                {link.label}
-                <svg
-                  className="w-3 h-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
-              </a>
-            </motion.li>
-          ))}
-        </ul>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+            </a>
+          </motion.li>
+        ))}
+      </ul>
 
-        {/* Bottom glow line */}
-        <motion.div
-          className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${intensity.bottomLine} to-transparent`}
-          variants={scaleXReveal}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={0.7}
-          style={{ transformOrigin: "center" }}
-        />
-      </motion.div>
-    </div>
+      {/* Bottom glow line */}
+      <motion.div
+        className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${intensity.bottomLine} to-transparent`}
+        variants={scaleXReveal}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        custom={0.5 + index * 0.12}
+        style={{ transformOrigin: "center" }}
+      />
+    </motion.div>
   );
 }
 
@@ -478,63 +232,66 @@ export default function PathwaySection() {
     <SectionWrapper
       id="get-started"
       bg="deep"
-      bgSlot={<BackgroundGradients />}
+      bgSlot={<CinematicBackdrop />}
     >
-      {/* Section Header */}
-      <div ref={headerRef} className="text-center mb-20">
-        <div className="overflow-hidden">
-          <motion.p
-            variants={maskReveal}
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            custom={0}
-            className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
-          >
-            Your Path
-          </motion.p>
-        </div>
-        <div className="overflow-hidden">
-          <motion.h2
-            variants={maskReveal}
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            custom={0.12}
-            className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-2"
-          >
-            Learn. Earn.
-          </motion.h2>
-        </div>
-        <div className="overflow-hidden">
-          <motion.h2
-            variants={maskReveal}
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            custom={0.24}
-            className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold text-primary"
-          >
-            Build.
-          </motion.h2>
-        </div>
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate={headerInView ? "visible" : "hidden"}
-          custom={0.4}
-          className="text-text-muted text-lg mt-4 max-w-lg mx-auto"
-        >
-          Three steps to go from curious to contributor in the Solana ecosystem.
-        </motion.p>
-      </div>
+      {/* Two-column layout: cards on left, towers visible on right */}
+      <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
+        {/* Left column: header + cards (takes ~55% on desktop) */}
+        <div className="md:w-[55%] flex flex-col gap-6">
+          {/* Section Header */}
+          <div ref={headerRef} className="mb-4 md:mb-8">
+            <div className="overflow-hidden">
+              <motion.p
+                variants={maskReveal}
+                initial="hidden"
+                animate={headerInView ? "visible" : "hidden"}
+                custom={0}
+                className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
+              >
+                Your Path
+              </motion.p>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h2
+                variants={maskReveal}
+                initial="hidden"
+                animate={headerInView ? "visible" : "hidden"}
+                custom={0.12}
+                className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-2"
+              >
+                Learn. Earn.
+              </motion.h2>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h2
+                variants={maskReveal}
+                initial="hidden"
+                animate={headerInView ? "visible" : "hidden"}
+                custom={0.24}
+                className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold text-primary"
+              >
+                Build.
+              </motion.h2>
+            </div>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate={headerInView ? "visible" : "hidden"}
+              custom={0.4}
+              className="text-text-muted text-lg mt-4 max-w-md"
+            >
+              Three steps to go from curious to contributor in the Solana ecosystem.
+            </motion.p>
+          </div>
 
-      {/* Timeline */}
-      <div className="relative">
-        <VineConnector cardPositions={[220, 460, 700]} />
-        <MobileVine />
-        <div className="space-y-16 md:space-y-40">
+          {/* Step Cards */}
           {STEPS.map((step, i) => (
             <PathwayCard key={step.number} step={step} index={i} />
           ))}
         </div>
+
+        {/* Right column: intentionally empty on desktop to reveal the KL towers */}
+        <div className="hidden md:block md:w-[45%]" aria-hidden="true" />
       </div>
     </SectionWrapper>
   );

@@ -1,6 +1,6 @@
 import type { Member } from "@/lib/supabase/types";
 
-// Sample members for development (replaced by Supabase in production)
+// Real members only. Add more as data becomes available.
 export const SAMPLE_MEMBERS: Partial<Member>[] = [
   {
     id: "1",
@@ -26,58 +26,6 @@ export const SAMPLE_MEMBERS: Partial<Member>[] = [
     is_featured: true,
     twitter_url: "https://x.com/W_Han_01",
     photo_url: "/images/members/han.jpg",
-    status: "published",
-  },
-  {
-    id: "3",
-    name: "Amirah Tan",
-    title: "Developer",
-    company: "SolanaLabs MY",
-    skills: ["Rust", "Frontend", "Product"],
-    badges: ["Solana Builder"],
-    is_core_team: false,
-    is_featured: true,
-    twitter_url: null,
-    photo_url: null,
-    status: "published",
-  },
-  {
-    id: "4",
-    name: "Raj Kumar",
-    title: "Designer",
-    company: "Phantom",
-    skills: ["Design", "Content", "Community"],
-    badges: ["Hackathon Winner"],
-    is_core_team: false,
-    is_featured: true,
-    twitter_url: null,
-    photo_url: null,
-    status: "published",
-  },
-  {
-    id: "5",
-    name: "Nurul Aisyah",
-    title: "Content Creator",
-    company: "Superteam Malaysia",
-    skills: ["Content", "Growth", "Community"],
-    badges: ["Core Contributor"],
-    is_core_team: false,
-    is_featured: true,
-    twitter_url: null,
-    photo_url: null,
-    status: "published",
-  },
-  {
-    id: "6",
-    name: "Wei Liang",
-    title: "DeFi Researcher",
-    company: "Jupiter",
-    skills: ["Rust", "Product", "Growth"],
-    badges: ["Grant Recipient"],
-    is_core_team: false,
-    is_featured: true,
-    twitter_url: null,
-    photo_url: null,
     status: "published",
   },
 ];
