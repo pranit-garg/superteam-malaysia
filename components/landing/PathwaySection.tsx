@@ -132,7 +132,7 @@ function PathwayCard({
     >
       {/* Ghost number */}
       <span
-        className={`absolute -top-4 -left-2 font-[family-name:var(--font-display)] text-[7rem] font-black text-primary/[${0.03 + index * 0.02}] leading-none select-none pointer-events-none group-hover:text-primary/[0.08] transition-colors duration-500`}
+        className="absolute -top-4 -left-2 font-[family-name:var(--font-display)] text-[7rem] font-black text-primary/[0.03] leading-none select-none pointer-events-none group-hover:text-primary/[0.06] transition-colors duration-500"
       >
         {step.number}
       </span>
