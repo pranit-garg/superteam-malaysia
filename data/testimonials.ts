@@ -5,6 +5,12 @@ export interface Testimonial {
   is_tweet: boolean;
   tweet_id: string | null;
   size: "compact" | "standard" | "featured";
+  avatar_url: string | null;
+}
+
+/** Extract bare handle from author_title for tweet URLs */
+export function getHandle(t: Testimonial): string {
+  return t.author_title.replace(/^@/, "").split(/[\s|]/)[0];
 }
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -17,6 +23,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2027026361706303670",
     size: "featured",
+    avatar_url: "https://unavatar.io/twitter/Ponderman_NFT",
   },
   // 1 - Standard: Superteam MY event tweet (33 likes)
   {
@@ -27,6 +34,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029461719777722615",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/SuperteamMY",
   },
   // 2 - Featured: Abang Brooch on cultural mixing at event (11 likes)
   {
@@ -37,6 +45,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029749717056528609",
     size: "featured",
+    avatar_url: "https://unavatar.io/twitter/abangbrooch",
   },
   // 3 - Standard: Marianne on the session (29 likes)
   {
@@ -47,6 +56,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029441113967177759",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/mariannehere",
   },
   // 4 - Standard: Han on Malaysia being unique (50 likes)
   {
@@ -57,6 +67,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2026283577089093803",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/W_Han_01",
   },
   // 5 - Compact: Eric Chan on community
   {
@@ -67,6 +78,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029756117832847658",
     size: "compact",
+    avatar_url: "https://unavatar.io/twitter/canmasu",
   },
   // 6 - Standard: Nizar on joining the community
   {
@@ -77,6 +89,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029765145044611519",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/nizarsyahmi37",
   },
   // 7 - Compact: Han on mixed culture celebration
   {
@@ -87,6 +100,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029750912827453925",
     size: "compact",
+    avatar_url: "https://unavatar.io/twitter/W_Han_01",
   },
   // 8 - Standard: SuperteamMY Ecosystem Sync key takeaway (16 likes)
   {
@@ -97,6 +111,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029440489863487997",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/SuperteamMY",
   },
   // 9 - Compact: Siyi Chen speaker tweet
   {
@@ -107,18 +122,9 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029470943781793886",
     size: "compact",
+    avatar_url: "https://unavatar.io/twitter/Siyi_Chen1",
   },
-  // 10 - Featured: Benjamin, Community Lead (from Substack newsletter)
-  {
-    author_name: "Benjamin",
-    author_title: "Community Lead, Superteam MY",
-    content:
-      "Superteam Malaysia is not only a community, it's a family filled with various people from different backgrounds, cultivating a significance in the Solana Ecosystem within Malaysia through supporting local projects and providing a platform and resources to excel.",
-    is_tweet: false,
-    tweet_id: null,
-    size: "featured",
-  },
-  // 11 - Compact: Taufik on the event
+  // 10 - Compact: Taufik on the event
   {
     author_name: "Taufik",
     author_title: "@taufiknaaim",
@@ -127,6 +133,7 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2029617085903687855",
     size: "compact",
+    avatar_url: "https://unavatar.io/twitter/taufiknaaim",
   },
   // 12 - Standard: Han on community calls
   {
@@ -137,9 +144,10 @@ export const TESTIMONIALS: Testimonial[] = [
     is_tweet: true,
     tweet_id: "2021431217565159490",
     size: "standard",
+    avatar_url: "https://unavatar.io/twitter/W_Han_01",
   },
 ];
 
 /* Row assignments for marquee */
-export const ROW_1_INDICES = [0, 3, 7, 8, 11, 4]; // Ponderman(featured), Marianne, Han-culture(compact), EcoSync, Taufik(compact), Han-NS
-export const ROW_2_INDICES = [2, 1, 5, 6, 10, 9, 12]; // Abang(featured), STM-event, Eric(compact), Nizar, Benjamin(featured), Siyi(compact), Han-calls
+export const ROW_1_INDICES = [0, 3, 7, 8, 10, 4]; // Ponderman(featured), Marianne, Han-culture(compact), EcoSync, Taufik(compact), Han-NS
+export const ROW_2_INDICES = [2, 1, 5, 6, 9, 11]; // Abang(featured), STM-event, Eric(compact), Nizar, Siyi(compact), Han-calls
