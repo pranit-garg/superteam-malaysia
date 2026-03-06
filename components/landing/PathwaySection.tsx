@@ -16,8 +16,8 @@ const STEPS = [
       "Free developer resources, workshops, and the community to learn alongside. No experience required.",
     links: [
       { label: "Developer Resources", href: "https://solana.com/developers" },
-      { label: "Learn Rust", href: "https://doc.rust-lang.org/book/" },
-      { label: "Newsletters", href: "https://superteam.fun" },
+      { label: "Build on Solana", href: "https://build.superteam.fun" },
+      { label: "Newsletters", href: "https://my.superteam.fun/superteam-my-newsletters" },
     ],
   },
   {
@@ -28,8 +28,8 @@ const STEPS = [
       "Bounties, freelance gigs, grants, and full-time roles. Real money for real work.",
     links: [
       { label: "Browse Bounties", href: "https://superteam.fun/earn" },
-      { label: "Find Jobs", href: "https://superteam.fun/earn" },
-      { label: "Apply for Grants", href: "https://superteam.fun/earn" },
+      { label: "Find Jobs", href: "https://jobs.solana.com/jobs" },
+      { label: "Apply for Grants", href: "https://superteam.fun/earn/grants/" },
     ],
   },
   {
@@ -40,7 +40,7 @@ const STEPS = [
       "Join hackathons, get mentorship from experienced devs, and launch your project with ecosystem support.",
     links: [
       { label: "Events Calendar", href: "https://lu.ma/mysuperteam" },
-      { label: "Brand Kit", href: "#" },
+      { label: "Brand Kit", href: "https://drive.google.com/drive/folders/1rmpMBbUTSCJnGoaHRi7dYtiOEAqiPVWv" },
     ],
   },
 ];

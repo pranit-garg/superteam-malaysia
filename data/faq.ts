@@ -7,7 +7,7 @@ export const FAQ_ITEMS = [
   {
     question: "How do I join?",
     answer:
-      "Hop into our Telegram or Discord. There's no application or approval process. Just show up, say hi, and start connecting with other builders.",
+      "Hop into our Telegram group. Just show up, say hi, and start connecting with other builders. Membership (with voting rights) is earned through contributions.",
   },
   {
     question: "What opportunities are available?",

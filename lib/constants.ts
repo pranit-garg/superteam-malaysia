@@ -13,7 +13,6 @@ export const COLORS = {
 export const SOCIAL_LINKS = {
   twitter: "https://x.com/SuperteamMY",
   telegram: "https://t.me/SuperteamMY",
-  discord: "#",
   luma: "https://lu.ma/mysuperteam",
   superteamGlobal: "https://superteam.fun",
   superteamEarn: "https://superteam.fun/earn",

@@ -62,7 +62,7 @@ export default function JoinCTA() {
           className="text-text-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed"
         >
           Builders, designers, and creators in Malaysia&apos;s most
-          active Solana community. No applications, no gatekeeping. Just show up and ship.
+          active Solana community. Join the Telegram, start contributing, and grow with us.
         </motion.p>
 
         <motion.div
