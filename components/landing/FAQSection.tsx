@@ -14,7 +14,7 @@ export default function FAQSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <SectionWrapper id="faq" alt>
+    <SectionWrapper id="faq" bg="warm">
       <div ref={ref} className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* Left 40%: Sticky heading */}
         <motion.div

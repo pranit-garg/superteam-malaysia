@@ -34,6 +34,8 @@
 @theme inline {
   --color-bg: #0d1a12;
   --color-bg-alt: #142820;
+  --color-bg-deep: #0a1410;
+  --color-bg-warm: #121a0f;
   --color-primary: #0AB172;
   --color-secondary: #9945FF;
   --color-gold: #d4a246;

@@ -16,6 +16,6 @@ export const PARTNERS: PartnerData[] = [
   { name: "Jito", type: "infrastructure", logo: "/images/partners/jito.svg", url: "https://jito.network" },
   { name: "Tensor", type: "ecosystem", logo: "/images/partners/tensor.svg", url: "https://tensor.trade" },
   { name: "Raydium", type: "ecosystem", logo: "/images/partners/raydium.svg", url: "https://raydium.io" },
-  { name: "Orca", type: "ecosystem", logo: "/images/partners/orca.svg", url: "https://orca.so" },
+  { name: "Orca", type: "ecosystem", logo: "/images/partners/orca.png", url: "https://orca.so" },
   { name: "Drift", type: "ecosystem", logo: "/images/partners/drift.svg", url: "https://drift.trade" },
 ];

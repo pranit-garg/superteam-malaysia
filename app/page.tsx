@@ -44,11 +44,11 @@ export default async function Home() {
       <main id="main-content">
         <HeroSection />
         <MissionSection />
+        <PartnersSection />
         <PathwaySection />
         <EventsSection events={events} />
         <MemberSpotlight />
         <InActionSection />
-        <PartnersSection />
         <WallOfLove />
         <FAQSection />
         <JoinCTA />

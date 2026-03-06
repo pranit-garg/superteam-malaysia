@@ -121,7 +121,7 @@ export default function MemberSpotlight() {
   const featured = SAMPLE_MEMBERS.filter((m) => m.is_featured);
 
   return (
-    <SectionWrapper id="members">
+    <SectionWrapper id="members" bg="warm">
       <div ref={ref} className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* Left 40%: Sticky info */}
         <motion.div

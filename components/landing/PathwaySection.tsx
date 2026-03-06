@@ -8,7 +8,6 @@ import {
   fadeRight,
   maskReveal,
   scaleXReveal,
-  pathwayCardHover,
   nodePulse,
   TROPICAL_EASE,
   DURATION,
@@ -184,6 +183,138 @@ function MobileVine() {
   );
 }
 
+/* ─── Step Visual (animated SVG compositions) ─── */
+const STEP_VISUALS = [
+  {
+    // LEARN: open book
+    icon: "M200 260 L200 160 L140 140 L140 240 Z M200 260 L200 160 L260 140 L260 240 Z",
+    rings: [{ r: 140, dash: "8 12", dur: "20s", dir: "normal" }],
+    particles: 4,
+    glowOpacity: 0.06,
+  },
+  {
+    // EARN: diamond/gem
+    icon: "M200 120 L260 200 L200 280 L140 200 Z M160 200 L200 140 L240 200 M160 200 L200 260 L240 200",
+    rings: [
+      { r: 140, dash: "6 10", dur: "15s", dir: "normal" },
+      { r: 110, dash: "4 14", dur: "12s", dir: "reverse" },
+    ],
+    particles: 5,
+    glowOpacity: 0.1,
+  },
+  {
+    // BUILD: 3 interlocking hexagons
+    icon: [
+      "M200 130 L230 147 L230 183 L200 200 L170 183 L170 147 Z",
+      "M170 200 L200 217 L200 253 L170 270 L140 253 L140 217 Z",
+      "M230 200 L260 217 L260 253 L230 270 L200 253 L200 217 Z",
+    ].join(" "),
+    rings: [
+      { r: 140, dash: "5 8", dur: "12s", dir: "normal" },
+      { r: 115, dash: "3 10", dur: "8s", dir: "reverse" },
+      { r: 165, dash: "7 12", dur: "18s", dir: "normal" },
+    ],
+    particles: 6,
+    glowOpacity: 0.15,
+  },
+];
+
+function StepVisual({ index, isInView }: { index: number; isInView: boolean }) {
+  const config = STEP_VISUALS[index];
+  const color = "#0AB172";
+
+  return (
+    <motion.div
+      className="relative w-full aspect-square max-w-[400px] mx-auto"
+      variants={index % 2 === 0 ? fadeRight : fadeLeft}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      custom={0.2}
+    >
+      {/* Layer 1: Ambient glow */}
+      <div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: `radial-gradient(circle at center, rgba(10,177,114,${config.glowOpacity}) 0%, transparent 70%)`,
+        }}
+      />
+
+      <svg viewBox="0 0 400 400" className="relative w-full h-full">
+        {/* Inline keyframes */}
+        <defs>
+          <style>{`
+            @keyframes spin { to { transform: rotate(360deg); } }
+            @keyframes orbit-${index} {
+              0% { transform: rotate(0deg) translateX(var(--orbit-r)) rotate(0deg); opacity: 0.6; }
+              50% { opacity: 1; }
+              100% { transform: rotate(360deg) translateX(var(--orbit-r)) rotate(-360deg); opacity: 0.6; }
+            }
+            ${index === 2 ? `@keyframes pulse-glow { 0%, 100% { opacity: ${config.glowOpacity}; } 50% { opacity: ${config.glowOpacity * 1.8}; } }` : ""}
+          `}</style>
+        </defs>
+
+        {/* Layer 2: Rotating rings */}
+        {config.rings.map((ring, ri) => (
+          <circle
+            key={ri}
+            cx={200}
+            cy={200}
+            r={ring.r}
+            fill="none"
+            stroke={color}
+            strokeOpacity={0.12 + ri * 0.04}
+            strokeWidth={1}
+            strokeDasharray={ring.dash}
+            style={{
+              transformOrigin: "200px 200px",
+              animation: `spin ${ring.dur} linear infinite ${ring.dir}`,
+            }}
+          />
+        ))}
+
+        {/* Layer 3: Orbital particles */}
+        {Array.from({ length: config.particles }).map((_, pi) => {
+          const angle = (pi / config.particles) * 360;
+          const orbitR = 120 + (pi % 2) * 30;
+          const dur = 10 + pi * 2;
+          return (
+            <circle
+              key={pi}
+              cx={200}
+              cy={200}
+              r={2}
+              fill={color}
+              fillOpacity={0.4 + (pi % 3) * 0.15}
+              style={{
+                ["--orbit-r" as string]: `${orbitR}px`,
+                transformOrigin: "200px 200px",
+                animation: `orbit-${index} ${dur}s linear infinite`,
+                animationDelay: `${(pi / config.particles) * -dur}s`,
+              }}
+            />
+          );
+        })}
+
+        {/* Layer 4: Icon with stroke reveal */}
+        <motion.path
+          d={config.icon}
+          fill="none"
+          stroke={color}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={
+            isInView
+              ? { pathLength: 1, opacity: 0.7, transition: { duration: 1.8, ease: "easeInOut", delay: 0.3 } }
+              : { pathLength: 0, opacity: 0 }
+          }
+        />
+      </svg>
+    </motion.div>
+  );
+}
+
 /* ─── Pathway Card ─── */
 function PathwayCard({
   step,
@@ -219,8 +350,10 @@ function PathwayCard({
         custom={0}
       />
 
-      {/* Spacer for vine column (desktop) */}
-      <div className="hidden md:block md:w-1/2" />
+      {/* Animated SVG visual (desktop only) */}
+      <div className="hidden md:block md:w-1/2">
+        <StepVisual index={index} isInView={isInView} />
+      </div>
 
       {/* Card */}
       <motion.div
@@ -344,7 +477,7 @@ export default function PathwaySection() {
   return (
     <SectionWrapper
       id="get-started"
-      alt
+      bg="deep"
       bgSlot={<BackgroundGradients />}
     >
       {/* Section Header */}

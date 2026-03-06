@@ -41,20 +41,6 @@ export default function HeroSection() {
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
         style={{ opacity }}
       >
-        {/* Eyebrow */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="mb-6"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-medium tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Solana Ecosystem &middot; Malaysia
-          </span>
-        </motion.div>
-
         {/* Headline */}
         <div className="overflow-hidden mb-6">
           <motion.h1

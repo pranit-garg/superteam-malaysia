@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="#FFFFFF">
-  <!-- Tensor logo: two upward-pointing chevron arrows -->
-  <!-- Left arrow -->
-  <path d="M19 7 L21 7 L21 41 L19 41 L16 38 L16 19 L15 19 L11 24 L4 24 L4 22 L7 19 L8 18 Z"/>
-  <!-- Right arrow (mirrored) -->
-  <path d="M29 7 L27 7 L27 41 L29 41 L32 38 L32 19 L33 19 L37 24 L44 24 L44 22 L41 19 L40 18 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Tensor: Black circle with white geometric T mark -->
+  <circle cx="256" cy="256" r="256" fill="#000000"/>
+  <!-- Left half: triangle wing + vertical bar tapering at bottom -->
+  <path d="M234 126 L102 258 L196 258 L196 356 L216 382 L234 356 Z" fill="#FFFFFF"/>
+  <!-- Right half: mirrored triangle wing + vertical bar tapering at bottom -->
+  <path d="M278 126 L410 258 L316 258 L316 356 L296 382 L278 356 Z" fill="#FFFFFF"/>
 </svg>

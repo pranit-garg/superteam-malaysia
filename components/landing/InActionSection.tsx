@@ -23,7 +23,7 @@ export default function InActionSection() {
   const doubledImages = [...IN_ACTION_IMAGES, ...IN_ACTION_IMAGES];
 
   return (
-    <SectionWrapper id="in-action" fullBleed>
+    <SectionWrapper id="in-action" bg="forest" fullBleed>
       <div ref={ref} className="max-w-7xl mx-auto px-6 mb-10">
         <motion.p
           variants={fadeUp}

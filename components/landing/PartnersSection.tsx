@@ -19,7 +19,7 @@ export default function PartnersSection() {
   const row2Double = [...row2, ...row2, ...row2, ...row2];
 
   return (
-    <SectionWrapper id="partners" alt fullBleed>
+    <SectionWrapper id="partners" bg="warm" fullBleed>
       <div ref={ref} className="max-w-7xl mx-auto px-6 mb-10">
         <motion.p
           variants={fadeUp}

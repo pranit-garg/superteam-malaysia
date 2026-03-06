@@ -47,7 +47,7 @@ export default function MissionSection() {
   return (
     <SectionWrapper
       id="mission"
-      alt
+      bg="deep"
     >
       {/* Decorative Malaysian batik pattern */}
       <div className="absolute top-0 right-0 w-[300px] h-[500px] opacity-20 z-0 pointer-events-none hidden md:block">

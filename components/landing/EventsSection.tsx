@@ -68,7 +68,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
   return (
     <SectionWrapper
       id="events"
-      alt
+      bg="forest"
       fullBleed
       bgSlot={
         <>
@@ -81,7 +81,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
             placeholder="blur"
             blurDataURL="data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoKAAYABUB8JYgCw7DdSZdXsAAA/ob/ZJnVg52yxsPbBQa393WRk3VtiE3gtAAA"
           />
-          <div className="absolute inset-0 bg-bg-alt/70 z-[1]" />
+          <div className="absolute inset-0 bg-bg/70 z-[1]" />
         </>
       }
     >
@@ -119,8 +119,8 @@ export default function EventsSection({ events }: EventsSectionProps) {
       {/* Horizontal scroll cards */}
       <div className="relative">
         {/* Fade masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-bg-alt to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-alt to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
 
         <div className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 pb-4">
           {displayEvents.map((event, i) => (
@@ -204,12 +204,6 @@ export default function EventsSection({ events }: EventsSectionProps) {
         </div>
       </div>
 
-      {/* Mobile CTA + Powered by Luma */}
-      <div className="mt-8 px-6 flex flex-col sm:flex-row items-center justify-center max-w-7xl mx-auto gap-4">
-        <span className="text-xs text-text-muted flex items-center gap-1">
-          Powered by <a href="https://lu.ma" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Luma</a>
-        </span>
-      </div>
     </SectionWrapper>
   );
 }

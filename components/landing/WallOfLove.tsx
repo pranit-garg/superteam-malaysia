@@ -110,8 +110,8 @@ function MarqueeRow({
   return (
     <div className="group relative overflow-hidden">
       {/* Fade masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
 
       <div
         className="flex gap-5 w-max group-hover:[animation-play-state:paused]"
@@ -133,7 +133,7 @@ export default function WallOfLove() {
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   return (
-    <SectionWrapper fullBleed bgSlot={<WallBackground />}>
+    <SectionWrapper fullBleed bg="deep" bgSlot={<WallBackground />}>
       {/* Botanical canopy overlay */}
       <BotanicalOverlay variant="canopy" className="opacity-30" />
 
