@@ -6,7 +6,6 @@ export interface PartnerData {
 }
 
 export const PARTNERS: PartnerData[] = [
-  { name: "Solana Foundation", type: "ecosystem", logo: "/images/partners/solana.svg", url: "https://solana.com" },
   { name: "Superteam", type: "ecosystem", logo: "/images/partners/superteam.svg", url: "https://superteam.fun" },
   { name: "Helius", type: "infrastructure", logo: "/images/partners/helius.svg", url: "https://helius.dev" },
   { name: "Jupiter", type: "ecosystem", logo: "/images/partners/jupiter.svg", url: "https://jup.ag" },
