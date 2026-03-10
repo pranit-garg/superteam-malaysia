@@ -28,4 +28,17 @@ export const SAMPLE_MEMBERS: Partial<Member>[] = [
     photo_url: "/images/members/han.jpg",
     status: "published",
   },
+  {
+    id: "3",
+    name: "Pranit Garg",
+    title: "Builder",
+    company: "a16z CSX",
+    skills: ["Growth", "Content", "Product"],
+    badges: ["Core Contributor"],
+    is_core_team: true,
+    is_featured: true,
+    twitter_url: "https://x.com/pranit",
+    photo_url: "/images/members/pranit.jpg",
+    status: "published",
+  },
 ];
