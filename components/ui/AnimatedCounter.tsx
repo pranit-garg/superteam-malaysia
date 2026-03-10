@@ -1,60 +1,72 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, motion } from "framer-motion";
-import { DRIFT_EASE } from "@/lib/animations";
+import { useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: number;
-  prefix?: string;
   suffix?: string;
-  duration?: number;
+  stiffness?: number;
+  damping?: number;
+  onComplete?: () => void;
 }
 
+/**
+ * Spring-physics counter. Overshoots the target then settles organically.
+ */
 export default function AnimatedCounter({
   value,
-  prefix = "",
   suffix = "",
-  duration = 2,
+  stiffness = 100,
+  damping = 13,
+  onComplete,
 }: AnimatedCounterProps) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
+  const [display, setDisplay] = useState(`0${suffix}`);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimated.current) return;
+    hasAnimated.current = true;
 
-    const start = 0;
-    const end = value;
-    const startTime = performance.now();
-    const durationMs = duration * 1000;
+    let current = 0;
+    let velocity = 0;
+    let settled = false;
+    let raf: number;
 
-    function update(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / durationMs, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(start + (end - start) * eased);
-      setCount(current);
-      if (progress < 1) {
-        requestAnimationFrame(update);
+    function tick() {
+      const displacement = current - value;
+      const springForce = -stiffness * displacement;
+      const dampingForce = -damping * velocity;
+      const acceleration = springForce + dampingForce;
+
+      velocity += acceleration * (1 / 60);
+      current += velocity * (1 / 60);
+
+      setDisplay(
+        Math.round(Math.max(0, current)).toLocaleString() + suffix
+      );
+
+      if (
+        Math.abs(velocity) > 0.1 ||
+        Math.abs(current - value) > 0.5
+      ) {
+        raf = requestAnimationFrame(tick);
+      } else if (!settled) {
+        settled = true;
+        setDisplay(value.toLocaleString() + suffix);
+        onComplete?.();
       }
     }
 
-    requestAnimationFrame(update);
-  }, [isInView, value, duration]);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [isInView, value, suffix, stiffness, damping, onComplete]);
 
   return (
-    <motion.span
-      ref={ref}
-      className="font-[family-name:var(--font-mono)] tabular-nums"
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.5, ease: DRIFT_EASE }}
-    >
-      {prefix}
-      {count.toLocaleString()}
-      {suffix}
-    </motion.span>
+    <span ref={ref} className="font-[family-name:var(--font-mono)] tabular-nums">
+      {display}
+    </span>
   );
 }

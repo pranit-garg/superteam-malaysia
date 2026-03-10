@@ -1,7 +1,7 @@
 export const COLORS = {
-  background: "#0a0a0f",
-  backgroundAlt: "#0f1a14",
-  primary: "#0ECB81",
+  background: "#0d1a12",
+  backgroundAlt: "#142820",
+  primary: "#0AB172",
   secondary: "#9945FF",
   tertiary: "#d4a246",
   textPrimary: "#ffffff",
@@ -30,7 +30,7 @@ export const NAV_LINKS = [
 export const SITE_CONFIG = {
   name: "Superteam Malaysia",
   tagline: "The home for Solana builders in Malaysia",
-  url: "https://superteammy.com",
+  url: "https://my.superteam.fun",
   description:
     "Superteam Malaysia is the local chapter of the global Superteam network, empowering builders, creators, and talent in the Solana ecosystem.",
 } as const;

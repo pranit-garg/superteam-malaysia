@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { fadeUp, DURATION } from "@/lib/animations";
+import type { InActionContent } from "@/lib/types/page-content";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 const IN_ACTION_IMAGES = [
@@ -16,11 +17,12 @@ const IN_ACTION_IMAGES = [
   { src: "/images/in-action/photo-8.jpg", alt: "Builder showcase presentation" },
 ];
 
-export default function InActionSection() {
+export default function InActionSection({ content }: { content?: InActionContent | null }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const doubledImages = [...IN_ACTION_IMAGES, ...IN_ACTION_IMAGES];
+  const images = content?.images ?? IN_ACTION_IMAGES;
+  const doubledImages = [...images, ...images];
 
   return (
     <SectionWrapper id="in-action" bg="forest" fullBleed>
@@ -31,7 +33,7 @@ export default function InActionSection() {
           animate={isInView ? "visible" : "hidden"}
           className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
         >
-          In Action
+          {content?.eyebrow ?? "In Action"}
         </motion.p>
         <motion.h2
           variants={fadeUp}
@@ -40,8 +42,8 @@ export default function InActionSection() {
           custom={0.1}
           className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold"
         >
-          Superteam Malaysia{" "}
-          <span className="text-primary">In Action</span>
+          {content?.headline ?? "Superteam Malaysia "}
+          <span className="text-primary">{content?.headline_accent ?? "In Action"}</span>
         </motion.h2>
       </div>
 

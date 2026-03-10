@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { PageContent } from "@/lib/supabase/types";
 
+const SECTION_LABELS: Record<string, string> = {
+  hero: "Hero Section",
+  mission: "Mission Section",
+  pathway: "Pathway Section",
+  in_action: "In Action Section",
+  join_cta: "Join CTA Section",
+  faq: "FAQ Section",
+};
+
 export default function ContentPage() {
   const [entries, setEntries] = useState<PageContent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,10 +42,27 @@ export default function ContentPage() {
 
   function startEdit(entry: PageContent) {
     setEditingId(entry.id);
-    setEditValue(entry.value);
+    if (entry.content_type === "json") {
+      try {
+        setEditValue(JSON.stringify(JSON.parse(entry.value), null, 2));
+      } catch {
+        setEditValue(entry.value);
+      }
+    } else {
+      setEditValue(entry.value);
+    }
   }
 
   async function saveEdit(id: string) {
+    const entry = entries.find((e) => e.id === id);
+    if (entry?.content_type === "json") {
+      try {
+        JSON.parse(editValue);
+      } catch {
+        setError("Invalid JSON. Please fix syntax errors before saving.");
+        return;
+      }
+    }
     setSaving(true);
     const supabase = createClient();
     const { error } = await supabase
@@ -88,7 +114,7 @@ export default function ContentPage() {
           <div key={section} className="bg-card border border-card-border rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-white/[0.02] border-b border-card-border">
               <h3 className="text-sm font-semibold text-text uppercase tracking-wider">
-                {section}
+                {SECTION_LABELS[section] || section}
               </h3>
             </div>
             <div className="divide-y divide-card-border">
@@ -113,7 +139,7 @@ export default function ContentPage() {
                             <textarea
                               value={editValue}
                               onChange={(e) => setEditValue(e.target.value)}
-                              rows={4}
+                              rows={entry.content_type === "json" ? 12 : 4}
                               className="w-full px-3 py-2 bg-bg border border-card-border rounded-lg text-text text-sm focus:outline-none focus:border-primary transition-colors resize-none font-mono"
                             />
                           )}

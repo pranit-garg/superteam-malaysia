@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://superteammy.com",
+    canonical: "https://my.superteam.fun",
   },
 };
 
@@ -89,8 +89,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Superteam Malaysia",
-              "url": "https://superteammy.com",
-              "logo": "https://superteammy.com/opengraph-image",
+              "url": "https://my.superteam.fun",
+              "logo": "https://my.superteam.fun/opengraph-image",
               "description": "Superteam Malaysia is the local chapter of the global Superteam network, empowering builders, creators, and talent in the Solana ecosystem.",
               "sameAs": [
                 "https://x.com/SuperteamMY",

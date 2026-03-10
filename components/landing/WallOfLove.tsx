@@ -5,8 +5,41 @@ import { useRef } from "react";
 import { fadeUp } from "@/lib/animations";
 import { TESTIMONIALS, ROW_1_INDICES, ROW_2_INDICES, getHandle } from "@/data/testimonials";
 import type { Testimonial } from "@/data/testimonials";
+import type { Testimonial as SupabaseTestimonial } from "@/lib/supabase/types";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
+
+/* ─── Supabase → local format mapping ─── */
+function mapSupabaseTestimonials(items: SupabaseTestimonial[]): Testimonial[] {
+  return items.map((t) => {
+    const len = t.content.length;
+    const size: Testimonial["size"] = len > 200 ? "featured" : len < 80 ? "compact" : "standard";
+    let tweet_id: string | null = null;
+    if (t.tweet_url) {
+      const match = t.tweet_url.match(/status\/(\d+)/);
+      if (match) tweet_id = match[1];
+    }
+    return {
+      author_name: t.author_name,
+      author_title: t.author_title || "",
+      content: t.content,
+      is_tweet: t.is_tweet,
+      tweet_id,
+      size,
+      avatar_url: t.author_photo_url,
+    };
+  });
+}
+
+function splitRows(items: Testimonial[]): { row1: number[]; row2: number[] } {
+  const row1: number[] = [];
+  const row2: number[] = [];
+  items.forEach((_, i) => {
+    if (i % 2 === 0) row1.push(i);
+    else row2.push(i);
+  });
+  return { row1, row2 };
+}
 
 /* ─── Size-based widths ─── */
 const SIZE_WIDTHS: Record<Testimonial["size"], string> = {
@@ -146,22 +179,21 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 /* ─── Marquee Row ─── */
 function MarqueeRow({
-  indices,
+  items,
   direction = "left",
   duration = "30s",
 }: {
-  indices: number[];
+  items: Testimonial[];
   direction?: "left" | "right";
   duration?: string;
 }) {
-  const items = indices.map((i) => TESTIMONIALS[i]);
   const repeated = [...items, ...items, ...items, ...items];
 
   return (
     <div className="group relative overflow-hidden">
       {/* Fade masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
 
       <div
         className="flex items-stretch gap-5 w-max group-hover:[animation-play-state:paused]"
@@ -178,9 +210,21 @@ function MarqueeRow({
 }
 
 /* ─── Main Section ─── */
-export default function WallOfLove() {
+export default function WallOfLove({ testimonials }: { testimonials?: SupabaseTestimonial[] | null }) {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+
+  const activeTestimonials = testimonials && testimonials.length > 0
+    ? mapSupabaseTestimonials(testimonials)
+    : TESTIMONIALS;
+
+  const useCustomRows = testimonials && testimonials.length > 0;
+  const { row1, row2 } = useCustomRows
+    ? splitRows(activeTestimonials)
+    : { row1: ROW_1_INDICES, row2: ROW_2_INDICES };
+
+  const row1Items = row1.map(i => activeTestimonials[i]);
+  const row2Items = row2.map(i => activeTestimonials[i]);
 
   return (
     <SectionWrapper fullBleed bg="deep" bgSlot={<WallBackground />}>
@@ -212,8 +256,8 @@ export default function WallOfLove() {
 
       {/* Dual-row marquee */}
       <div className="space-y-5">
-        <MarqueeRow indices={ROW_1_INDICES} direction="left" duration="30s" />
-        <MarqueeRow indices={ROW_2_INDICES} direction="right" duration="38s" />
+        <MarqueeRow items={row1Items} direction="left" duration="30s" />
+        <MarqueeRow items={row2Items} direction="right" duration="38s" />
       </div>
     </SectionWrapper>
   );

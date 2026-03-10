@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { fadeUp, fadeLeft, maskReveal, scaleXReveal } from "@/lib/animations";
+import type { PathwayContent } from "@/lib/types/page-content";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 /* ─── Data ─── */
@@ -58,7 +59,7 @@ function CinematicBackdrop() {
     <>
       {/* KL skyline image */}
       <Image
-        src="/images/pathway/kl-backdrop-v1.png"
+        src="/images/pathway/kl-backdrop-v1.webp"
         alt=""
         fill
         className="object-cover object-[center_30%]"
@@ -70,11 +71,11 @@ function CinematicBackdrop() {
         className="absolute inset-0"
         style={{
           background: `linear-gradient(to right,
-            rgba(10,20,16,0.92) 0%,
-            rgba(10,20,16,0.88) 35%,
-            rgba(10,20,16,0.7) 55%,
-            rgba(10,20,16,0.5) 75%,
-            rgba(10,20,16,0.6) 100%
+            rgba(13,26,18,0.92) 0%,
+            rgba(13,26,18,0.88) 35%,
+            rgba(13,26,18,0.7) 55%,
+            rgba(13,26,18,0.5) 75%,
+            rgba(13,26,18,0.6) 100%
           )`,
         }}
       />
@@ -83,10 +84,10 @@ function CinematicBackdrop() {
         className="absolute inset-0"
         style={{
           background: `linear-gradient(to bottom,
-            rgba(10,20,16,1) 0%,
-            transparent 12%,
-            transparent 88%,
-            rgba(10,20,16,1) 100%
+            rgba(13,26,18,1) 0%,
+            transparent 15%,
+            transparent 85%,
+            rgba(13,26,18,1) 100%
           )`,
         }}
       />
@@ -94,7 +95,7 @@ function CinematicBackdrop() {
       <div
         className="absolute inset-0 md:hidden"
         style={{
-          background: "rgba(10,20,16,0.75)",
+          background: "rgba(13,26,18,0.75)",
         }}
       />
     </>
@@ -106,7 +107,7 @@ function PathwayCard({
   step,
   index,
 }: {
-  step: (typeof STEPS)[number];
+  step: { number: string; label: string; title: string; description: string; links: { label: string; href: string }[] };
   index: number;
 }) {
   const ref = useRef(null);
@@ -224,7 +225,7 @@ function PathwayCard({
 }
 
 /* ─── Main Section ─── */
-export default function PathwaySection() {
+export default function PathwaySection({ content }: { content?: PathwayContent | null }) {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
 
@@ -248,7 +249,7 @@ export default function PathwaySection() {
                 custom={0}
                 className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
               >
-                Your Path
+                {content?.eyebrow ?? "Your Path"}
               </motion.p>
             </div>
             <div className="overflow-hidden">
@@ -259,7 +260,7 @@ export default function PathwaySection() {
                 custom={0.12}
                 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-2"
               >
-                Learn. Earn.
+                {content?.headline_1 ?? "Learn. Earn."}
               </motion.h2>
             </div>
             <div className="overflow-hidden">
@@ -270,7 +271,7 @@ export default function PathwaySection() {
                 custom={0.24}
                 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold text-primary"
               >
-                Build.
+                {content?.headline_2 ?? "Build."}
               </motion.h2>
             </div>
             <motion.p
@@ -280,12 +281,12 @@ export default function PathwaySection() {
               custom={0.4}
               className="text-text-muted text-lg mt-4 max-w-md"
             >
-              Three steps to go from curious to contributor in the Solana ecosystem.
+              {content?.description ?? "Three steps to go from curious to contributor in the Solana ecosystem."}
             </motion.p>
           </div>
 
           {/* Step Cards */}
-          {STEPS.map((step, i) => (
+          {(content?.steps ?? STEPS).map((step, i) => (
             <PathwayCard key={step.number} step={step} index={i} />
           ))}
         </div>

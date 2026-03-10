@@ -9,7 +9,11 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Accordion from "@/components/ui/Accordion";
 import Button from "@/components/ui/Button";
 
-export default function FAQSection() {
+interface FAQSectionProps {
+  items?: { question: string; answer: string }[];
+}
+
+export default function FAQSection({ items }: FAQSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -46,7 +50,7 @@ export default function FAQSection() {
           animate={isInView ? "visible" : "hidden"}
           custom={0.15}
         >
-          <Accordion items={FAQ_ITEMS} />
+          <Accordion items={items ?? FAQ_ITEMS} />
         </motion.div>
       </div>
     </SectionWrapper>

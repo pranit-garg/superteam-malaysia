@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
@@ -33,6 +34,13 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-bg flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
+          <Image
+            src="/images/logo-superteam-my.png"
+            alt="Superteam Malaysia"
+            width={64}
+            height={64}
+            className="mx-auto mb-4 rounded-xl"
+          />
           <h1 className="text-3xl font-bold text-text font-[family-name:var(--font-display)]">
             Superteam Malaysia
           </h1>

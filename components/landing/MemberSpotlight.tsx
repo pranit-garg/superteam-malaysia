@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { fadeLeft, fadeRight, fadeUp, staggerContainer } from "@/lib/animations";
 import { SAMPLE_MEMBERS } from "@/data/members";
+import type { Member } from "@/lib/supabase/types";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 
@@ -66,10 +67,10 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
   );
 }
 
-export default function MemberSpotlight() {
+export default function MemberSpotlight({ members }: { members?: Partial<Member>[] }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const featured = SAMPLE_MEMBERS.filter((m) => m.is_featured);
+  const featured = (members && members.length > 0 ? members : SAMPLE_MEMBERS).filter((m) => m.is_featured);
 
   return (
     <SectionWrapper id="members" bg="warm">

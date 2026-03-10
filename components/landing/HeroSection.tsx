@@ -4,11 +4,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { maskReveal, fadeUp } from "@/lib/animations";
 import { SOCIAL_LINKS } from "@/lib/constants";
+import type { HeroContent } from "@/lib/types/page-content";
 import BotanicalOverlay from "@/components/ui/BotanicalOverlay";
 import Button from "@/components/ui/Button";
 import SeamlessVideo from "@/components/ui/SeamlessVideo";
 
-export default function HeroSection() {
+export default function HeroSection({ content }: { content?: HeroContent | null }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -24,7 +25,7 @@ export default function HeroSection() {
       {/* Background video layer - static, no parallax */}
       <div className="absolute inset-0 z-0">
         <SeamlessVideo
-          src="/videos/hero-bg.mp4"
+          src={content?.video_url ?? "/videos/hero-bg.mp4"}
           poster="/images/hero-bg.webp"
           className="absolute inset-0 w-full h-full"
           eager
@@ -50,9 +51,9 @@ export default function HeroSection() {
             custom={0.1}
             className="font-[family-name:var(--font-display)] text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight"
           >
-            Where Malaysia
+            {content?.headline_1 ?? "Where Malaysia"}
             <br />
-            <span className="text-primary">Builds Solana</span>
+            <span className="text-primary">{content?.headline_2 ?? "Builds Solana"}</span>
           </motion.h1>
         </div>
 
@@ -64,7 +65,7 @@ export default function HeroSection() {
           custom={0.3}
           className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]"
         >
-          The home for Solana builders in Malaysia. Ship projects, earn bounties, grow together.
+          {content?.subheadline ?? "The home for Solana builders in Malaysia. Ship projects, earn bounties, grow together."}
         </motion.p>
 
         {/* CTAs */}
@@ -75,15 +76,15 @@ export default function HeroSection() {
           custom={0.5}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button href={SOCIAL_LINKS.telegram} size="lg">
-            Join Community
+          <Button href={content?.cta_1_url ?? SOCIAL_LINKS.telegram} size="lg">
+            {content?.cta_1_text ?? "Join Community"}
           </Button>
           <Button
-            href={SOCIAL_LINKS.superteamGlobal + "/earn"}
+            href={content?.cta_2_url ?? (SOCIAL_LINKS.superteamGlobal + "/earn")}
             variant="ghost"
             size="lg"
           >
-            Earn on Solana
+            {content?.cta_2_text ?? "Earn on Solana"}
           </Button>
         </motion.div>
 

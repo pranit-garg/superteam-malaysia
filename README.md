@@ -1,46 +1,49 @@
 # Superteam Malaysia
 
-> The official website for Superteam Malaysia, the home for Solana builders in Malaysia.
+Community website for Superteam Malaysia, the Malaysian chapter of the global Superteam network focused on growing the Solana ecosystem.
 
-**Live:** https://superteam-malaysia-one.vercel.app
-**GitHub:** https://github.com/pranit-garg/superteam-malaysia
+**Live:** [https://my.superteam.fun](https://my.superteam.fun)
 
-## Overview
+## Deliverables
 
-Superteam Malaysia is the local chapter of the global Superteam network, connecting builders, creators, and talent in the Solana ecosystem across Malaysia. This website serves as the community hub, featuring events, member directory, partner showcase, and a full admin CMS.
+| Deliverable | Link |
+|------------|------|
+| Live site | [https://my.superteam.fun](https://my.superteam.fun) |
+| GitHub repo | [github.com/pranit-garg/superteam-malaysia](https://github.com/pranit-garg/superteam-malaysia) |
+| Figma file | [Figma Design](https://www.figma.com/design/fMrDpMgv6p5lqM1uFgV4rn) |
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|-----------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| Animations | Framer Motion |
-| Smooth Scroll | Lenis |
-| Database | Supabase (PostgreSQL) |
-| Auth | Supabase Auth |
-| Hosting | Vercel |
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Lenis (smooth scroll)
+- Supabase (PostgreSQL + Auth + Storage)
+- Vercel (hosting + cron)
 
 ## Features
 
-- 10-section cinematic landing page with "Tropical Futurism" design
+- Animated landing page with 10 cinematic sections
 - Member directory with search and skill filtering
-- Full admin CMS (members, events, partners, content, announcements, media)
+- Admin panel with CRUD for all content types (members, events, partners, testimonials, announcements, page content)
 - Luma event sync via API with Vercel cron (daily 8am UTC)
-- Supabase integration (auth, database, storage)
-- JSON-LD structured data (Organization, FAQPage, Event schemas)
-- Responsive design with accessibility (skip nav, ARIA, focus-visible, reduced motion)
-- OG images, sitemap, robots.txt
+- ISR with on-demand revalidation after admin edits
+- SEO optimized: metadata, dynamic OG image, sitemap, robots.txt, JSON-LD structured data (Organization, FAQPage, Event)
+- Responsive design (mobile + desktop)
+- Image upload to Supabase Storage
+- Accessibility: skip-to-content link, ARIA labels, focus-visible states, reduced motion support
+
+## Prerequisites
+
+- Node.js 18+
+- npm
+- A Supabase account (or Supabase CLI for local development)
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
+### 1. Clone and Install
 
 ```bash
 git clone https://github.com/pranit-garg/superteam-malaysia.git
@@ -48,28 +51,42 @@ cd superteam-malaysia
 npm install
 ```
 
-### Environment Variables
+### 2. Environment Variables
 
 Copy `.env.example` to `.env.local` and fill in your values:
 
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-
-# Luma (optional, for event sync)
-LUMA_API_KEY=your_luma_api_key
-LUMA_CALENDAR_ID=your_calendar_id
-
-# Cron secret (for Luma sync endpoint)
-CRON_SECRET=your_cron_secret
-
-# Revalidation secret
-REVALIDATION_SECRET=your_revalidation_secret
+```bash
+cp .env.example .env.local
 ```
 
-### Development
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL (e.g. `https://abc.supabase.co`) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public API key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-side only, never exposed to client) |
+| `LUMA_API_KEY` | (Optional) Luma API key for event sync |
+| `LUMA_CALENDAR_ID` | (Optional) Luma calendar ID to sync events from |
+| `CRON_SECRET` | Secret token to authorize the `/api/events/sync` cron endpoint |
+| `REVALIDATION_SECRET` | Secret token to authorize the `/api/revalidate` ISR endpoint |
+
+### 3. Database Setup
+
+Run the consolidated migration in the Supabase SQL Editor or via CLI:
+
+```bash
+# Using Supabase CLI
+supabase db push
+
+# Or manually in the SQL Editor:
+# 1. Run supabase/migrations/001_initial_schema.sql
+# 2. Run supabase/seed.sql for initial data
+```
+
+The migration creates all 8 tables (members, events, partners, testimonials, stats, page_content, announcements, admin_profiles) with Row Level Security policies and updated-at triggers.
+
+The seed file populates initial data from the community (2 members, 25 partners, 5 stats, 12 testimonials, 7 FAQ items).
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
@@ -77,118 +94,76 @@ npm run dev
 
 Open http://localhost:3000.
 
-### Build
+### 5. Build for Production
 
 ```bash
 npm run build
 npm start
 ```
 
-## Project Structure
+## Admin Panel (CMS)
 
-```
-superteam-malaysia/
-  app/
-    admin/              # Admin CMS dashboard
-      announcements/    # Announcement CRUD pages
-      content/          # Page content editor
-      events/           # Event CRUD pages
-      login/            # Admin login
-      media/            # Media library
-      members/          # Member CRUD pages
-      partners/         # Partner CRUD pages
-    api/
-      events/sync/      # Luma event sync endpoint (Vercel cron)
-      revalidate/       # On-demand ISR revalidation
-      upload/           # File upload handler
-    members/            # Member directory page
-    page.tsx            # Landing page (10 sections)
-    layout.tsx          # Root layout with metadata + JSON-LD
-    sitemap.ts          # Dynamic sitemap generation
-    robots.ts           # Robots.txt generation
-    opengraph-image.tsx # Dynamic OG image
-  components/
-    landing/            # Landing page sections
-      HeroSection.tsx
-      MissionSection.tsx
-      StatsSection.tsx
-      EventsSection.tsx
-      MemberSpotlight.tsx
-      PartnersSection.tsx
-      WallOfLove.tsx
-      FAQSection.tsx
-      JoinCTA.tsx
-    layout/             # Header, Footer, SmoothScroll, ScrollProgress
-    ui/                 # Reusable components (Button, GlowCard, Accordion, etc.)
-    admin/              # Admin dashboard components
-    members/            # Member directory components
-    providers/          # Context providers
-  data/                 # Sample/seed data
-    members.ts
-    faq.ts
-    stats.ts
-    partners.ts
-    testimonials.ts
-  lib/
-    animations.ts       # Framer Motion variants and easing
-    constants.ts        # Site config, skills list, links
-    utils.ts            # Utility functions (clsx/tailwind-merge)
-    hooks/              # Custom React hooks
-    luma/               # Luma API client and types
-    supabase/           # Supabase clients (browser, server, admin) and types
-  public/
-    fonts/              # Self-hosted Satoshi font (woff2)
-    botanicals/         # Botanical SVG overlays
-    images/             # Static images
-    og/                 # OG image assets
-  supabase/
-    migrations/         # SQL migration files (8 tables)
-    seed.sql            # Seed data
-  middleware.ts         # Supabase auth session refresh
-  vercel.json           # Cron job configuration
+The admin dashboard is at `/admin`. It provides full CRUD management for all content types with role-based access control.
+
+### How It Works
+
+1. Go to `/admin/login` and sign in with your admin credentials
+2. The dashboard shows counts for each content type (members, events, partners, etc.)
+3. Use the sidebar to navigate between sections
+4. Each section supports: list, add, edit, delete, publish/unpublish
+5. Changes trigger ISR revalidation so the public site updates within seconds
+
+### Roles
+
+| Role | Permissions |
+|------|------------|
+| **Admin** | Full CRUD on all content, can delete items, can manage other admin/editor users |
+| **Editor** | Can add and edit content, cannot delete items or manage users |
+
+The sidebar displays a green "Admin" or blue "Editor" badge based on your role.
+
+### Creating the First Admin User
+
+1. Create a user in the Supabase Auth dashboard (Authentication > Users > Add user)
+2. Insert a row into `admin_profiles` linking to that user:
+
+```sql
+insert into public.admin_profiles (id, display_name, role)
+values ('YOUR_USER_UUID', 'Your Name', 'admin');
 ```
 
-## Supabase Setup
+3. Log in at `/admin/login` with the credentials you created
 
-1. Create a Supabase project at https://supabase.com
-2. Run the migration files in `supabase/migrations/` in order:
-   - `001_members.sql`
-   - `002_events.sql`
-   - `003_partners.sql`
-   - `004_page_content.sql`
-   - `005_announcements.sql`
-   - `006_testimonials.sql`
-   - `007_stats.sql`
-   - `008_admin_profiles.sql`
-3. Optionally run `supabase/seed.sql` for initial data
-4. Set up Row Level Security (RLS) policies
-5. Add your Supabase credentials to `.env.local`
+### Admin Sections
+
+| Section | What It Manages |
+|---------|----------------|
+| Members | Community member profiles (name, title, company, bio, photo, skills, badges) |
+| Events | Upcoming events (also auto-synced from Luma) |
+| Partners | Ecosystem and infrastructure partner logos |
+| Stats | Homepage statistics (e.g. "20 Members", "50 Events") |
+| Testimonials | Wall of Love quotes |
+| Announcements | Community announcements with pinning and publish status |
+| Content | Editable page content blocks (hero text, mission statement, etc.) |
+| Media | Image upload and management via Supabase Storage |
 
 ## Luma Integration
 
-The site syncs events from Luma via a daily cron job:
-- API endpoint: `/api/events/sync`
-- Cron schedule: Daily at 8:00 AM UTC (configured in `vercel.json`)
-- Requires `LUMA_API_KEY`, `LUMA_CALENDAR_ID`, and `CRON_SECRET` in environment variables
+Events are synced from Luma via a daily Vercel cron job:
 
-## Admin Dashboard
+- **Endpoint:** `/api/events/sync`
+- **Schedule:** Daily at 8:00 AM UTC (configured in `vercel.json`)
+- **Required env vars:** `LUMA_API_KEY`, `LUMA_CALENDAR_ID`, `CRON_SECRET`
 
-Access the admin panel at `/admin`. Features:
-- Member management (add, edit, remove)
-- Event management with Luma sync
-- Partner and content management
-- Announcement system
-- Media library
-
-Authentication is handled via Supabase Auth with the admin login page at `/admin/login`.
+Events synced from Luma are matched by `luma_id` to avoid duplicates. New events default to `draft` status and must be published via the admin panel.
 
 ## Deployment
 
 ### Vercel (Recommended)
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Add environment variables
+1. Push your repository to GitHub
+2. Import the project in the Vercel dashboard
+3. Add all environment variables from `.env.example`
 4. Deploy
 
 ```bash
@@ -197,18 +172,79 @@ vercel --prod
 
 The `vercel.json` cron configuration is automatically picked up on deploy.
 
-## Design System
+## Project Structure
 
-- **Aesthetic:** Tropical Futurism (dark theme, cinematic scroll, botanical overlays)
-- **Fonts:** Satoshi (display, self-hosted), Space Grotesk (body, Google Fonts), Geist Mono (code)
-- **Colors:**
-  - Background: `#0a0a0f`
-  - Solana Green (primary): `#14F195`
+```
+superteam-malaysia/
+  app/
+    admin/              Admin CMS dashboard
+      announcements/    Announcement CRUD pages
+      content/          Page content editor
+      events/           Event CRUD pages
+      login/            Admin login
+      media/            Media library
+      members/          Member CRUD pages
+      partners/         Partner CRUD pages
+    api/
+      events/sync/      Luma event sync endpoint (Vercel cron)
+      revalidate/       On-demand ISR revalidation
+      upload/           File upload handler
+    members/            Member directory page
+    page.tsx            Landing page (10 sections)
+    layout.tsx          Root layout with metadata + JSON-LD
+    sitemap.ts          Dynamic sitemap generation
+    robots.ts           Robots.txt generation
+    opengraph-image.tsx Dynamic OG image
+  components/
+    landing/            Landing page sections (Hero, Mission, Stats,
+                        Events, MemberSpotlight, Partners, WallOfLove,
+                        FAQ, JoinCTA)
+    layout/             Header, Footer, SmoothScroll, ScrollProgress
+    ui/                 Reusable components (Button, GlowCard, Accordion, etc.)
+    admin/              Admin dashboard components
+    members/            Member directory components
+    providers/          Context providers
+  data/                 Static/seed data (members, faq, stats, partners, testimonials)
+  lib/
+    animations.ts       Framer Motion variants and easing
+    constants.ts        Site config, skills list, links
+    utils.ts            Utility functions (clsx/tailwind-merge)
+    hooks/              Custom React hooks
+    luma/               Luma API client and types
+    supabase/           Supabase clients (browser, server, admin) and types
+  public/
+    fonts/              Self-hosted Satoshi font (woff2)
+    botanicals/         Botanical SVG overlays
+    images/             Static images (members, partners, og)
+  supabase/
+    migrations/         SQL migration files
+    seed.sql            Seed data
+  middleware.ts         Supabase auth session refresh
+  vercel.json           Cron job configuration
+```
+
+## Design
+
+The site follows a **Tropical Futurism** aesthetic: a dark cinematic canvas layered with botanical overlays, glowing accents, and scroll-triggered animations.
+
+- **Font:** Satoshi (self-hosted from Fontshare CDN)
+- **Color palette:**
+  - Background: `#0d1a12`
+  - Solana Green (primary): `#0AB172`
   - Solana Purple (secondary): `#9945FF`
   - Malaysian Gold: `#d4a246`
-  - Text: `#ffffff` / muted `#a1a1aa`
-- **Effects:** Glassmorphism header, glow cards, botanical SVG overlays, scroll-triggered animations
-- **Accessibility:** Skip-to-content link, reduced motion support, custom scrollbar, semantic HTML
+  - Text: `#ffffff`, muted: `#c8c8d0`
+- **Effects:** Glassmorphism header, glow cards, botanical SVG overlays, parallax sections, scroll-triggered Framer Motion animations
+- **Effects:** Glassmorphism header, glow cards, botanical SVG overlays, parallax sections, scroll-triggered Framer Motion animations
+- **Accessibility:** Skip-to-content link, reduced motion support, semantic HTML, focus-visible outlines, custom scrollbar
+
+## Responsive Design
+
+The site is built mobile-first with breakpoints at:
+- **Mobile:** < 640px (single column, stacked layouts)
+- **Tablet:** 640px - 1024px (2-column grids, adjusted spacing)
+- **Desktop:** 1024px+ (full multi-column layouts, all effects enabled)
+- **Wide:** 1440px+ (max-width containers, no layout breakage)
 
 ## License
 

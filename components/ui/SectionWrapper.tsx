@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils";
 
 const BG_COLORS = {
   forest: "bg-bg",
-  deep: "bg-bg-deep",
-  warm: "bg-bg-warm",
+  deep: "bg-bg",
+  warm: "bg-bg",
 } as const;
 
 const BG_HEX = {
   forest: "#0d1a12",
-  deep: "#0a1410",
-  warm: "#121a0f",
+  deep: "#0d1a12",
+  warm: "#0d1a12",
 } as const;
 
 type BgVariant = keyof typeof BG_COLORS;
@@ -58,17 +58,17 @@ export default function SectionWrapper({
         className
       )}
     >
-      {/* Soft gradient transition zones */}
+      {/* Soft gradient transition zones for bgSlot content */}
       <div
-        className="absolute top-0 left-0 right-0 h-12 z-[3] pointer-events-none"
+        className="absolute top-0 left-0 right-0 h-24 z-[3] pointer-events-none"
         style={{
-          background: `linear-gradient(to bottom, transparent, ${hex})`,
+          background: `linear-gradient(to bottom, ${hex}, transparent)`,
         }}
       />
       <div
-        className="absolute bottom-0 left-0 right-0 h-12 z-[3] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-24 z-[3] pointer-events-none"
         style={{
-          background: `linear-gradient(to top, transparent, ${hex})`,
+          background: `linear-gradient(to top, ${hex}, transparent)`,
         }}
       />
       {bgSlot && (

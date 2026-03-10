@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { fadeUp, TROPICAL_EASE, DURATION } from "@/lib/animations";
+import type { MissionContent } from "@/lib/types/page-content";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 
@@ -40,7 +41,7 @@ const PILLARS = [
   },
 ];
 
-export default function MissionSection() {
+export default function MissionSection({ content }: { content?: MissionContent | null }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -68,7 +69,7 @@ export default function MissionSection() {
           animate={isInView ? "visible" : "hidden"}
           className="text-primary text-sm font-medium tracking-wider uppercase mb-3"
         >
-          Who We Are
+          {content?.eyebrow ?? "Who We Are"}
         </motion.p>
         <motion.h2
           variants={fadeUp}
@@ -77,9 +78,9 @@ export default function MissionSection() {
           custom={0.1}
           className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-4"
         >
-          Creatives, Developers, Operators
+          {content?.headline ?? "Creatives, Developers, Operators"}
           <br className="hidden md:block" />
-          <span className="text-primary"> Building Solana</span>
+          <span className="text-primary">{content?.headline_accent ?? " Building Solana"}</span>
         </motion.h2>
         <motion.p
           variants={fadeUp}
@@ -88,12 +89,12 @@ export default function MissionSection() {
           custom={0.2}
           className="text-text-muted text-base md:text-lg leading-relaxed max-w-3xl mb-16"
         >
-          We value the sovereignty that comes with founding a company, the skin in the game that comes with investing, and the joy that comes with getting sh*t done.
+          {content?.description ?? "We value the sovereignty that comes with founding a company, the skin in the game that comes with investing, and the joy that comes with getting sh*t done."}
         </motion.p>
 
         {/* Numbered vertical list */}
         <div className="space-y-0">
-          {PILLARS.map((pillar, i) => (
+          {(content?.pillars ?? PILLARS).map((pillar, i) => (
             <motion.div
               key={pillar.title}
               initial={{ opacity: 0, x: -40 }}

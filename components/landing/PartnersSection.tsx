@@ -4,10 +4,14 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { fadeUp, staggerContainer } from "@/lib/animations";
-import { PARTNERS } from "@/data/partners";
+import { PARTNERS, type PartnerData } from "@/data/partners";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
-export default function PartnersSection() {
+interface PartnersSectionProps {
+  partners?: PartnerData[];
+}
+
+export default function PartnersSection({ partners }: PartnersSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -42,19 +46,19 @@ export default function PartnersSection() {
         </motion.h2>
 
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 max-w-[900px] mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-3.5 max-w-[1100px] mx-auto"
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {PARTNERS.map((partner, i) => (
+          {(partners ?? PARTNERS).map((partner, i) => (
             <motion.a
               key={partner.name}
               href={partner.url}
               target="_blank"
               rel="noopener noreferrer"
               variants={fadeUp}
-              custom={i * 0.05}
+              custom={i * 0.03}
               className="flex items-center gap-2.5 px-4 py-3 rounded-xl border border-card-border bg-card/50 hover:border-primary/30 hover:shadow-[0_0_20px_rgba(10,177,114,0.12)] transition-all duration-300 group"
               whileHover={{ y: -2 }}
             >
