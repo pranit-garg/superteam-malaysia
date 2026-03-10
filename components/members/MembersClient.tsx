@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { fadeUp, staggerContainer, TROPICAL_EASE } from "@/lib/animations";
 import { MEMBER_SKILLS } from "@/lib/constants";
 import type { Member } from "@/lib/supabase/types";
@@ -136,13 +137,23 @@ export default function MembersClient({ members }: MembersClientProps) {
                 >
                   {/* Avatar */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center flex-shrink-0">
-                      <span className="text-primary font-bold text-lg font-[family-name:var(--font-display)]">
-                        {member.name
-                          ?.split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </span>
+                    <div className="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                      {member.photo_url ? (
+                        <Image
+                          src={member.photo_url}
+                          alt={member.name || "Member"}
+                          width={56}
+                          height={56}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-primary font-bold text-lg font-[family-name:var(--font-display)]">
+                          {member.name
+                            ?.split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <h3 className="font-[family-name:var(--font-display)] font-bold text-lg">

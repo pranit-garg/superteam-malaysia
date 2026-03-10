@@ -60,15 +60,15 @@ export default function SectionWrapper({
     >
       {/* Soft gradient transition zones for bgSlot content */}
       <div
-        className="absolute top-0 left-0 right-0 h-24 z-[3] pointer-events-none"
+        className="absolute top-0 left-0 right-0 h-40 z-[3] pointer-events-none"
         style={{
-          background: `linear-gradient(to bottom, ${hex}, transparent)`,
+          background: `linear-gradient(to bottom, ${hex} 0%, ${hex}cc 30%, transparent 100%)`,
         }}
       />
       <div
-        className="absolute bottom-0 left-0 right-0 h-24 z-[3] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-40 z-[3] pointer-events-none"
         style={{
-          background: `linear-gradient(to top, ${hex}, transparent)`,
+          background: `linear-gradient(to top, ${hex} 0%, ${hex}cc 30%, transparent 100%)`,
         }}
       />
       {bgSlot && (
