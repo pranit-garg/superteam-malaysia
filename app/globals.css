@@ -36,16 +36,16 @@
   --color-bg-alt: #142820;
   --color-bg-deep: #0a1410;
   --color-bg-warm: #121a0f;
-  --color-primary: #0AB172;
-  --color-secondary: #9945FF;
+  --color-primary: #5523DE;
+  --color-secondary: #0AB172;
   --color-gold: #d4a246;
   --color-text: #ffffff;
   --color-text-muted: #c8c8d0;
   --color-card: rgba(255, 255, 255, 0.08);
-  --color-card-border: rgba(14, 203, 129, 0.20);
-  --color-primary-glow: rgba(10, 177, 114, 0.20);
-  --color-secondary-glow: rgba(153, 69, 255, 0.20);
-  --color-section-divider: rgba(10, 177, 114, 0.10);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-primary-glow: rgba(85, 35, 222, 0.20);
+  --color-secondary-glow: rgba(10, 177, 114, 0.20);
+  --color-section-divider: rgba(85, 35, 222, 0.08);
 
   --font-display: "Satoshi", system-ui, sans-serif;
   --font-body: var(--font-space-grotesk), system-ui, sans-serif;
@@ -68,7 +68,7 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background-color: rgba(10, 177, 114, 0.3);
+  background-color: rgba(85, 35, 222, 0.35);
   color: #ffffff;
 }
 
@@ -117,11 +117,18 @@ body {
 
 /* ── Glow Effects ── */
 .glow-primary {
-  box-shadow: 0 0 30px var(--color-primary-glow), 0 0 60px rgba(10, 177, 114, 0.05);
+  box-shadow: 0 0 30px var(--color-primary-glow), 0 0 60px rgba(85, 35, 222, 0.05);
 }
 
 .glow-secondary {
-  box-shadow: 0 0 30px var(--color-secondary-glow), 0 0 60px rgba(153, 69, 255, 0.05);
+  box-shadow: 0 0 30px var(--color-secondary-glow), 0 0 60px rgba(10, 177, 114, 0.05);
+}
+
+.glow-mixed {
+  box-shadow:
+    0 0 30px rgba(85,35,222,0.15),
+    0 0 60px rgba(10,177,114,0.10),
+    0 0 90px rgba(85,35,222,0.05);
 }
 
 /* ── Marquee ── */
@@ -152,6 +159,6 @@ body {
 
 /* ── Dot Grid ── */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(10,177,114,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(85,35,222,0.07) 1px, transparent 1px);
   background-size: 24px 24px;
 }
