@@ -14,15 +14,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const hoverEffects = {
   primary: {
     scale: 1.03,
-    boxShadow: "0 0 25px rgba(10,177,114,0.35), 0 0 50px rgba(10,177,114,0.15)",
+    boxShadow: "0 0 25px rgba(85,35,222,0.35), 0 0 50px rgba(85,35,222,0.15)",
   },
   secondary: {
     scale: 1.03,
-    boxShadow: "0 0 25px rgba(153,69,255,0.35), 0 0 50px rgba(153,69,255,0.15)",
+    boxShadow: "0 0 25px rgba(10,177,114,0.35), 0 0 50px rgba(10,177,114,0.15)",
   },
   ghost: {
-    scale: 1.03,
-    boxShadow: "0 0 20px rgba(10,177,114,0.15)",
+    scale: 1.01,
+    boxShadow: "0 0 20px rgba(85,35,222,0.12)",
   },
 };
 
@@ -38,9 +38,9 @@ export default function Button({
     "relative overflow-hidden inline-flex items-center justify-center gap-2 font-medium rounded-full transition-colors duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
 
   const variants = {
-    primary: "bg-primary text-bg hover:bg-primary/90 glow-primary",
+    primary: "bg-primary text-white hover:bg-primary/90 glow-primary",
     secondary: "bg-secondary text-white hover:bg-secondary/90 glow-secondary",
-    ghost: "bg-transparent border border-card-border text-text hover:border-primary hover:text-primary",
+    ghost: "bg-transparent border border-white/10 text-text hover:border-primary/50 hover:bg-primary/5",
   };
 
   const sizes = {
