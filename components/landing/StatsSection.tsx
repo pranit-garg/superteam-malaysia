@@ -73,8 +73,8 @@ export default function StatsSection({ stats }: StatsSectionProps) {
             className="absolute inset-0 animate-[mesh-drift_12s_ease-in-out_infinite_alternate]"
             style={{
               background: [
-                "radial-gradient(ellipse 50% 40% at 20% 50%, rgba(10,177,114,0.06) 0%, transparent 100%)",
-                "radial-gradient(ellipse 40% 50% at 80% 30%, rgba(153,69,255,0.04) 0%, transparent 100%)",
+                "radial-gradient(ellipse 50% 40% at 20% 50%, rgba(85,35,222,0.06) 0%, transparent 100%)",
+                "radial-gradient(ellipse 40% 50% at 80% 30%, rgba(85,35,222,0.10) 0%, transparent 100%)",
                 "radial-gradient(ellipse 60% 30% at 50% 80%, rgba(212,162,70,0.03) 0%, transparent 100%)",
               ].join(","),
             }}
@@ -91,7 +91,7 @@ export default function StatsSection({ stats }: StatsSectionProps) {
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-[family-name:var(--font-mono)] text-[clamp(80px,14vw,160px)] font-black pointer-events-none select-none whitespace-nowrap tracking-[0.02em]"
             style={{
-              WebkitTextStroke: "1.5px rgba(10,177,114,0.07)",
+              WebkitTextStroke: "1.5px rgba(85,35,222,0.09)",
               color: "transparent",
             }}
             initial={{ opacity: 0 }}
@@ -106,8 +106,8 @@ export default function StatsSection({ stats }: StatsSectionProps) {
             ref={heroNumRef}
             className={`text-[clamp(72px,12vw,130px)] font-black text-primary leading-none font-[family-name:var(--font-mono)] tabular-nums inline-block transition-[text-shadow] duration-400 ${
               heroBurst
-                ? "[text-shadow:0_0_40px_rgba(10,177,114,0.6),0_0_100px_rgba(10,177,114,0.25),0_0_160px_rgba(10,177,114,0.08)]"
-                : "[text-shadow:0_0_20px_rgba(10,177,114,0.35),0_0_60px_rgba(10,177,114,0.12)]"
+                ? "[text-shadow:0_0_40px_rgba(85,35,222,0.6),0_0_100px_rgba(85,35,222,0.25),0_0_160px_rgba(85,35,222,0.08)]"
+                : "[text-shadow:0_0_20px_rgba(85,35,222,0.35),0_0_60px_rgba(85,35,222,0.12)]"
             }`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -192,19 +192,19 @@ function SecondaryStatCell({
     >
       {/* Divider */}
       {index > 0 && (
-        <div className="absolute left-0 top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
+        <div className="absolute left-0 top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
       )}
 
       {/* Hover glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(10,177,114,0.08)_0%,transparent_70%)] scale-0 group-hover:scale-[2] transition-transform duration-500 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(85,35,222,0.08)_0%,transparent_70%)] scale-0 group-hover:scale-[2] transition-transform duration-500 pointer-events-none" />
 
       {/* Number */}
       <div
         ref={numRef}
-        className={`text-[clamp(36px,5vw,52px)] font-bold text-primary relative inline-block font-[family-name:var(--font-mono)] tabular-nums transition-[text-shadow] duration-300 group-hover:[text-shadow:0_0_30px_rgba(10,177,114,0.45),0_0_60px_rgba(10,177,114,0.15)] ${
+        className={`text-[clamp(36px,5vw,52px)] font-bold text-primary relative inline-block font-[family-name:var(--font-mono)] tabular-nums transition-[text-shadow] duration-300 group-hover:[text-shadow:0_0_30px_rgba(85,35,222,0.45),0_0_60px_rgba(85,35,222,0.15)] ${
           burst
-            ? "[text-shadow:0_0_40px_rgba(10,177,114,0.6),0_0_80px_rgba(10,177,114,0.25)]"
-            : "[text-shadow:0_0_20px_rgba(10,177,114,0.25)]"
+            ? "[text-shadow:0_0_40px_rgba(85,35,222,0.6),0_0_80px_rgba(85,35,222,0.25)]"
+            : "[text-shadow:0_0_20px_rgba(85,35,222,0.25)]"
         }`}
       >
         <AnimatedCounter

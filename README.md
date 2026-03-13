@@ -230,11 +230,10 @@ The site follows a **Tropical Futurism** aesthetic: a dark cinematic canvas laye
 - **Font:** Satoshi (self-hosted from Fontshare CDN)
 - **Color palette:**
   - Background: `#0d1a12`
-  - Solana Green (primary): `#0AB172`
-  - Solana Purple (secondary): `#9945FF`
+  - Solana Purple (primary): `#5523DE`
+  - Solana Green (secondary): `#0AB172`
   - Malaysian Gold: `#d4a246`
   - Text: `#ffffff`, muted: `#c8c8d0`
-- **Effects:** Glassmorphism header, glow cards, botanical SVG overlays, parallax sections, scroll-triggered Framer Motion animations
 - **Effects:** Glassmorphism header, glow cards, botanical SVG overlays, parallax sections, scroll-triggered Framer Motion animations
 - **Accessibility:** Skip-to-content link, reduced motion support, semantic HTML, focus-visible outlines, custom scrollbar
 

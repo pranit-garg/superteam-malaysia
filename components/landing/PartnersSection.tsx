@@ -59,7 +59,7 @@ export default function PartnersSection({ partners }: PartnersSectionProps) {
               rel="noopener noreferrer"
               variants={fadeUp}
               custom={i * 0.03}
-              className="flex items-center gap-2.5 px-4 py-3 rounded-xl border border-card-border bg-card/50 hover:border-primary/30 hover:shadow-[0_0_20px_rgba(10,177,114,0.12)] transition-all duration-300 group"
+              className="flex items-center gap-2.5 px-4 py-3 rounded-xl border border-card-border bg-card/50 hover:border-primary/30 hover:shadow-[0_0_20px_rgba(85,35,222,0.12)] transition-all duration-300 group"
               whileHover={{ y: -2 }}
             >
               <Image

@@ -24,21 +24,27 @@ export default function JoinCTA({ content }: { content?: JoinCTAContent | null }
         />
       </div>
 
+      {/* Purple atmospheric glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none z-[1]"
+        style={{ background: "radial-gradient(ellipse, rgba(85,35,222,0.08) 0%, transparent 70%)" }}
+      />
+
       <div ref={ref} className="relative z-10 max-w-3xl mx-auto text-center">
         {/* Animated horizontal rule */}
         <motion.div
-          className="w-24 h-px bg-primary mx-auto mb-8"
+          className="w-24 h-px mx-auto mb-8"
+          style={{ background: "#5523DE", originX: 0.5 }}
           variants={scaleXReveal}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          style={{ originX: 0.5 }}
         />
 
         <motion.p
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-primary text-sm font-medium tracking-wider uppercase mb-4"
+          className="text-secondary text-sm font-medium tracking-wider uppercase mb-4"
         >
           {content?.eyebrow ?? "Ready to build?"}
         </motion.p>

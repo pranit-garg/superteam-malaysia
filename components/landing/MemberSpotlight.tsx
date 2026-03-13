@@ -19,7 +19,7 @@ function MemberCard({ member }: { member: (typeof SAMPLE_MEMBERS)[0] }) {
   return (
     <Wrapper
       {...linkProps}
-      className="relative block h-72 rounded-2xl bg-card border border-card-border p-6 group hover:border-primary/30 hover:shadow-[0_0_30px_rgba(10,177,114,0.1)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+      className="relative block h-72 rounded-2xl bg-card border border-card-border p-6 group hover:border-primary/30 hover:shadow-[0_0_30px_rgba(85,35,222,0.1)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
       {/* X/Twitter icon in top-right corner */}
       {member.twitter_url && (

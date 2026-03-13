@@ -91,7 +91,7 @@ export default function AdminSidebar({
 
   const roleBadge =
     role === "admin" ? (
-      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/20">
         Admin
       </span>
     ) : (

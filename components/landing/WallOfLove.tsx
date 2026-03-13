@@ -54,11 +54,11 @@ function WallBackground() {
     <>
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.04) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(85,35,222,0.04) 0%, transparent 70%)" }}
       />
       <div
         className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(10,177,114,0.03) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(85,35,222,0.03) 0%, transparent 70%)" }}
       />
     </>
   );
@@ -143,7 +143,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             loading="lazy"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shadow-[0_0_8px_rgba(10,177,114,0.15)]">
+          <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shadow-[0_0_8px_rgba(85,35,222,0.15)]">
             <span className="text-primary text-xs font-bold">
               {testimonial.author_name.charAt(0)}
             </span>

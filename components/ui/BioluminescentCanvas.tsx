@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from "react";
 
 const COLORS = {
   green: { r: 10, g: 177, b: 114 },
-  purple: { r: 153, g: 69, b: 255 },
+  purple: { r: 85, g: 35, b: 222 },
   gold: { r: 212, g: 162, b: 70 },
 };
 
@@ -73,9 +73,9 @@ function createParticle(
 
 function pickColor(): RGB {
   const roll = Math.random() * 100;
-  if (roll < 70) return COLORS.green;
-  if (roll < 90) return COLORS.gold;
-  return COLORS.purple;
+  if (roll < 55) return COLORS.purple;
+  if (roll < 80) return COLORS.gold;
+  return COLORS.green;
 }
 
 export interface BioluminescentCanvasRef {
@@ -101,11 +101,11 @@ export default function BioluminescentCanvas({
         (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8;
       const speed = 1.5 + Math.random() * 3.5;
       const color =
-        Math.random() < 0.75
-          ? COLORS.green
-          : Math.random() < 0.5
+        Math.random() < 0.6
+          ? COLORS.purple
+          : Math.random() < 0.4
             ? COLORS.gold
-            : COLORS.purple;
+            : COLORS.green;
       particlesRef.current.push(
         createParticle(0, 0, x, y, color, {
           vx: Math.cos(angle) * speed,
@@ -242,7 +242,7 @@ export default function BioluminescentCanvas({
 
         swCtx.beginPath();
         swCtx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
-        swCtx.strokeStyle = `rgba(10,177,114,${sw.life * 0.25})`;
+        swCtx.strokeStyle = `rgba(85,35,222,${sw.life * 0.20})`;
         swCtx.lineWidth = 1.5 * sw.life;
         swCtx.stroke();
         return true;

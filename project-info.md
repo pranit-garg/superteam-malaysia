@@ -36,9 +36,9 @@ Active (building for Superteam Earn bounty, 3,000 USDG)
 - Geist Mono (next/font/google, data/stats)
 
 ## Colors
-- Background: #0a0a0f
-- Primary: #14F195 (Solana Green)
-- Secondary: #9945FF (Solana Purple)
+- Background: #0d1a12
+- Primary: #5523DE (Solana Purple)
+- Secondary: #0AB172 (Solana Green)
 - Tertiary: #d4a246 (Gold)
 
-last_reviewed: 2026-03-05
+last_reviewed: 2026-03-13
