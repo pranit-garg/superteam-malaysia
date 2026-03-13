@@ -6,13 +6,13 @@
 ## Colors
 | Token | Hex | Usage |
 |-------|-----|-------|
-| Background | #0a0a0f | Primary background (near-black) |
-| Background Alt | #0f1a14 | Alternating sections (green tint) |
-| Primary | #14F195 | Solana Green: botanicals, glows, progress, CTAs |
-| Secondary | #9945FF | Solana Purple: interactive elements, secondary CTAs |
+| Background | #0d1a12 | Primary background (deep green-black) |
+| Background Alt | #142820 | Alternating sections (green tint) |
+| Primary | #5523DE | Solana Purple: CTAs, glows, progress, section dividers |
+| Secondary | #0AB172 | Solana Green: botanicals, secondary CTAs, accents |
 | Gold | #d4a246 | Malaysian warmth: badges, premium accents, testimonials |
 | Text | #ffffff | Primary text |
-| Text Muted | #a1a1aa | Secondary text, descriptions |
+| Text Muted | #c8c8d0 | Secondary text, descriptions |
 | Card | rgba(255,255,255,0.05) | Card backgrounds |
 | Card Border | rgba(255,255,255,0.08) | Card borders |
 
@@ -24,7 +24,7 @@
 ## Signature Elements
 - Botanical line-art overlays in Solana green, animated via stroke-dashoffset on scroll
 - Glassmorphic header with backdrop-blur
-- Glow effects on hover (primary green, secondary purple)
+- Glow effects on hover (primary purple, secondary green)
 - Animated stat counters
 - Flip cards for member profiles
 

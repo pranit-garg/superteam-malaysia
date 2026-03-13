@@ -9,7 +9,8 @@
 -- ============================================================
 insert into public.members (name, title, company, skills, badges, is_core_team, is_featured, display_order, twitter_url, photo_url, status) values
   ('Marianne', 'Co-Lead', 'Superteam Malaysia', '{"Community","Growth","Content"}', '{"Core Contributor"}', true, true, 1, 'https://x.com/tuakdotsol', '/images/members/marianne.jpg', 'published'),
-  ('Han', 'Co-Lead, DevRel', 'Superteam Malaysia', '{"DevRel","Community","Operations"}', '{"Core Contributor"}', true, true, 2, 'https://x.com/W_Han_01', '/images/members/han.jpg', 'published');
+  ('Han', 'Co-Lead, DevRel', 'Superteam Malaysia', '{"DevRel","Community","Operations"}', '{"Core Contributor"}', true, true, 2, 'https://x.com/W_Han_01', '/images/members/han.jpg', 'published'),
+  ('Pranit Garg', 'Builder', NULL, '{"Growth","Content","Product"}', '{"Core Contributor"}', true, false, 3, 'https://x.com/pranit', '/images/members/pranit.jpg', 'published');
 
 -- ============================================================
 -- Partners (from data/partners.ts, 25 partners)
@@ -45,11 +46,11 @@ insert into public.partners (name, logo_url, website_url, partner_type, display_
 -- Stats (from data/stats.ts, 5 stats)
 -- ============================================================
 insert into public.stats (stat_key, label, value, suffix, display_order) values
-  ('members',  'Members',          500, '+', 1),
-  ('events',   'Events',            30, '+', 2),
-  ('projects', 'Projects Shipped',  45, '',  3),
-  ('bounties', 'Bounties Earned',  120, '+', 4),
-  ('reach',    'Reach',             15, 'K', 5);
+  ('members',     'Members',              20, NULL,  1),
+  ('events',      'Events',               50, NULL,  2),
+  ('projects',    'Projects Shipped',     20, NULL,  3),
+  ('bounties',    'Bounties Earned',     100, NULL,  4),
+  ('impressions', 'Impressions Reached',   1, 'M+',  5);
 
 -- ============================================================
 -- Testimonials (from data/testimonials.ts, 12 testimonials)
@@ -152,6 +153,20 @@ insert into public.testimonials (author_name, author_title, author_photo_url, co
     'https://x.com/W_Han_01/status/2021431217565159490',
     true, 12, 'published'
   );
+
+-- ============================================================
+-- Events (from components/landing/EventsSection.tsx SAMPLE_EVENTS)
+-- ============================================================
+insert into public.events (title, start_at, location_name, event_type, is_featured, status) values
+  ('Solana Developer Workshop: Building with Anchor', '2026-03-20T14:00:00+08:00', 'WeWork KL Sentral', 'Workshop', true, 'published'),
+  ('Superteam MY Monthly Meetup', '2026-03-28T18:30:00+08:00', 'Common Ground TTDI', 'Meetup', false, 'published'),
+  ('DeFi Deep Dive: Yield Strategies on Solana', '2026-04-05T15:00:00+08:00', 'Online (Zoom)', 'Workshop', false, 'published');
+
+-- ============================================================
+-- Announcements
+-- ============================================================
+insert into public.announcements (title, body, is_pinned, status) values
+  ('Website Launch', 'The new Superteam Malaysia website is live! Explore our community, events, and opportunities.', true, 'published');
 
 -- ============================================================
 -- Page Content: FAQ (from data/faq.ts, 7 items as JSON array)

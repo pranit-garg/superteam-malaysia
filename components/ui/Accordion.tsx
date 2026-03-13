@@ -47,14 +47,14 @@ export default function Accordion({ items }: AccordionProps) {
             key={i}
             animate={{
               boxShadow: isOpen
-                ? "0 8px 32px rgba(10,177,114,0.12), 0 2px 8px rgba(10,177,114,0.08)"
+                ? "0 8px 32px rgba(85,35,222,0.12), 0 2px 8px rgba(85,35,222,0.08)"
                 : "0 0 0 rgba(0,0,0,0)",
             }}
             transition={{ duration: 0.3, ease: TROPICAL_EASE }}
             className="rounded-xl overflow-hidden"
             style={{
               background: isOpen
-                ? "linear-gradient(135deg, rgba(10,177,114,0.15), rgba(10,177,114,0.05)) padding-box, linear-gradient(135deg, #0AB172, rgba(10,177,114,0.3)) border-box"
+                ? "rgba(85,35,222,0.10) padding-box, #5523DE border-box"
                 : undefined,
               border: isOpen ? "1px solid transparent" : undefined,
             }}

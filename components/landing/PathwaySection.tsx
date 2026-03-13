@@ -48,9 +48,9 @@ const STEPS = [
 
 /* ─── Escalating intensity per step ─── */
 const INTENSITY = [
-  { border: "border-card-border", glowBg: 0.04, bottomLine: "via-primary/20", pulse: "2s" },
-  { border: "border-primary/15", glowBg: 0.08, bottomLine: "via-primary/35", pulse: "1.4s" },
-  { border: "border-primary/25", glowBg: 0.12, bottomLine: "via-primary/50", pulse: "0.8s" },
+  { border: "border-secondary/15", glowColor: "85,35,222", glowBg: 0.04, bottomLine: "via-secondary/20", pulse: "2s" },
+  { border: "border-primary/15", glowColor: "50,80,180", glowBg: 0.08, bottomLine: "via-primary/35", pulse: "1.4s" },
+  { border: "border-primary/25", glowColor: "10,177,114", glowBg: 0.12, bottomLine: "via-primary/50", pulse: "0.8s" },
 ];
 
 /* ─── Cinematic KL Backdrop ─── */
@@ -124,11 +124,11 @@ function PathwayCard({
       custom={index * 0.12}
       whileHover={{
         y: -8,
-        borderColor: "rgba(10,177,114,0.3)",
+        borderColor: index === 0 ? "rgba(85,35,222,0.3)" : "rgba(85,35,222,0.3)",
         transition: { type: "spring", stiffness: 300, damping: 20 },
       }}
       style={{
-        boxShadow: `0 0 ${40 + index * 20}px rgba(10,177,114,${intensity.glowBg * 0.5})`,
+        boxShadow: `0 0 ${40 + index * 20}px rgba(${intensity.glowColor},${intensity.glowBg * 0.5})`,
       }}
     >
       {/* Ghost number */}
@@ -140,17 +140,21 @@ function PathwayCard({
 
       {/* Step label pill */}
       <motion.div
-        className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4"
+        className={`relative inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-4 ${
+          index === 0
+            ? "border-secondary/20 bg-secondary/5"
+            : "border-primary/20 bg-primary/5"
+        }`}
         variants={fadeUp}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         custom={0.15 + index * 0.12}
       >
         <span
-          className="w-2 h-2 rounded-full bg-primary"
+          className={`w-2 h-2 rounded-full ${index === 0 ? "bg-secondary" : "bg-primary"}`}
           style={{ animation: `node-ping ${intensity.pulse} ease-out infinite` }}
         />
-        <span className="text-primary text-xs font-semibold tracking-widest">
+        <span className={`text-xs font-semibold tracking-widest ${index === 0 ? "text-secondary" : "text-primary"}`}>
           {step.label}
         </span>
       </motion.div>

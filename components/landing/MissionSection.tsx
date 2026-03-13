@@ -50,6 +50,12 @@ export default function MissionSection({ content }: { content?: MissionContent |
       id="mission"
       bg="deep"
     >
+      {/* Purple atmospheric glow */}
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-30 z-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(85,35,222,0.06) 0%, transparent 70%)" }}
+      />
+
       {/* Decorative Malaysian batik pattern */}
       <div className="absolute top-0 right-0 w-[300px] h-[500px] opacity-20 z-0 pointer-events-none hidden md:block">
         <Image
@@ -111,17 +117,19 @@ export default function MissionSection({ content }: { content?: MissionContent |
 
 
               {/* Number */}
-              <span className="relative font-[family-name:var(--font-mono)] text-4xl md:text-5xl font-bold text-text-muted/20 group-hover:text-primary/50 leading-none shrink-0 w-16 md:w-20 transition-colors duration-300">
+              <span className={`relative font-[family-name:var(--font-mono)] text-4xl md:text-5xl font-bold text-text-muted/20 leading-none shrink-0 w-16 md:w-20 transition-colors duration-300 ${
+                i % 2 === 1 ? "group-hover:text-secondary/50" : "group-hover:text-primary/50"
+              }`}>
                 {String(i + 1).padStart(2, "0")}
               </span>
 
               {/* Vertical divider */}
               <motion.div
                 className="w-px self-stretch shrink-0"
-                initial={{ scaleY: 0, backgroundColor: "rgba(14, 203, 129, 0.22)" }}
+                initial={{ scaleY: 0, backgroundColor: "rgba(85, 35, 222, 0.22)" }}
                 animate={
                   isInView
-                    ? { scaleY: 1, backgroundColor: "rgba(14, 203, 129, 0.22)" }
+                    ? { scaleY: 1, backgroundColor: "rgba(85, 35, 222, 0.22)" }
                     : {}
                 }
                 transition={{

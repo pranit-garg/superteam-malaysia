@@ -3,7 +3,7 @@
 ## 2026-03-05: Design direction chosen: Tropical Futurism
 - Cinematic + immersive scroll-driven experience
 - Malaysian tropical nature (Forest City, JB) meets Solana tech identity
-- Botanical line-art overlays in Solana green (#14F195) animated on scroll
+- Botanical line-art overlays animated on scroll (primary purple #5523DE, secondary green #0AB172)
 - Brand ref: Apple product deep-dives meet Solana dark technical identity
 
 ## 2026-03-05: Font stack

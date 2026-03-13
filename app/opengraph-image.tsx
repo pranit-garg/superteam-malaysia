@@ -29,7 +29,7 @@ export default async function Image() {
             left: "40px",
             width: "120px",
             height: "3px",
-            background: "#0ECB81",
+            background: "#5523DE",
             display: "flex",
           }}
         />
@@ -40,7 +40,7 @@ export default async function Image() {
             left: "40px",
             width: "3px",
             height: "80px",
-            background: "#0ECB81",
+            background: "#5523DE",
             display: "flex",
           }}
         />
@@ -53,7 +53,7 @@ export default async function Image() {
             right: "40px",
             width: "120px",
             height: "3px",
-            background: "#0ECB81",
+            background: "#5523DE",
             display: "flex",
           }}
         />
@@ -64,7 +64,7 @@ export default async function Image() {
             right: "40px",
             width: "3px",
             height: "80px",
-            background: "#0ECB81",
+            background: "#5523DE",
             display: "flex",
           }}
         />
@@ -84,8 +84,8 @@ export default async function Image() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "rgba(14,203,129,0.1)",
-              border: "1px solid rgba(14,203,129,0.3)",
+              background: "rgba(85,35,222,0.1)",
+              border: "1px solid rgba(85,35,222,0.3)",
               borderRadius: "9999px",
               padding: "8px 20px",
             }}
@@ -95,13 +95,13 @@ export default async function Image() {
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                background: "#0ECB81",
+                background: "#5523DE",
                 display: "flex",
               }}
             />
             <span
               style={{
-                color: "#0ECB81",
+                color: "#5523DE",
                 fontSize: "18px",
                 fontWeight: 600,
                 letterSpacing: "0.05em",
@@ -125,7 +125,7 @@ export default async function Image() {
             }}
           >
             <span>Superteam</span>
-            <span style={{ color: "#0ECB81" }}>Malaysia</span>
+            <span style={{ color: "#5523DE" }}>Malaysia</span>
           </div>
 
           {/* Subtitle */}
@@ -149,7 +149,7 @@ export default async function Image() {
             left: "0",
             width: "100%",
             height: "4px",
-            background: "#0ECB81",
+            background: "#5523DE",
             display: "flex",
           }}
         />
